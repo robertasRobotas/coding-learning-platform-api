@@ -8,7 +8,7 @@ const validateEmail = function (email) {
 const courseProgressSchema = new mongoose.Schema(
   {
     courseId: { type: String, required: true },
-    lastCompletedLesson: { type: String, required: true },
+    lastCompletedLesson: { type: Number, required: true },
   },
   { _id: false }
 );
