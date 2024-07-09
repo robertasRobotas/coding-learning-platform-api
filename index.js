@@ -1,7 +1,8 @@
 import express from "express";
 import mongoose from "mongoose";
 import "dotenv/config";
-import gameRoutes from "./src/routes/game.js";
+import taskRoutes from "./src/routes/task.js";
+import courseRoutes from "./src/routes/course.js";
 import userRoutes from "./src/routes/user.js";
 
 import cors from "cors";
@@ -19,7 +20,8 @@ mongoose
   });
 
 app.use(userRoutes);
-app.use(gameRoutes);
+app.use(taskRoutes);
+app.use(courseRoutes);
 
 app.use((req, res) => {
   return res.status(404).json({ message: "This endpoint des not exist" });
