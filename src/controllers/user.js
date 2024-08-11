@@ -16,7 +16,7 @@ export const SIGN_IN = async (req, res) => {
       password: hash,
       dateOfBirth: req.body.dateOfBirth,
       occupation: req.body.occupation,
-      isPremium: req.body.isPremium,
+      isPremium: false,
       creationDate: new Date(),
       lastLoginDate: new Date(),
       country: req.body.country,
@@ -27,7 +27,12 @@ export const SIGN_IN = async (req, res) => {
 
     const response = await user.save();
 
-    return res.status(200).json({ user: response });
+    const jwt_token = jwt.sign(
+      { email: user.email, user_id: user.id },
+      process.env.JWT_SECRET
+    );
+
+    return res.status(200).json({ user: response, jwt_token: jwt_token });
   } catch (err) {
     console.log(err);
     return res.status(400).json({ message: "bad data", err: err });
