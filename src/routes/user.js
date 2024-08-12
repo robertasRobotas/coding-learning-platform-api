@@ -1,9 +1,11 @@
 import express from "express";
-import { SIGN_IN, LOG_IN } from "../controllers/user.js";
+import { auth } from "../middlewares/auth.js";
+import { SIGN_IN, LOG_IN, VALIDATE_USER } from "../controllers/user.js";
 
 const router = express.Router();
 
 router.post("/users", SIGN_IN);
+router.get("/users/validate", auth, VALIDATE_USER);
 router.post("/users/login", LOG_IN);
 
 export default router;

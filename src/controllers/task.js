@@ -3,7 +3,7 @@ import TaskModel from "../models/task.js";
 
 export const GET_ALL_TASKS_BY_COURSE_ID = async (req, res) => {
   try {
-    const tasks = new TaskModel.find({ courseId: req.params.courseId });
+    const tasks = await TaskModel.find({ courseId: req.params.courseId });
 
     return res.status(200).json({
       message: `All course ${req.params.courseId} tasks`,
@@ -25,6 +25,7 @@ export const GET_TASK_BY_ID = async (req, res) => {
     });
   } catch (err) {
     console.log(err);
+    return res.status(500).json({ message: "err" });
   }
 };
 
@@ -37,14 +38,17 @@ export const INSERT_TASK = async (req, res) => {
       description: req.body.description,
       difficulty: req.body.difficulty,
       answer: req.body.answer,
+      hint: req.body.hint,
       orderId: req.body.orderId,
     };
 
     const response = new TaskModel(task);
+    await response.save();
 
     return res.status(200).json({ message: "task was saved", task: response });
   } catch (err) {
     console.log(err);
+    return res.status(500).json({ message: "err" });
   }
 };
 
@@ -58,5 +62,6 @@ export const DELETE_TASK_BY_ID = async (req, res) => {
     });
   } catch (err) {
     console.log(err);
+    return res.status(500).json({ message: "err" });
   }
 };

@@ -1,7 +1,10 @@
-import { v4 as uuidv4 } from "uuid";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import UserModel from "../models/user.js";
+
+export const VALIDATE_USER = async (req, res) => {
+  res.status(200).json({ message: "user OK" });
+};
 
 export const SIGN_IN = async (req, res) => {
   try {
@@ -9,7 +12,7 @@ export const SIGN_IN = async (req, res) => {
     var hash = bcrypt.hashSync(req.body.password, salt);
 
     const user = new UserModel({
-      id: uuidv4(),
+      id: req.body.id,
       name: req.body.name,
       surname: req.body.surname,
       email: req.body.email,

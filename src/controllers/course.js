@@ -4,7 +4,7 @@ import UserModel from "../models/user.js";
 
 export const GET_ALL_COURSES = async (req, res) => {
   try {
-    const courses = new CourseModel.find();
+    const courses = await CourseModel.find();
 
     return res.status(200).json({ courses: courses });
   } catch (err) {
@@ -50,7 +50,7 @@ export const INSERT_COURSE = async (req, res) => {
   try {
     const course = {
       id: uuidv4(),
-      title: req.body.course,
+      title: req.body.title,
       description: req.body.description,
       difficulty: req.body.difficulty,
       duration: req.body.duration,
@@ -62,6 +62,7 @@ export const INSERT_COURSE = async (req, res) => {
     };
 
     const response = new CourseModel(course);
+    await response.save();
 
     return res
       .status(200)

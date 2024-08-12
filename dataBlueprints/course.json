@@ -1,0 +1,30 @@
+[
+  {
+    "id": "digital_intelligence",
+    "title": "Digital intelligence",
+    "description": "Course intended for a people who wants to learn to make day to day tasks with help of tech.",
+    "difficulty": "EASY",
+    "duration": "1 week",
+    "prerequisites": "-",
+    "imgUrl": "https://d91ztqmtx7u1k.cloudfront.net/ClientContent/Images/Catalogue/599a03f7-f330-4177-8353-290de0394dde.png",
+    "displayOrder": 1,
+    "skills": [
+      "Searching information",
+      "Basic tasks with AI",
+      "Basic web tools"
+    ],
+    "totalTasks": 20
+  },
+  {
+    "id": "html_css",
+    "title": "HTML / CSS",
+    "description": "Course intended for beginners who want to start their tech career.",
+    "difficulty": "EASY",
+    "duration": "2 weeks",
+    "prerequisites": "-",
+    "imgUrl": "https://camo.githubusercontent.com/3795e5487dfe7c70b09b3e40c9d7a170bbb61aaec2b8bc35a2b4d0b5af1205ca/68747470733a2f2f7777772e69696d2e66722f65636f6c652d7765622f77702d636f6e74656e742f75706c6f6164732f323031372f30312f48544d4c352e6a7067",
+    "displayOrder": 2,
+    "skills": ["HTML", "CSS"],
+    "totalTasks": 20
+  }
+]
