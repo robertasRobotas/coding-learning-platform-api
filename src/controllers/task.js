@@ -17,7 +17,7 @@ export const GET_ALL_TASKS_BY_COURSE_ID = async (req, res) => {
 
 export const GET_TASK_BY_ID = async (req, res) => {
   try {
-    const task = new TaskModel.findOne({ id: req.params.id });
+    const task = await TaskModel.findOne({ id: req.params.id });
 
     return res.status(200).json({
       message: `ok`,

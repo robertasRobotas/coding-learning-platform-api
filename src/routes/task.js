@@ -10,7 +10,7 @@ import { auth } from "../middlewares/auth.js";
 
 const router = express.Router();
 
-router.get("/tasks/:courseId", auth, GET_ALL_TASKS_BY_COURSE_ID);
+router.get("/tasks/course/:courseId", auth, GET_ALL_TASKS_BY_COURSE_ID);
 router.get("/tasks/:id", auth, GET_TASK_BY_ID);
 router.post("/tasks", auth, INSERT_TASK);
 // router.delete("/tasks/:id", auth, DELETE_GAME_BY_ID);
