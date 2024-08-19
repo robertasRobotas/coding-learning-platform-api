@@ -12,8 +12,10 @@ const taskSchema = mongoose.Schema({
   taskHintContent: { type: String, required: true },
   orderId: { type: Number, required: true },
   testsId: { type: String, required: true },
-  aiAssistsCount: { type: Number, required: true },
-  submitCount: { type: Number, required: true },
+  durationMins: { type: Number, required: true },
+
+  // aiAssistsCount: { type: Number, required: true },
+  // submitCount: { type: Number, required: true },
 });
 
-export default mongoose.model("Task", taskSchema);
+export default mongoose.model("Lesson", taskSchema);

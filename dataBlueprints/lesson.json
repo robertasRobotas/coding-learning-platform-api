@@ -1,0 +1,26 @@
+[
+  {
+    "id": "html_1",
+    "courseId": "html_css",
+    "title": "Introduction",
+    "description": "",
+    "lessonContent": "<p id='lesson'>Mastering HTML and CSS gives you the power to bring your ideas to life on the web. Whether you're interested in pursuing a career in web development, creating personal projects, or understanding how websites work, these skills are essential. Plus, seeing your designs come to life is incredibly rewarding and motivating!<br /><br />Get ready to start building and styling the web!</p>",
+    "taskContent": "<p id='tutorial'>Each lesson will have it's own task. At the bottom you are able to see the code editor where the main work will be happening. <br/> In this course you will have your own AI assistant Coddy🤖. Whenewer you will stuck - just click the button 'Ask AI for a help', he will be checking your code and he will try to resolve your problem🦾. To ensure that you are gaining problemsoving skills Coddy will be available once per 3 minnutes. <br/> When you think that you have completed the task successully - just clik on the button 'Complete' to validate your job! <br/> So for the first task write any word to the code editor and try to 'Complete'. 🚀🚀🚀</p>",
+    "difficulty": "EASY",
+    "orderId": 1,
+    "taskHintContent": "",
+    "answer": "any",
+    "testsId": "1_html_lesson",
+    "durationMins": 5
+  },
+  {
+    "id": "html_2",
+    "courseId": "html_css",
+    "title": "Displaying two words in different lines",
+    "description": "In this task you will get to know html tags.",
+    "difficulty": "EASY",
+    "orderId": 2,
+    "answer": "<div>aaa</div> <div>bbb</div> ",
+    "hint": "In index.html file body section create 2 div wrappers and add some words inside it"
+  }
+]
