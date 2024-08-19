@@ -9,9 +9,9 @@ const taskSchema = mongoose.Schema({
   taskContent: { type: String, required: true },
   difficulty: { type: String, required: true },
   answer: { type: String, required: true },
-  hint: { type: String, required: true },
+  taskHintContent: { type: String, required: true },
   orderId: { type: Number, required: true },
-  testId: { type: String, required: true },
+  testsId: { type: String, required: true },
   aiAssistsCount: { type: Number, required: true },
   submitCount: { type: Number, required: true },
 });
