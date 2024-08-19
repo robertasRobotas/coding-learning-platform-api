@@ -1,7 +1,7 @@
 import { v4 as uuidv4 } from "uuid";
-import TaskModel from "../models/task.js";
+import TaskModel from "../models/lesson.js";
 
-export const GET_ALL_TASKS_BY_COURSE_ID = async (req, res) => {
+export const GET_ALL_LESSONS_BY_COURSE_ID = async (req, res) => {
   try {
     const tasks = await TaskModel.find({ courseId: req.params.courseId });
 
@@ -15,7 +15,7 @@ export const GET_ALL_TASKS_BY_COURSE_ID = async (req, res) => {
   }
 };
 
-export const GET_TASK_BY_ID = async (req, res) => {
+export const GET_LESSON_BY_ID = async (req, res) => {
   try {
     const task = await TaskModel.findOne({ id: req.params.id });
 
@@ -29,7 +29,7 @@ export const GET_TASK_BY_ID = async (req, res) => {
   }
 };
 
-export const INSERT_TASK = async (req, res) => {
+export const INSERT_LESSON = async (req, res) => {
   try {
     const task = {
       id: uuidv4(),

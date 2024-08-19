@@ -1,7 +1,7 @@
 import express from "express";
 import mongoose from "mongoose";
 import "dotenv/config";
-import taskRoutes from "./src/routes/task.js";
+import lessonRoutes from "./src/routes/lesson.js";
 import courseRoutes from "./src/routes/course.js";
 import userRoutes from "./src/routes/user.js";
 
@@ -20,7 +20,7 @@ mongoose
   });
 
 app.use(userRoutes);
-app.use(taskRoutes);
+app.use(lessonRoutes);
 app.use(courseRoutes);
 
 app.use((req, res) => {
