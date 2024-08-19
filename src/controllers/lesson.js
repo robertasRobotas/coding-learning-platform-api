@@ -31,7 +31,7 @@ export const GET_LESSON_BY_ID = async (req, res) => {
 
 export const INSERT_LESSON = async (req, res) => {
   try {
-    const task = {
+    const lesson = {
       id: uuidv4(),
       courseId: req.body.courseId,
       title: req.body.title,
@@ -40,9 +40,14 @@ export const INSERT_LESSON = async (req, res) => {
       answer: req.body.answer,
       hint: req.body.hint,
       orderId: req.body.orderId,
+      durationMins: req.body.durationMins,
+      testsId: req.body.testsId,
+      taskHintContent: req.body.taskHintContent,
+      taskContent: req.body.taskContent,
+      lessonContent: req.body.lessonContent,
     };
 
-    const response = new TaskModel(task);
+    const response = new TaskModel(lesson);
     await response.save();
 
     return res.status(200).json({ message: "task was saved", task: response });
