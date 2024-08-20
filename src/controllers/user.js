@@ -65,7 +65,16 @@ export const LOG_IN = async (req, res) => {
       process.env.JWT_SECRET
     );
 
-    return res.status(200).json({ jwt_token: jwt_token });
+    const userDetails = {
+      name: user.name,
+      surname: user.surname,
+      email: user.email,
+      courseProgress: user.courseProgress,
+      certificateURLs: user.certificateURLs,
+      isPremium: user.isPremium,
+    };
+
+    return res.status(200).json({ jwt_token: jwt_token, user: userDetails });
   } catch (err) {
     console.log(err);
   }
