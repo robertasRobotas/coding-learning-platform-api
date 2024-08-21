@@ -1,5 +1,6 @@
 import { v4 as uuidv4 } from "uuid";
 import TaskModel from "../models/lesson.js";
+import puppeteer from "puppeteer";
 
 export const GET_ALL_LESSONS_BY_COURSE_ID = async (req, res) => {
   try {
@@ -57,16 +58,32 @@ export const INSERT_LESSON = async (req, res) => {
   }
 };
 
-export const DELETE_TASK_BY_ID = async (req, res) => {
+export const COMPLETE_TASK = async (req, res) => {
+  const { code } = req.body;
   try {
-    const task = new TaskModel.deleteOne({ id: req.params.id });
+    // Launch Puppeteer browser
+    const browser = await puppeteer.launch();
+    const page = await browser.newPage();
 
-    return res.status(200).json({
-      message: `deleted`,
-      response: task,
+    // Set the HTML content
+    await page.setContent(code);
+
+    // Run tests on the page
+    const testResults = await page.evaluate(() => {
+      // Example test: Check if a specific element exists
+      const elementExists = !!document.querySelector('h2');
+      return {
+        elementExists,
+      };
     });
-  } catch (err) {
-    console.log(err);
-    return res.status(500).json({ message: "err" });
+
+    // Close the browser
+    await browser.close();
+
+    // Return the test results
+    return res.status(200).json({ message: "Tests completed", results: testResults });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ message: error.message });
   }
-};
+}
