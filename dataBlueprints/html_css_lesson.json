@@ -1,0 +1,30 @@
+[
+  {
+    "id": "html_1",
+    "courseId": "html_css",
+    "description": "",
+    "difficulty": "EASY",
+    "orderId": 1,
+    "answer": "any",
+    "testsId": "1_html_lesson",
+    "durationMins": 5,
+    "lessonContent_en": "<p id='lesson'>Mastering HTML and CSS gives you the power to bring your ideas to life on the web. Whether you're interested in pursuing a career in web development, creating personal projects, or understanding how websites work, these skills are essential. Plus, seeing your designs come to life is incredibly rewarding and motivating!<br /><br />Get ready to start building and styling the web!</p>",
+    "lessonContent_lt": "<p id='lesson'>Įvaldę HTML ir CSS, jūs įgyjate galią įgyvendinti savo idėjas internete. Nesvarbu, ar jus domina karjera interneto svetainių kūrime, asmeniniai projektai, ar norite suprasti, kaip veikia svetainės, šie įgūdžiai yra būtini. Be to, matyti, kaip jūsų dizainai atgyja, yra nepaprastai malonu ir motyvuojančiai!<br /><br />Pasiruoškite pradėti kurti ir stiliuoti internetą!</p>",
+    "taskContent_en": "<p id='tutorial'>Each lesson will have it's own task. At the bottom you are able to see the code editor where the main work will be happening. <br/> In this course you will have your own AI assistant Coddy🤖. Whenewer you will stuck - just click the button 'Ask AI for a help', he will be checking your code and he will try to resolve your problem🦾. To ensure that you are gaining problemsoving skills Coddy will be available once per 3 minnutes. <br/> When you think that you have completed the task successully - just clik on the button 'Complete' to validate your job! <br/> So for the first task write any word to the code editor and try to 'Complete'. 🚀🚀🚀</p>",
+    "taskContent_lt": "<p id='tutorial'>Kiekviena pamoka turės savo užduotį. Apačioje matysite kodų redaktorių, kuriame vyks pagrindinis darbas. <br/> Šiame kurse turėsite savo AI asistentą Kodį🤖. Kai tik užstrigsite, tiesiog paspauskite mygtuką 'Klauskite AI pagalbos', jis patikrins jūsų kodą ir bandys išspręsti jūsų problemą🦾. Siekiant užtikrinti, kad įgytumėte problemų sprendimo įgūdžių, Kodis bus prieinamas kartą per 3 minutes. <br/> Kai manysite, kad sėkmingai atlikote užduotį, tiesiog spauskite mygtuką 'Baigti', kad patvirtintumėte savo darbą! <br/> Taigi, pirmai užduočiai įrašykite bet kokį žodį į kodų redaktorių ir pabandykite 'Baigti'. 🚀🚀🚀</p>",
+    "title_en": "Introduction",
+    "title_lt": "Įvadas",
+    "taskHintContent_en": "",
+    "taskHintContent_lt": ""
+  },
+  {
+    "id": "html_2",
+    "courseId": "html_css",
+    "title": "Displaying two words in different lines",
+    "description": "In this task you will get to know html tags.",
+    "difficulty": "EASY",
+    "orderId": 2,
+    "answer": "<div>aaa</div> <div>bbb</div> ",
+    "hint": "In index.html file body section create 2 div wrappers and add some words inside it"
+  }
+]
