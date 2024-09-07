@@ -1,6 +1,8 @@
 import { v4 as uuidv4 } from "uuid";
 import TaskModel from "../models/lesson.js";
 import puppeteer from "puppeteer";
+import UserModel from "../models/user.js";
+import taskTest from "../../taskTests/index.js";
 
 export const GET_ALL_LESSONS_BY_COURSE_ID = async (req, res) => {
   try {
@@ -63,28 +65,45 @@ export const INSERT_LESSON = async (req, res) => {
 };
 
 export const COMPLETE_TASK = async (req, res) => {
-  const { code } = req.body;
+  const { code, userId } = req.body;
+  const { id } = req.params;
+
   try {
-    // Launch Puppeteer browser
+    const user = await UserModel.findOne({ id: userId });
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    // TODO pridėti +1 prei bandymų completint užduotį
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ message: "err" });
+  }
+  
+  try {
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
-
-    // Set the HTML content
-    await page.setContent(code);
-
-    // Run tests on the page
-    const testResults = await page.evaluate(() => {
-      // Example test: Check if a specific element exists
-      const elementExists = !!document.querySelector("h2");
-      return {
-        elementExists,
-      };
+    // Listen for console events and log them to the Node.js console
+    page.on('console', async (msg) => {
+      const args = msg.args();
+      for (let i = 0; i < args.length; ++i) {
+        const arg = args[i];
+        const value = await arg.jsonValue();
+        console.log(`${i}: ${value}`);
+      }
     });
-
-    // Close the browser
+    await page.setContent(code);
+    const testToGive = taskTest[id];
+    console.log(testToGive, "testToGive");
+    
+    const testResults = await page.evaluate((test) => {
+      const testFunction = new Function(`return ${test}`)();
+      return testFunction();
+    }, testToGive.toString());
+    console.log(testResults, "testResults");
+    
     await browser.close();
 
-    // Return the test results
     return res
       .status(200)
       .json({ message: "Tests completed", results: testResults });
