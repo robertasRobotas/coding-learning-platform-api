@@ -20,11 +20,37 @@
   {
     "id": "html_2",
     "courseId": "html_css",
-    "title": "Displaying two words in different lines",
-    "description": "In this task you will get to know html tags.",
+    "description": "",
     "difficulty": "EASY",
     "orderId": 2,
-    "answer": "<div>aaa</div> <div>bbb</div> ",
-    "hint": "In index.html file body section create 2 div wrappers and add some words inside it"
+    "answer": "any",
+    "testsId": "2_html_lesson",
+    "durationMins": 5,
+    "lessonContent_en": "<p id='lesson'>The <a href='#'>anchor (a)</a> tag is one of the most important elements in HTML. It allows you to link to other web pages, creating a network of information on the web. Without links, navigating between pages would be nearly impossible, making the internet a static place. Whether you're linking to internal pages or external websites, the <a> tag is essential for making the web functional and interactive.<br /><br />Mastering the use of the <a> tag will open up new possibilities for your web projects!</p>",
+    "lessonContent_lt": "<p id='lesson'>Vienas iš svarbiausių HTML elementų yra <a href='#'>nuoroda (a)</a> žyma. Ji leidžia jums susieti su kitais tinklalapiais, sukurti tinklą informacijos internete. Be nuorodų naršyti tarp puslapių būtų beveik neįmanoma, todėl internetas taptų statiška vieta. Nesvarbu, ar jungiatės prie vidinių puslapių, ar išorinių svetainių, <a> žyma yra būtina, kad internetas būtų funkcionalus ir interaktyvus.<br /><br />Išmokę naudotis <a> žyma, atversite naujas galimybes savo interneto projektuose!</p>",
+    "taskContent_en": "<p id='tutorial'>Create a link using the <a> tag.Using <a> tag navigate to 'https://google.com'.  Make sure it leads to a valid website!</p>",
+    "taskContent_lt": "<p id='tutorial'>Sukurkite nuorodą naudodami <a> žymą. Naudodamiesi išmokta žyma nunaviguokite į puslapį 'https://google.com'.  Įsitikinkite, kad nuoroda veda į galiojančią svetainę!</p>",
+    "title_en": "Creating Links with the Anchor Tag",
+    "title_lt": "Nuorodų kūrimas",
+    "taskHintContent_en": "",
+    "taskHintContent_lt": ""
+  },
+  {
+    "id": "html_3",
+    "courseId": "html_css",
+    "description": "",
+    "difficulty": "EASY",
+    "orderId": 3,
+    "answer": "any",
+    "testsId": "3_html_lesson",
+    "durationMins": 5,
+    "lessonContent_en": "<p id='lesson'>The <div> and <span> tags are two commonly used HTML elements for structuring web pages. The <div> tag is a block-level element, used to group larger sections of content, while the <span> tag is an inline element, typically used to style small portions of text within other elements. Learning to use both <div> and <span> effectively allows you to organize your web pages and apply styles efficiently. <br /><br />Knowing when to use each tag is crucial for clean and maintainable HTML.</p>",
+    "lessonContent_lt": "<p id='lesson'><div> ir <span> žymos yra du dažnai naudojami HTML elementai, skirti tinklalapių struktūravimui. <div> yra blokinis elementas, naudojamas grupuoti didesnes turinio dalis, o <span> yra eilutinis elementas, paprastai naudojamas stiliuoti mažesnes teksto dalis. Išmokti tinkamai naudoti <div> ir <span> leis jums organizuoti tinklalapius ir efektyviai taikyti stilius. <br /><br />Žinoti, kada naudoti kurią žymą, yra svarbu norint rašyti švarų ir lengvai prižiūrimą HTML kodą.</p>",
+    "taskContent_en": "<p id='tutorial'>In this task, you will use both <div> and <span> tags. Wrap a block of text with a <div> tag and then highlight a small portion of it using a <span> tag. Style them using inline CSS to make the <div> background blue and the <span> text red.</p>",
+    "taskContent_lt": "<p id='tutorial'>Šioje užduotyje naudosite tiek <div>, tiek <span> žymas. Apgaubkite tekstinį bloką naudodami <div> žymą ir išskirkite mažą jo dalį <span> žyma. Pridėkite vidinį CSS, kad <div> žymos fono spalva būtų mėlyna, o <span> teksto spalva - raudona.</p>",
+    "title_en": "Understanding <div> and <span> Tags",
+    "title_lt": "Suprasti <div> ir <span> žymas",
+    "taskHintContent_en": "",
+    "taskHintContent_lt": ""
   }
 ]
