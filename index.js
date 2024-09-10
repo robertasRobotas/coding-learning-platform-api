@@ -4,6 +4,7 @@ import "dotenv/config";
 import lessonRoutes from "./src/routes/lesson.js";
 import courseRoutes from "./src/routes/course.js";
 import userRoutes from "./src/routes/user.js";
+import openAiRoutes from "./src/routes/openai.js";
 
 import cors from "cors";
 const app = express();
@@ -22,6 +23,7 @@ mongoose
 app.use(userRoutes);
 app.use(lessonRoutes);
 app.use(courseRoutes);
+app.use(openAiRoutes);
 
 app.use((req, res) => {
   return res.status(404).json({ message: "This endpoint des not exist" });
