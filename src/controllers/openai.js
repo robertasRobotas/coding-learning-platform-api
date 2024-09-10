@@ -1,20 +1,25 @@
 import OpenAI from "openai";
+import LessonModel from "../models/lesson.js";
+import UserModel from "../models/user.js";
 
 const { OPENAI_API_KEY } = process.env;
 const openai = new OpenAI({ apiKey: OPENAI_API_KEY });
 
-
 export const GET_OPENAI_HELP = async (req, res) => {
-  const { code } = req.body;
+  const { code, lessonId } = req.body;
+  const { userId } = req.params;
 
   try {
-  const messages = [
-      { role: "system", content: "You are a helpful assistant." },
+    const lesson = await LessonModel.findOne({ id: lessonId });
+    const user = await UserModel.findOne({ id: userId });
+    const messages = [
+      { role: "system", content: "You are a helpful assistant for a student. You reply in 3 sentences" },
       {
-          role: "user",
-          content: "Write a haiku about recursion in programming.",
+        role: "user",
+        content: `give help for this task ${lesson.
+          lessonContent_en}, this is the students code: ${code}`,
       },
-  ];
+    ];
 
     const completion = await openai.chat.completions.create({
       model: "gpt-3.5-turbo",
