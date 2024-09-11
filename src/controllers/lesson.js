@@ -52,6 +52,7 @@ export const INSERT_LESSON = async (req, res) => {
       title_lt: req.body.title_lt,
       taskHintContent_en: req.body.taskHintContent_en,
       taskHintContent_lt: req.body.taskHintContent_lt,
+      initialCode: req.body.initialCode,
     };
 
     const response = new TaskModel(lesson);
@@ -79,12 +80,12 @@ export const COMPLETE_TASK = async (req, res) => {
     console.log(error);
     return res.status(500).json({ message: "err" });
   }
-  
+
   try {
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
     // Listen for console events and log them to the Node.js console
-    page.on('console', async (msg) => {
+    page.on("console", async (msg) => {
       const args = msg.args();
       for (let i = 0; i < args.length; ++i) {
         const arg = args[i];
@@ -95,13 +96,13 @@ export const COMPLETE_TASK = async (req, res) => {
     await page.setContent(code);
     const testToGive = taskTest[id];
     console.log(testToGive, "testToGive");
-    
+
     const testResults = await page.evaluate((test) => {
       const testFunction = new Function(`return ${test}`)();
       return testFunction();
     }, testToGive.toString());
     console.log(testResults, "testResults");
-    
+
     await browser.close();
 
     return res

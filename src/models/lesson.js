@@ -16,6 +16,7 @@ const taskSchema = mongoose.Schema({
   title_lt: { type: String, required: true },
   taskHintContent_en: { type: String, required: false },
   taskHintContent_lt: { type: String, required: false },
+  initialCode: { type: String, required: false },
 
   // aiAssistsCount: { type: Number, required: true },
   // submitCount: { type: Number, required: true },
