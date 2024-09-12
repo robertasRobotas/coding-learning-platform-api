@@ -52,7 +52,9 @@ export const INSERT_LESSON = async (req, res) => {
       title_lt: req.body.title_lt,
       taskHintContent_en: req.body.taskHintContent_en,
       taskHintContent_lt: req.body.taskHintContent_lt,
-      initialCode: req.body.initialCode,
+      initialHtmlCode: req.body.initialHtmlCode,
+      initialCssCode: req.body.initialCssCode,
+      initialJsCode: req.body.initialJsCode,
     };
 
     const response = new TaskModel(lesson);
