@@ -48,7 +48,7 @@ export const LOG_IN = async (req, res) => {
     const user = await UserModel.findOne({ email: req.body.email });
 
     if (!user) {
-      return res.status(400).json({ message: "bad data" });
+      return res.status(401).json({ message: "bad data" });
     }
 
     const isPasswordMatch = bcrypt.compareSync(
@@ -57,7 +57,7 @@ export const LOG_IN = async (req, res) => {
     );
 
     if (!isPasswordMatch) {
-      return res.status(400).json({ message: "bad data" });
+      return res.status(401).json({ message: "bad data" });
     }
 
     const jwt_token = jwt.sign(
