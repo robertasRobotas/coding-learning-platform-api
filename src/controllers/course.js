@@ -37,7 +37,7 @@ export const GET_ALL_USER_COURSES = async (req, res) => {
 
 export const GET_COURSE_BY_ID = async (req, res) => {
   try {
-    const course = new CourseModel.find({ id: req.params.id });
+    const course = await CourseModel.find({ id: req.params.id });
 
     return res.status(200).json({ course: course });
   } catch (err) {
