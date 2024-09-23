@@ -146,6 +146,68 @@ const task7 = () => {
   } catch (error) {
     console.log(error);
   }
+
+  return result;
+};
+
+const task8 = () => {
+  const result = {
+    paragraphsExist: false,
+    paragraphsAreNotInsideEachPOther: false,
+    firstParagraphHasBrTagInside: false,
+    paragraphsAreSeperatedByHrTag: false,
+  };
+
+  try {
+    const paragraphs = document.querySelectorAll("p");
+    result.paragraphsExist = paragraphs.length === 2;
+    if (paragraphs.length === 2) {
+      result.paragraphsAreNotInsideEachPOther = paragraphs[1].parentElement.tagName !== "p" && paragraphs[0].parentElement.tagName !== "p";
+      result.firstParagraphHasBrTagInside = paragraphs[0].querySelector("br") !== null;
+      result.paragraphsAreSeperatedByHrTag = paragraphs[1].nextElementSibling.tagName === "HR" || paragraphs[0].nextElementSibling.tagName === "HR";
+    }
+  } catch (error) {
+    console.log(error);
+  }
+
+  return result;
+};
+
+const task9 = () => {
+  const result = {
+    formElementExists: false,
+    formElementHas5InputsInside: false,
+    firstInputIsText: false,
+    secondInputIsEmail: false,
+    thirdInputIsPassword: false,
+    fourthInputIsDate: false,
+    fifthInputIsSubmit: false,
+    first4InputsHavePlaceholder: false,
+  };
+
+  try {
+    const form = document.querySelector("form");
+    result.formElementExists = !!form;
+    if (form) {
+      const inputs = form.querySelectorAll("input");
+      result.formElementHas5InputsInside = inputs.length === 5;
+      result.firstInputIsText = inputs[0].type === "text";
+      result.secondInputIsEmail = inputs[1].type === "email";
+      result.thirdInputIsPassword = inputs[2].type === "password";
+      result.fourthInputIsDate = inputs[3].type === "date";
+      result.fifthInputIsSubmit = inputs[4].type === "submit";
+      result.first4InputsHavePlaceholder =
+        inputs[0].placeholder !== "" && inputs[1].placeholder !== "" && inputs[2].placeholder !== "" && inputs[3].placeholder !== "";
+    }
+  } catch (error) {
+    console.log(error);
+  }
+
+  return result;
+};
+
+const task10 = () => {
+  const result = {};
 };
 
 export default {
@@ -155,4 +217,8 @@ export default {
   ["0b4f7b3e-38c3-46e9-aa57-886a427cdd72"]: task4,
   ["423cfe50-9982-4ebd-9c82-b9f8e126a7c8"]: task5,
   ["a07344b4-d6a2-47b5-bbcb-a7bb6c3a6b7c"]: task6,
+  ["25372cee-4261-4922-9d10-7ac323b8072d"]: task7,
+  ["04eb14f8-cf36-4e24-a0a7-48a6de26f604"]: task8,
+  ["f47d4836-b14f-472f-aa98-175c596d92f8"]: task9,
+  ["e7d0092c-324f-4879-8fc7-df9ddbccdbe2"]: task10,
 };
