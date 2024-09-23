@@ -71,11 +71,11 @@ const task4 = () => {
     console.log(error);
   }
   return result;
-}
+};
 
 // TODO fix this shit
 const task5 = () => {
-  const result = { 
+  const result = {
     commentExists: false,
   };
   try {
@@ -87,11 +87,11 @@ const task5 = () => {
         // Traverse previous siblings until a comment node is found
         while (previousSibling) {
           console.log(previousSibling.nodeValue.trim());
-          
-            if (previousSibling.nodeValue.trim().toLowerCase() === "this is a comment") {
-              result.commentExists = true;
-              break;
-            }
+
+          if (previousSibling.nodeValue.trim().toLowerCase() === "this is a comment") {
+            result.commentExists = true;
+            break;
+          }
           previousSibling = previousSibling.previousSibling;
         }
       }
@@ -100,12 +100,59 @@ const task5 = () => {
     console.log(error);
   }
   return result;
-}
+};
+
+const task6 = () => {
+  const result = {
+    imageTagExists: false,
+    imageHasCorrectSrc: false,
+    imageHasSrc: false,
+  };
+
+  try {
+    const image = document.querySelector("img");
+    result.imageTagExists = true;
+    result.imageHasSrc = image.href !== "";
+    result.imageHasCorrectSrc =
+      image.src === "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Larix_decidua_Aletschwald.jpg/1280px-Larix_decidua_Aletschwald.jpg";
+  } catch (error) {
+    console.log(error);
+  }
+  return result;
+};
+
+const task7 = () => {
+  const result = {
+    ulExists: false,
+    olExists: false,
+    ulHasCorrectItems: false,
+    olHasCorrectItems: false,
+  };
+
+  try {
+    const ul = document.querySelector("ul");
+    result.ulExists = !!ul;
+    if (ul) {
+      const ulItems = ul.querySelectorAll("li");
+      result.ulHasCorrectItems = ulItems.length === 3;
+    }
+
+    const ol = document.querySelector("ol");
+    result.olExists = !!ol;
+    if (ol) {
+      const olItems = ol.querySelectorAll("li");
+      result.olHasCorrectItems = olItems.length === 3;
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 export default {
   ["362abec3-81b2-4361-870c-a4e054781d73"]: task1,
   ["46ae62bc-0db1-4e99-94af-d52d3f2cdfd5"]: task2,
   ["d7639a1a-f9a1-4604-84b4-6d4f64396fc2"]: task3,
   ["0b4f7b3e-38c3-46e9-aa57-886a427cdd72"]: task4,
-  ["423cfe50-9982-4ebd-9c82-b9f8e126a7c8"]: task5
+  ["423cfe50-9982-4ebd-9c82-b9f8e126a7c8"]: task5,
+  ["a07344b4-d6a2-47b5-bbcb-a7bb6c3a6b7c"]: task6,
 };
