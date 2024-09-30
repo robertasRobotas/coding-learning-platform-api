@@ -19,6 +19,9 @@ const taskSchema = mongoose.Schema({
   initialHtmlCode: { type: String, required: false },
   initialCssCode: { type: String, required: false },
   initialJsCode: { type: String, required: false },
+  isHtmlEditor: { type: Boolean, required: false },
+  isCssEditor: { type: Boolean, required: false },
+  isJsEditor: { type: Boolean, required: false },
 
   // aiAssistsCount: { type: Number, required: true },
   // submitCount: { type: Number, required: true },
