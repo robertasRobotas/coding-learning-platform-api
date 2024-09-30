@@ -26,7 +26,6 @@ export const SIGN_IN = async (req, res) => {
       country: req.body.country,
       phoneNumber: req.body.phoneNumber,
       certificateURLs: null,
-      courseProgress: [],
     });
 
     const response = await user.save();
@@ -70,7 +69,6 @@ export const LOG_IN = async (req, res) => {
       name: user.name,
       surname: user.surname,
       email: user.email,
-      courseProgress: user.courseProgress,
       certificateURLs: user.certificateURLs,
       isPremium: user.isPremium,
     };

@@ -5,14 +5,6 @@ const validateEmail = function (email) {
   return re.test(email);
 };
 
-const courseProgressSchema = new mongoose.Schema(
-  {
-    courseId: { type: String, required: true },
-    lastCompletedLesson: { type: Number, required: true },
-  },
-  { _id: false }
-);
-
 const userSchema = mongoose.Schema({
   id: { type: String, required: true },
   name: { type: String, required: true },
@@ -38,7 +30,6 @@ const userSchema = mongoose.Schema({
   country: { type: String, required: true },
   phoneNumber: { type: String, required: true },
   certificateURLs: { type: Array, required: false },
-  courseProgress: { type: [courseProgressSchema], required: false },
 });
 
 export default mongoose.model("User", userSchema);
