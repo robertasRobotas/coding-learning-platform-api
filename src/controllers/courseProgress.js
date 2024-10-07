@@ -1,4 +1,4 @@
-import CourseProgressModel from "../models/courseProgress";
+import CourseProgressModel from "../models/courseProgress.js";
 
 export const CREATE_NEW_LESSON_PROGRESS = async (req, res) => {
   try {
@@ -6,20 +6,24 @@ export const CREATE_NEW_LESSON_PROGRESS = async (req, res) => {
       userId: req.body.userId,
       courseId: req.body.courseId,
       lessonId: req.body.lessonId,
+      lessonOrder: req.body.lessonOrder,
     });
 
     if (lessonProgress) {
-      return res.status(204);
+      return res.status(204).send();
     }
 
     const progress = new CourseProgressModel({
       userId: req.body.userId,
       courseId: req.body.courseId,
       lessonId: req.body.lessonId,
+      lessonOrder: req.body.lessonOrder,
       attemptsCount: 0,
       aiHelpCount: 0,
       status: "IN_PROGRESS",
     });
+
+    await progress.save();
 
     return res
       .status(201)

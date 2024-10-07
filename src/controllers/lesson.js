@@ -6,7 +6,9 @@ import taskTest from "../../taskTests/index.js";
 
 export const GET_ALL_LESSONS_BY_COURSE_ID = async (req, res) => {
   try {
-    const tasks = await TaskModel.find({ courseId: req.params.courseId });
+    const tasks = await TaskModel.find({ courseId: req.params.courseId }).sort({
+      orderId: "asc",
+    });
 
     return res.status(200).json({
       message: `All course ${req.params.courseId} tasks`,
