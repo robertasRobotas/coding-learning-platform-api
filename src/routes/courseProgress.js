@@ -15,6 +15,6 @@ router.post("/progress", auth, CREATE_NEW_LESSON_PROGRESS);
 router.put("/atempt/increase", auth, INCREASE_COMPLETE_ATTEMPT_COUNT);
 router.put("/help/increase", auth, INCREASE_AI_HELP_COUNT);
 router.post("/complete/lesson", auth, COMPLETE_LESSON);
-router.get("progress/:courses/:userId", auth, GET_HIGHEST_FINISHED_LESSON);
+router.get("/progress/:courseId", auth, GET_HIGHEST_FINISHED_LESSON);
 
 export default router;

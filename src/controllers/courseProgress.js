@@ -116,21 +116,21 @@ export const GET_HIGHEST_FINISHED_LESSON = async (req, res) => {
   try {
     const lessonProgress = await CourseProgressModel.find({
       userId: req.body.userId,
-      courseId: req.body.courseId,
-      lessonId: req.body.lessonId,
-    });
+      courseId: req.params.courseId,
+      status: "COMPLETED",
+    })
+      .sort({ lessonOrder: -1 })
+      .limit(1);
 
     if (!lessonProgress) {
       return res.status(404).json({ message: "Progress not found" });
     }
 
-    lessonProgress.status = "COMPLETED";
-
-    const updatedProgress = await lessonProgress.save();
+    console.log("lessonProgress", lessonProgress);
 
     return res.status(200).json({
-      progress: updatedProgress,
-      message: "Lesson was completed",
+      progress: lessonProgress[0].lessonOrder,
+      message: "Latest completed lesson ",
     });
   } catch (err) {
     console.log(err);
