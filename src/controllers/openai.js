@@ -13,11 +13,13 @@ export const GET_OPENAI_HELP = async (req, res) => {
     const lesson = await LessonModel.findOne({ id: lessonId });
     const user = await UserModel.findOne({ id: userId });
     const messages = [
-      { role: "system", content: "You are a helpful assistant for a student. You reply in 3 sentences" },
+      {
+        role: "system",
+        content: "You are a helpful assistant for a student. You reply in 3 sentences, write in an understandable and readable manner",
+      },
       {
         role: "user",
-        content: `give help for this task ${lesson.
-          lessonContent_en}, this is the students code: ${code}`,
+        content: `give help for this task ${lesson.lessonContent_en}, this is the students code: html: ${code.html} css: ${code.css} js: ${code.js}`,
       },
     ];
 
