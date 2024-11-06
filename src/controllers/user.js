@@ -2,6 +2,7 @@ import { v4 as uuidv4 } from "uuid";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import UserModel from "../models/user.js";
+import { requiredUserFields } from "../utils/user.js";
 
 export const VALIDATE_USER = async (req, res) => {
   res.status(200).json({ message: "user OK" });
@@ -9,6 +10,17 @@ export const VALIDATE_USER = async (req, res) => {
 
 export const SIGN_IN = async (req, res) => {
   try {
+    const missingFields = requiredUserFields.filter(
+      (field) => !req.body[field]
+    );
+
+    if (missingFields.length > 0) {
+      return res.status(400).json({
+        message: "Missing required fields",
+        missingFields: missingFields,
+      });
+    }
+
     const salt = bcrypt.genSaltSync(10);
     var hash = bcrypt.hashSync(req.body.password, salt);
 
