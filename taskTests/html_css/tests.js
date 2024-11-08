@@ -5,6 +5,8 @@ const task1 = () => {
   };
 };
 
+const task1TestNames = ["checking if h2 exists"];
+
 const task2 = () => {
   const result = {
     aTagExists: false,
@@ -211,7 +213,7 @@ const task10 = () => {
 };
 
 export default {
-  ["362abec3-81b2-4361-870c-a4e054781d73"]: task1,
+  ["362abec3-81b2-4361-870c-a4e054781d73"]: {test: task1, testNames: task1TestNames},
   ["46ae62bc-0db1-4e99-94af-d52d3f2cdfd5"]: task2,
   ["d7639a1a-f9a1-4604-84b4-6d4f64396fc2"]: task3,
   ["0b4f7b3e-38c3-46e9-aa57-886a427cdd72"]: task4,

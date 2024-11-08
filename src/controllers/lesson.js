@@ -101,7 +101,7 @@ export const COMPLETE_TASK = async (req, res) => {
       }
     });
     await page.setContent(code);
-    const testToGive = taskTest[id];
+    const testToGive = taskTest[id].test;
     console.log(testToGive, "testToGive");
 
     const testResults = await page.evaluate((test) => {
@@ -119,4 +119,12 @@ export const COMPLETE_TASK = async (req, res) => {
     console.log(error);
     return res.status(500).json({ message: error.message });
   }
+};
+
+export const GET_LESSON_TEST_NAMES = async (req, res) => {
+  const { id } = req.params;
+  const testNames = taskTest[id].testNames;
+  console.log(testNames, "testNames");
+  
+  return res.status(200).json({ testNames });
 };
