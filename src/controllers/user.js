@@ -10,9 +10,18 @@ export const VALIDATE_USER = async (req, res) => {
 
 export const SIGN_IN = async (req, res) => {
   try {
-    const missingFields = requiredUserFields.filter(
-      (field) => !req.body[field]
-    );
+    const user = UserModel.find({ email: req.body.email });
+
+    if (user) {
+      return res.status(400).json({
+        message: "Missing required fields",
+        missingFields: ["user_email_exist"],
+      });
+    }
+
+    const missingFields = requiredUserFields
+      .filter((field) => !req.body[field])
+      .map((f) => `${f}_missing`);
 
     if (missingFields.length > 0) {
       return res.status(400).json({
@@ -24,7 +33,7 @@ export const SIGN_IN = async (req, res) => {
     const salt = bcrypt.genSaltSync(10);
     var hash = bcrypt.hashSync(req.body.password, salt);
 
-    const user = new UserModel({
+    const newUser = new UserModel({
       id: uuidv4(),
       name: req.body.name,
       surname: req.body.surname,
@@ -40,14 +49,14 @@ export const SIGN_IN = async (req, res) => {
       certificateURLs: null,
     });
 
-    const response = await user.save();
+    const response = await newUser.save();
 
     const jwt_token = jwt.sign(
       { email: user.email, user_id: user.id },
       process.env.JWT_SECRET
     );
 
-    return res.status(200).json({ user: response, jwt_token: jwt_token });
+    return res.status(201).json({ user: response, jwt_token: jwt_token });
   } catch (err) {
     console.log(err);
     return res.status(400).json({ message: "bad data", err: err });
