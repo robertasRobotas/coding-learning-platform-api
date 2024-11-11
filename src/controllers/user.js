@@ -10,7 +10,7 @@ export const VALIDATE_USER = async (req, res) => {
 
 export const SIGN_IN = async (req, res) => {
   try {
-    const user = UserModel.find({ email: req.body.email });
+    const user = await UserModel.findOne({ email: req.body.email });
 
     if (user) {
       return res.status(400).json({
