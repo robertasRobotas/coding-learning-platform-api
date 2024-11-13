@@ -123,8 +123,11 @@ export const COMPLETE_TASK = async (req, res) => {
 
 export const GET_LESSON_TEST_NAMES = async (req, res) => {
   const { id } = req.params;
-  const testNames = taskTest[id].testNames;
-  console.log(testNames, "testNames");
-  
-  return res.status(200).json({ testNames });
+  try {
+    const testNames = taskTest[id].testNames;
+    return res.status(200).json({ testNames });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ message: "err" });
+  }
 };

@@ -1,45 +1,103 @@
+const task1TestNames = {
+  h2Exists: {
+    en: "Checking if h2 exists",
+  }
+}
+
 const task1 = () => {
-  const elementExists = !!document.querySelector("h2");
-  return {
-    elementExists,
-  };
+  const result = {
+    h2Exists: {
+      result: false,
+      testName: task1TestNames.h2Exists
+    }
+  }
+
+  result.h2Exists.result = !!document.querySelector("h2");
+  return result;
 };
 
-const task1TestNames = ["checking if h2 exists"];
+const task2TestNames = {
+  aTagExists: {
+    en: "Checking if a tag exists",
+  },
+  hrefAttributeExists: {
+    en: "Checking if href attribute exists",
+  },
+  hrefIsGoogle: {
+    en: "Checking if href attribute is google",
+  },
+}
 
 const task2 = () => {
   const result = {
-    aTagExists: false,
-    hrefAttributeExists: false,
-    hrefIsGoogle: false,
+    aTagExists: {
+      result: false,
+      testName: task2TestNames.aTagExists
+    },
+    hrefAttributeExists: {
+      result: false,
+      testName: task2TestNames.hrefAttributeExists
+    },
+    hrefIsGoogle: {
+      result: false,
+      testName: task2TestNames.href
+    },
   };
   try {
     const aTag = document.querySelector("a");
-    result.aTagExists = !!aTag;
-    result.hrefAttributeExists = aTag.href !== "";
-    result.hrefIsGoogle = aTag.href.includes("https://www.google.com") || aTag.href.includes("https://google.com");
+    result.aTagExists.result = !!aTag;
+    result.hrefAttributeExists.result = aTag.href !== "";
+    result.hrefIsGoogle.result = aTag.href.includes("https://www.google.com") || aTag.href.includes("https://google.com");
   } catch (error) {
     console.log(error);
   }
   return result;
 };
 
+const task3TestNames = {
+  divExists: {
+    en: "Checking if div exists",
+  },
+  spanExists: {
+    en: "Checking if span exists",
+  },
+  divStylesCorrect: {
+    en: "Checking if div styles are correct",
+  },
+  spanStylesCorrect: {
+    en: "Checking if span styles are correct",
+  },
+}
+
 const task3 = () => {
   const result = {
-    divExists: false,
-    spanExists: false,
-    divStylesCorrect: false,
-    spanStylesCorrect: false,
+    divExists: {
+      result: false,
+      testName: task3TestNames.divExists
+    },
+    spanExists: {
+      result: false,
+      testName: task3TestNames.spanExists
+    },
+    divStylesCorrect: {
+      result: false,
+      testName: task3TestNames.divStylesCorrect
+    },
+    spanStylesCorrect: {
+      result: false,
+      testName: task3TestNames.spanStylesCorrect
+    },
   };
+
   try {
     const div = document.querySelector("div");
-    result.divExists = !!div;
+    result.divExists.result = !!div;
     if (div) {
       const span = div.querySelector("span");
-      result.spanExists = !!span;
-      result.divStylesCorrect = div.style.backgroundColor === "blue" && div.style.color === "red";
+      result.spanExists.result = !!span;
+      result.divStylesCorrect.result = div.style.backgroundColor === "blue" && div.style.color === "red";
       if (span) {
-        result.spanStylesCorrect = span.style.backgroundColor === "blue" && span.style.color === "red";
+        result.spanStylesCorrect.result = span.style.backgroundColor === "blue" && span.style.color === "red";
       }
     }
   } catch (error) {
