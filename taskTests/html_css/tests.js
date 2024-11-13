@@ -1,18 +1,15 @@
 const task1TestNames = {
-  h2Exists: {
-    en: "Checking if h2 exists",
+  ["1-1"] : {
+    en: "Checking if h2 exists"
   }
 }
 
 const task1 = () => {
   const result = {
-    h2Exists: {
-      result: false,
-      testName: task1TestNames.h2Exists
-    }
+    "1-1": false,
   }
 
-  result.h2Exists.result = !!document.querySelector("h2");
+  result["1-1"] = !!document.querySelector("h2");
   return result;
 };
 

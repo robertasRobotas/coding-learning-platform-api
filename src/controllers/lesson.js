@@ -102,19 +102,26 @@ export const COMPLETE_TASK = async (req, res) => {
     });
     await page.setContent(code);
     const testToGive = taskTest[id].test;
-    console.log(testToGive, "testToGive");
+    const names = taskTest[id].testNames;
 
     const testResults = await page.evaluate((test) => {
       const testFunction = new Function(`return ${test}`)();
       return testFunction();
     }, testToGive.toString());
-    console.log(testResults, "testResults");
 
     await browser.close();
 
+    const response = Object.entries(testResults).map(([key, value]) => {
+      const name = names[key];
+      return {
+        result: value,
+        name
+      };
+    });
+
     return res
       .status(200)
-      .json({ message: "Tests completed", results: testResults });
+      .json(response);
   } catch (error) {
     console.log(error);
     return res.status(500).json({ message: error.message });
@@ -125,7 +132,7 @@ export const GET_LESSON_TEST_NAMES = async (req, res) => {
   const { id } = req.params;
   try {
     const testNames = taskTest[id].testNames;
-    return res.status(200).json({ testNames });
+    return res.status(200).json(Object.values(testNames));
   } catch (error) {
     console.log(error);
     return res.status(500).json({ message: "err" });
