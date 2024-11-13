@@ -14,37 +14,28 @@ const task1 = () => {
 };
 
 const task2TestNames = {
-  aTagExists: {
+  ["2-1"]: {
     en: "Checking if a tag exists",
   },
-  hrefAttributeExists: {
+  ["2-2"]: {
     en: "Checking if href attribute exists",
   },
-  hrefIsGoogle: {
+  ["2-3"]: {
     en: "Checking if href attribute is google",
   },
 }
 
 const task2 = () => {
   const result = {
-    aTagExists: {
-      result: false,
-      testName: task2TestNames.aTagExists
-    },
-    hrefAttributeExists: {
-      result: false,
-      testName: task2TestNames.hrefAttributeExists
-    },
-    hrefIsGoogle: {
-      result: false,
-      testName: task2TestNames.href
-    },
+    ["2-1"]: false,
+    ["2-2"]: false,
+    ["2-3"]: false,
   };
   try {
     const aTag = document.querySelector("a");
-    result.aTagExists.result = !!aTag;
-    result.hrefAttributeExists.result = aTag.href !== "";
-    result.hrefIsGoogle.result = aTag.href.includes("https://www.google.com") || aTag.href.includes("https://google.com");
+    result["2-1"] = !!aTag;
+    result["2-2"] = aTag.href !== "";
+    result["2-3"] = aTag.href.includes("https://www.google.com") || aTag.href.includes("https://google.com");
   } catch (error) {
     console.log(error);
   }
@@ -269,7 +260,7 @@ const task10 = () => {
 
 export default {
   ["362abec3-81b2-4361-870c-a4e054781d73"]: {test: task1, testNames: task1TestNames},
-  ["46ae62bc-0db1-4e99-94af-d52d3f2cdfd5"]: task2,
+  ["46ae62bc-0db1-4e99-94af-d52d3f2cdfd5"]: {test: task2, testNames: task2TestNames},
   ["d7639a1a-f9a1-4604-84b4-6d4f64396fc2"]: task3,
   ["0b4f7b3e-38c3-46e9-aa57-886a427cdd72"]: task4,
   ["423cfe50-9982-4ebd-9c82-b9f8e126a7c8"]: task5,

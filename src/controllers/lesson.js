@@ -75,7 +75,8 @@ export const INSERT_LESSON = async (req, res) => {
 export const COMPLETE_TASK = async (req, res) => {
   const { code, userId } = req.body;
   const { id } = req.params;
-
+  console.log(code);
+  
   try {
     const user = await UserModel.findOne({ id: userId });
     if (!user) {
@@ -100,7 +101,11 @@ export const COMPLETE_TASK = async (req, res) => {
         console.log(`${i}: ${value}`);
       }
     });
-    await page.setContent(code);
+    const combinedHtml = `
+    ${code.html.replace('</head>', `<style>${code.css}</style></head>`)}
+    <script defer>${code.js}</script>
+  `;
+    await page.setContent(combinedHtml);
     const testToGive = taskTest[id].test;
     const names = taskTest[id].testNames;
 
