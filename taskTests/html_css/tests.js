@@ -1,15 +1,15 @@
 const task1TestNames = {
-  ["1-1"] : {
-    en: "Checking if h2 exists"
-  }
-}
+  ["1-1"]: {
+    en: "Checking if text let's go exists",
+  },
+};
 
 const task1 = () => {
   const result = {
     "1-1": false,
-  }
+  };
 
-  result["1-1"] = !!document.querySelector("h2");
+  result["1-1"] = /let's go/i.test(document.body.textContent);
   return result;
 };
 
@@ -23,7 +23,7 @@ const task2TestNames = {
   ["2-3"]: {
     en: "Checking if href attribute is google",
   },
-}
+};
 
 const task2 = () => {
   const result = {
@@ -55,25 +55,25 @@ const task3TestNames = {
   spanStylesCorrect: {
     en: "Checking if span styles are correct",
   },
-}
+};
 
 const task3 = () => {
   const result = {
     divExists: {
       result: false,
-      testName: task3TestNames.divExists
+      testName: task3TestNames.divExists,
     },
     spanExists: {
       result: false,
-      testName: task3TestNames.spanExists
+      testName: task3TestNames.spanExists,
     },
     divStylesCorrect: {
       result: false,
-      testName: task3TestNames.divStylesCorrect
+      testName: task3TestNames.divStylesCorrect,
     },
     spanStylesCorrect: {
       result: false,
-      testName: task3TestNames.spanStylesCorrect
+      testName: task3TestNames.spanStylesCorrect,
     },
   };
 
@@ -161,8 +161,7 @@ const task6 = () => {
     const image = document.querySelector("img");
     result.imageTagExists = true;
     result.imageHasSrc = image.href !== "";
-    result.imageHasCorrectSrc =
-      image.src === "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Larix_decidua_Aletschwald.jpg/1280px-Larix_decidua_Aletschwald.jpg";
+    result.imageHasCorrectSrc = image.src === "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Larix_decidua_Aletschwald.jpg/1280px-Larix_decidua_Aletschwald.jpg";
   } catch (error) {
     console.log(error);
   }
@@ -244,8 +243,7 @@ const task9 = () => {
       result.thirdInputIsPassword = inputs[2].type === "password";
       result.fourthInputIsDate = inputs[3].type === "date";
       result.fifthInputIsSubmit = inputs[4].type === "submit";
-      result.first4InputsHavePlaceholder =
-        inputs[0].placeholder !== "" && inputs[1].placeholder !== "" && inputs[2].placeholder !== "" && inputs[3].placeholder !== "";
+      result.first4InputsHavePlaceholder = inputs[0].placeholder !== "" && inputs[1].placeholder !== "" && inputs[2].placeholder !== "" && inputs[3].placeholder !== "";
     }
   } catch (error) {
     console.log(error);
@@ -259,8 +257,8 @@ const task10 = () => {
 };
 
 export default {
-  ["362abec3-81b2-4361-870c-a4e054781d73"]: {test: task1, testNames: task1TestNames},
-  ["f038e5bc-1cff-4f1f-acb6-03f24becf1ed"]: {test: task2, testNames: task2TestNames},
+  ["362abec3-81b2-4361-870c-a4e054781d73"]: { test: task1, testNames: task1TestNames },
+  ["f038e5bc-1cff-4f1f-acb6-03f24becf1ed"]: { test: task2, testNames: task2TestNames },
   ["46ae62bc-0db1-4e99-94af-d52d3f2cdfd5"]: task3,
   ["d7639a1a-f9a1-4604-84b4-6d4f64396fc2"]: task4,
   ["0b4f7b3e-38c3-46e9-aa57-886a427cdd72"]: task5,
