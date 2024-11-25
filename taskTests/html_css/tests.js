@@ -71,11 +71,13 @@ const task2 = () => {
 
     // Check if heading with text 'Welcome to My Page' exists
     const heading = document.querySelector("h1");
-    result["2-4"] = !!heading && heading.textContent.includes("Welcome to My Page");
+    result["2-4"] =
+      !!heading && heading.textContent.includes("Welcome to My Page");
 
     // Check if paragraph with text 'This is my first webpage!' exists
     const paragraph = document.querySelector("p");
-    result["2-5"] = !!paragraph && paragraph.textContent.includes("This is my first webpage");
+    result["2-5"] =
+      !!paragraph && paragraph.textContent.includes("This is my first webpage");
 
     // Check if <head> is inside <html>
     result["2-6"] = htmlTag && headTag && htmlTag.contains(headTag);
@@ -136,9 +138,11 @@ const task3 = () => {
     if (div) {
       const span = div.querySelector("span");
       result.spanExists.result = !!span;
-      result.divStylesCorrect.result = div.style.backgroundColor === "blue" && div.style.color === "red";
+      result.divStylesCorrect.result =
+        div.style.backgroundColor === "blue" && div.style.color === "red";
       if (span) {
-        result.spanStylesCorrect.result = span.style.backgroundColor === "blue" && span.style.color === "red";
+        result.spanStylesCorrect.result =
+          span.style.backgroundColor === "blue" && span.style.color === "red";
       }
     }
   } catch (error) {
@@ -187,9 +191,10 @@ const task5 = () => {
         let previousSibling = emailDiv.previousSibling;
         // Traverse previous siblings until a comment node is found
         while (previousSibling) {
-          console.log(previousSibling.nodeValue.trim());
-
-          if (previousSibling.nodeValue.trim().toLowerCase() === "this is a comment") {
+          if (
+            previousSibling.nodeValue.trim().toLowerCase() ===
+            "this is a comment"
+          ) {
             result.commentExists = true;
             break;
           }
@@ -214,7 +219,9 @@ const task6 = () => {
     const image = document.querySelector("img");
     result.imageTagExists = true;
     result.imageHasSrc = image.href !== "";
-    result.imageHasCorrectSrc = image.src === "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Larix_decidua_Aletschwald.jpg/1280px-Larix_decidua_Aletschwald.jpg";
+    result.imageHasCorrectSrc =
+      image.src ===
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Larix_decidua_Aletschwald.jpg/1280px-Larix_decidua_Aletschwald.jpg";
   } catch (error) {
     console.log(error);
   }
@@ -262,9 +269,14 @@ const task8 = () => {
     const paragraphs = document.querySelectorAll("p");
     result.paragraphsExist = paragraphs.length === 2;
     if (paragraphs.length === 2) {
-      result.paragraphsAreNotInsideEachPOther = paragraphs[1].parentElement.tagName !== "p" && paragraphs[0].parentElement.tagName !== "p";
-      result.firstParagraphHasBrTagInside = paragraphs[0].querySelector("br") !== null;
-      result.paragraphsAreSeperatedByHrTag = paragraphs[1].nextElementSibling.tagName === "HR" || paragraphs[0].nextElementSibling.tagName === "HR";
+      result.paragraphsAreNotInsideEachPOther =
+        paragraphs[1].parentElement.tagName !== "p" &&
+        paragraphs[0].parentElement.tagName !== "p";
+      result.firstParagraphHasBrTagInside =
+        paragraphs[0].querySelector("br") !== null;
+      result.paragraphsAreSeperatedByHrTag =
+        paragraphs[1].nextElementSibling.tagName === "HR" ||
+        paragraphs[0].nextElementSibling.tagName === "HR";
     }
   } catch (error) {
     console.log(error);
@@ -296,7 +308,11 @@ const task9 = () => {
       result.thirdInputIsPassword = inputs[2].type === "password";
       result.fourthInputIsDate = inputs[3].type === "date";
       result.fifthInputIsSubmit = inputs[4].type === "submit";
-      result.first4InputsHavePlaceholder = inputs[0].placeholder !== "" && inputs[1].placeholder !== "" && inputs[2].placeholder !== "" && inputs[3].placeholder !== "";
+      result.first4InputsHavePlaceholder =
+        inputs[0].placeholder !== "" &&
+        inputs[1].placeholder !== "" &&
+        inputs[2].placeholder !== "" &&
+        inputs[3].placeholder !== "";
     }
   } catch (error) {
     console.log(error);
@@ -310,8 +326,14 @@ const task10 = () => {
 };
 
 export default {
-  ["362abec3-81b2-4361-870c-a4e054781d73"]: { test: task1, testNames: task1TestNames },
-  ["f038e5bc-1cff-4f1f-acb6-03f24becf1ed"]: { test: task2, testNames: task2TestNames },
+  ["362abec3-81b2-4361-870c-a4e054781d73"]: {
+    test: task1,
+    testNames: task1TestNames,
+  },
+  ["f038e5bc-1cff-4f1f-acb6-03f24becf1ed"]: {
+    test: task2,
+    testNames: task2TestNames,
+  },
   ["46ae62bc-0db1-4e99-94af-d52d3f2cdfd5"]: task3,
   ["d7639a1a-f9a1-4604-84b4-6d4f64396fc2"]: task4,
   ["0b4f7b3e-38c3-46e9-aa57-886a427cdd72"]: task5,

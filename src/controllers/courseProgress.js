@@ -1,4 +1,5 @@
 import CourseProgressModel from "../models/courseProgress.js";
+import { isProgressExit, completeLesson } from "../services/progress.js";
 
 export const CREATE_NEW_LESSON_PROGRESS = async (req, res) => {
   try {
@@ -88,19 +89,21 @@ export const INCREASE_AI_HELP_COUNT = async (req, res) => {
 
 export const COMPLETE_LESSON = async (req, res) => {
   try {
-    const lessonProgress = await CourseProgressModel.findOne({
+    const isProgressExist = isProgressExit({
       userId: req.body.userId,
       courseId: req.body.courseId,
       lessonId: req.body.lessonId,
     });
 
-    if (!lessonProgress) {
+    if (!isProgressExist) {
       return res.status(404).json({ message: "Progress not found" });
     }
 
-    lessonProgress.status = "COMPLETED";
-
-    const updatedProgress = await lessonProgress.save();
+    const updatedProgress = await completeLesson({
+      userId: req.body.userId,
+      courseId: req.body.courseId,
+      lessonId: req.body.lessonId,
+    });
 
     return res.status(200).json({
       progress: updatedProgress,
@@ -125,8 +128,6 @@ export const GET_HIGHEST_FINISHED_LESSON = async (req, res) => {
     if (!lessonProgress) {
       return res.status(404).json({ message: "Progress not found" });
     }
-
-    console.log("lessonProgress", lessonProgress);
 
     return res.status(200).json({
       progress: lessonProgress[0].lessonOrder,

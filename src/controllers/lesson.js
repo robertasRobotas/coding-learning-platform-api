@@ -3,6 +3,7 @@ import TaskModel from "../models/lesson.js";
 import puppeteer from "puppeteer";
 import UserModel from "../models/user.js";
 import taskTest from "../../taskTests/index.js";
+import { isProgressExit, completeLesson } from "../services/progress.js";
 
 export const GET_ALL_LESSONS_BY_COURSE_ID = async (req, res) => {
   try {
@@ -122,6 +123,26 @@ export const COMPLETE_TASK = async (req, res) => {
         name,
       };
     });
+
+    const isEveryTestPassed = response.every((r) => r.result);
+
+    if (isEveryTestPassed) {
+      const isProgressExist = isProgressExit({
+        userId: req.body.userId,
+        courseId: req.body.courseId,
+        lessonId: req.body.lessonId,
+      });
+
+      if (!isProgressExist) {
+        return res.status(404).json({ message: "Progress not found" });
+      }
+
+      await completeLesson({
+        userId: req.body.userId,
+        courseId: req.body.courseId,
+        lessonId: req.body.lessonId,
+      });
+    }
 
     return res.status(200).json(response);
   } catch (error) {
