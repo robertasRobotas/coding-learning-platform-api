@@ -15,13 +15,31 @@ const task1 = () => {
 
 const task2TestNames = {
   ["2-1"]: {
-    en: "Checking if a tag exists",
+    en: "Checking if <html> root tag exists",
   },
   ["2-2"]: {
-    en: "Checking if href attribute exists",
+    en: "Checking if <head> section exists",
   },
   ["2-3"]: {
-    en: "Checking if href attribute is google",
+    en: "Checking if <body> section exists",
+  },
+  ["2-4"]: {
+    en: "Checking if heading with text 'Welcome to My Page' exists",
+  },
+  ["2-5"]: {
+    en: "Checking if paragraph with text 'This is my first webpage!' exists",
+  },
+  ["2-6"]: {
+    en: "Checking if <head> is inside <html>",
+  },
+  ["2-7"]: {
+    en: "Checking if <body> is inside <html>",
+  },
+  ["2-8"]: {
+    en: "Checking if heading is inside <body>",
+  },
+  ["2-9"]: {
+    en: "Checking if paragraph is inside <body>",
   },
 };
 
@@ -30,15 +48,50 @@ const task2 = () => {
     ["2-1"]: false,
     ["2-2"]: false,
     ["2-3"]: false,
+    ["2-4"]: false,
+    ["2-5"]: false,
+    ["2-6"]: false,
+    ["2-7"]: false,
+    ["2-8"]: false,
+    ["2-9"]: false,
   };
+
   try {
-    const aTag = document.querySelector("a");
-    result["2-1"] = !!aTag;
-    result["2-2"] = aTag.href !== "";
-    result["2-3"] = aTag.href.includes("https://www.google.com") || aTag.href.includes("https://google.com");
+    // Check if <html> root tag exists
+    const htmlTag = document.querySelector("html");
+    result["2-1"] = !!htmlTag;
+
+    // Check if <head> section exists
+    const headTag = document.querySelector("head");
+    result["2-2"] = !!headTag;
+
+    // Check if <body> section exists
+    const bodyTag = document.querySelector("body");
+    result["2-3"] = !!bodyTag;
+
+    // Check if heading with text 'Welcome to My Page' exists
+    const heading = document.querySelector("h1");
+    result["2-4"] = !!heading && heading.textContent.includes("Welcome to My Page");
+
+    // Check if paragraph with text 'This is my first webpage!' exists
+    const paragraph = document.querySelector("p");
+    result["2-5"] = !!paragraph && paragraph.textContent.includes("This is my first webpage");
+
+    // Check if <head> is inside <html>
+    result["2-6"] = htmlTag && headTag && htmlTag.contains(headTag);
+
+    // Check if <body> is inside <html>
+    result["2-7"] = htmlTag && bodyTag && htmlTag.contains(bodyTag);
+
+    // Check if heading is inside <body>
+    result["2-8"] = bodyTag && heading && bodyTag.contains(heading);
+
+    // Check if paragraph is inside <body>
+    result["2-9"] = bodyTag && paragraph && bodyTag.contains(paragraph);
   } catch (error) {
     console.log(error);
   }
+
   return result;
 };
 
