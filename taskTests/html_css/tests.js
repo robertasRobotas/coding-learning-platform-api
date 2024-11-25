@@ -260,13 +260,13 @@ const task10 = () => {
 
 export default {
   ["362abec3-81b2-4361-870c-a4e054781d73"]: {test: task1, testNames: task1TestNames},
-  ["46ae62bc-0db1-4e99-94af-d52d3f2cdfd5"]: {test: task2, testNames: task2TestNames},
-  ["d7639a1a-f9a1-4604-84b4-6d4f64396fc2"]: task3,
-  ["0b4f7b3e-38c3-46e9-aa57-886a427cdd72"]: task4,
-  ["423cfe50-9982-4ebd-9c82-b9f8e126a7c8"]: task5,
-  ["a07344b4-d6a2-47b5-bbcb-a7bb6c3a6b7c"]: task6,
-  ["25372cee-4261-4922-9d10-7ac323b8072d"]: task7,
-  ["04eb14f8-cf36-4e24-a0a7-48a6de26f604"]: task8,
-  ["f47d4836-b14f-472f-aa98-175c596d92f8"]: task9,
-  ["e7d0092c-324f-4879-8fc7-df9ddbccdbe2"]: task10,
+  ["f038e5bc-1cff-4f1f-acb6-03f24becf1ed"]: {test: task2, testNames: task2TestNames},
+  ["46ae62bc-0db1-4e99-94af-d52d3f2cdfd5"]: task3,
+  ["d7639a1a-f9a1-4604-84b4-6d4f64396fc2"]: task4,
+  ["0b4f7b3e-38c3-46e9-aa57-886a427cdd72"]: task5,
+  ["423cfe50-9982-4ebd-9c82-b9f8e126a7c8"]: task6,
+  ["a07344b4-d6a2-47b5-bbcb-a7bb6c3a6b7c"]: task7,
+  ["25372cee-4261-4922-9d10-7ac323b8072d"]: task8,
+  ["04eb14f8-cf36-4e24-a0a7-48a6de26f604"]: task9,
+  ["f47d4836-b14f-472f-aa98-175c596d92f8"]: task10,
 };
