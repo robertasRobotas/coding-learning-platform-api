@@ -75,8 +75,7 @@ export const INSERT_LESSON = async (req, res) => {
 export const COMPLETE_TASK = async (req, res) => {
   const { code, userId } = req.body;
   const { id } = req.params;
-  console.log(code);
-  
+
   try {
     const user = await UserModel.findOne({ id: userId });
     if (!user) {
@@ -102,7 +101,7 @@ export const COMPLETE_TASK = async (req, res) => {
       }
     });
     const combinedHtml = `
-    ${code.html.replace('</head>', `<style>${code.css}</style></head>`)}
+    ${code.html.replace("</head>", `<style>${code.css}</style></head>`)}
     <script defer>${code.js}</script>
   `;
     await page.setContent(combinedHtml);
@@ -120,13 +119,11 @@ export const COMPLETE_TASK = async (req, res) => {
       const name = names[key];
       return {
         result: value,
-        name
+        name,
       };
     });
 
-    return res
-      .status(200)
-      .json(response);
+    return res.status(200).json(response);
   } catch (error) {
     console.log(error);
     return res.status(500).json({ message: error.message });
