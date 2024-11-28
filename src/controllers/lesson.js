@@ -25,9 +25,14 @@ export const GET_LESSON_BY_ID = async (req, res) => {
   try {
     const task = await TaskModel.findOne({ id: req.params.id });
 
+    const nextTask = await TaskModel.findOne({
+      courseId: task.courseId,
+      orderId: task.orderId + 1,
+    });
+
     return res.status(200).json({
       message: `ok`,
-      task: task,
+      task: { ...task.toObject(), nextTaskId: nextTask.id },
     });
   } catch (err) {
     console.log(err);
