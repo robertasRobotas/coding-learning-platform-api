@@ -3,7 +3,11 @@ import TaskModel from "../models/lesson.js";
 import puppeteer from "puppeteer";
 import UserModel from "../models/user.js";
 import taskTest from "../../taskTests/index.js";
-import { isProgressExit, completeLesson } from "../services/progress.js";
+import {
+  isProgressExit,
+  completeLesson,
+  increaseAttempts,
+} from "../services/progress.js";
 
 export const GET_ALL_LESSONS_BY_COURSE_ID = async (req, res) => {
   try {
@@ -25,14 +29,14 @@ export const GET_LESSON_BY_ID = async (req, res) => {
   try {
     const task = await TaskModel.findOne({ id: req.params.id });
 
-    const nextTask = await TaskModel.findOne({
+    const nextLessonId = await TaskModel.findOne({
       courseId: task.courseId,
       orderId: task.orderId + 1,
     });
 
     return res.status(200).json({
       message: `ok`,
-      task: { ...task.toObject(), nextTaskId: nextTask.id },
+      task: { ...task.toObject(), nextLessonId: nextLessonId.id },
     });
   } catch (err) {
     console.log(err);
@@ -131,17 +135,25 @@ export const COMPLETE_TASK = async (req, res) => {
 
     const isEveryTestPassed = response.every((r) => r.result);
 
-    if (isEveryTestPassed) {
-      const isProgressExist = isProgressExit({
+    const isProgressExist = isProgressExit({
+      userId: req.body.userId,
+      courseId: req.body.courseId,
+      lessonId: req.body.lessonId,
+    });
+
+    if (!isProgressExist) {
+      return res.status(404).json({ message: "Progress not found" });
+    }
+
+    if (!isEveryTestPassed) {
+      await increaseAttempts({
         userId: req.body.userId,
         courseId: req.body.courseId,
         lessonId: req.body.lessonId,
       });
+    }
 
-      if (!isProgressExist) {
-        return res.status(404).json({ message: "Progress not found" });
-      }
-
+    if (isEveryTestPassed) {
       await completeLesson({
         userId: req.body.userId,
         courseId: req.body.courseId,

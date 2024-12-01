@@ -15,7 +15,8 @@ export const GET_OPENAI_HELP = async (req, res) => {
     const messages = [
       {
         role: "system",
-        content: "You are a helpful assistant for a student. You reply in 3 sentences, write in an understandable and readable manner",
+        content:
+          "You are a helpful assistant for a student. You reply in 3 sentences, write in an understandable and readable manner",
       },
       {
         role: "user",
@@ -33,7 +34,12 @@ export const GET_OPENAI_HELP = async (req, res) => {
 
     console.log(completion);
 
-    return res.status(200).json({ message: "success", data: completion.choices[0].message.content });
+    return res
+      .status(200)
+      .json({
+        message: "success",
+        data: completion.choices[0].message.content,
+      });
   } catch (err) {
     console.log(err);
     return res.status(500).json({ message: "server error", err: err });

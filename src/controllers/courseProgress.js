@@ -19,7 +19,7 @@ export const CREATE_NEW_LESSON_PROGRESS = async (req, res) => {
       courseId: req.body.courseId,
       lessonId: req.body.lessonId,
       lessonOrder: req.body.lessonOrder,
-      attemptsCount: 0,
+      attemptsCount: 1,
       aiHelpCount: 0,
       status: "IN_PROGRESS",
     });
@@ -29,6 +29,27 @@ export const CREATE_NEW_LESSON_PROGRESS = async (req, res) => {
     return res
       .status(201)
       .json({ progress: progress, message: "Lesson progress was created" });
+  } catch (err) {
+    console.log(err);
+    return res.status(400).json({ message: "bad data", err: err });
+  }
+};
+
+export const GET_USER_PROGRESS = async (req, res) => {
+  try {
+    const lessonProgress = await CourseProgressModel.findOne({
+      userId: req.params.userId,
+      courseId: req.params.courseId,
+      lessonId: req.params.lessonId,
+    });
+
+    if (!lessonProgress) {
+      return res.status(404).json({ message: "Progress not found" });
+    }
+
+    return res.status(200).json({
+      progress: lessonProgress,
+    });
   } catch (err) {
     console.log(err);
     return res.status(400).json({ message: "bad data", err: err });
