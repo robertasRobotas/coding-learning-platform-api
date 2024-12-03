@@ -261,27 +261,37 @@ const task6 = (code) => {
   }));
 };
 
+const task7TestNames = {
+  ["7-1"]: {
+    en: "Checking if <img> tag exists",
+  },
+  ["7-2"]: {
+    en: "Checking if <img> tag has correct src attribute",
+  },
+  ["7-3"]: {
+    en: "Checking if <img> tag has alt attribute",
+  },
+  ["7-4"]: {
+    en: "Checking if <img> tag appears correctly on the webpage",
+  },
+};
+
 const task7 = () => {
   const result = {
-    ulExists: false,
-    olExists: false,
-    ulHasCorrectItems: false,
-    olHasCorrectItems: false,
+    ["7-1"]: false,
+    ["7-2"]: false,
+    ["7-3"]: false,
+    ["7-4"]: false,
   };
 
   try {
-    const ul = document.querySelector("ul");
-    result.ulExists = !!ul;
-    if (ul) {
-      const ulItems = ul.querySelectorAll("li");
-      result.ulHasCorrectItems = ulItems.length === 3;
-    }
+    const img = document.querySelector("img");
+    result["7-1"] = !!img;
 
-    const ol = document.querySelector("ol");
-    result.olExists = !!ol;
-    if (ol) {
-      const olItems = ol.querySelectorAll("li");
-      result.olHasCorrectItems = olItems.length === 3;
+    if (img) {
+      result["7-2"] = img.getAttribute("src") === "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Larix_decidua_Aletschwald.jpg/1280px-Larix_decidua_Aletschwald.jpg";
+      result["7-3"] = img.hasAttribute("alt");
+      result["7-4"] = img.complete && img.naturalHeight !== 0;
     }
   } catch (error) {
     console.log(error);
@@ -362,7 +372,7 @@ export default {
   ["d7639a1a-f9a1-4604-84b4-6d4f64396fc2"]: { test: task4, testNames: task4TestNames },
   ["0b4f7b3e-38c3-46e9-aa57-886a427cdd72"]: { test: task5, testNames: task5TestNames },
 
-  ["a07344b4-d6a2-47b5-bbcb-a7bb6c3a6b7c"]: task7,
+  ["a07344b4-d6a2-47b5-bbcb-a7bb6c3a6b7c"]: { test: task7, testNames: task7TestNames },
   ["25372cee-4261-4922-9d10-7ac323b8072d"]: task8,
   ["04eb14f8-cf36-4e24-a0a7-48a6de26f604"]: task9,
   ["f47d4836-b14f-472f-aa98-175c596d92f8"]: task10,
