@@ -1,6 +1,6 @@
 const task1TestNames = {
   ["1-1"]: {
-    en: "Checking if text let's go exists",
+    en: "Checking if text Let's go exists",
   },
 };
 
@@ -9,7 +9,7 @@ const task1 = () => {
     "1-1": false,
   };
 
-  result["1-1"] = /let's go/i.test(document.body.textContent);
+  result["1-1"] = document.body.textContent.includes("Let's go");
   return result;
 };
 
