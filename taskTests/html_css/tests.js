@@ -300,53 +300,83 @@ const task7 = () => {
   return result;
 };
 
+const task8TestNames = {
+  ["8-1"]: {
+    en: "Checking if <ul> tag exists",
+  },
+  ["8-2"]: {
+    en: "Checking if <ul> has correct items",
+  },
+  ["8-3"]: {
+    en: "Checking if <ol> tag exists",
+  },
+  ["8-4"]: {
+    en: "Checking if <ol> has correct items",
+  },
+};
+
 const task8 = () => {
   const result = {
-    paragraphsExist: false,
-    paragraphsAreNotInsideEachPOther: false,
-    firstParagraphHasBrTagInside: false,
-    paragraphsAreSeperatedByHrTag: false,
+    ["8-1"]: false,
+    ["8-2"]: false,
+    ["8-3"]: false,
+    ["8-4"]: false,
   };
 
   try {
-    const paragraphs = document.querySelectorAll("p");
-    result.paragraphsExist = paragraphs.length === 2;
-    if (paragraphs.length === 2) {
-      result.paragraphsAreNotInsideEachPOther = paragraphs[1].parentElement.tagName !== "p" && paragraphs[0].parentElement.tagName !== "p";
-      result.firstParagraphHasBrTagInside = paragraphs[0].querySelector("br") !== null;
-      result.paragraphsAreSeperatedByHrTag = paragraphs[1].nextElementSibling.tagName === "HR" || paragraphs[0].nextElementSibling.tagName === "HR";
+    const ul = document.querySelector("ul");
+    result["8-1"] = !!ul;
+    if (ul) {
+      const ulItems = Array.from(ul.querySelectorAll("li")).map((item) => item.textContent.trim());
+      result["8-2"] = ulItems.length === 3 && ulItems.includes("Apple") && ulItems.includes("Banana") && ulItems.includes("Cherry");
+    }
+
+    const ol = document.querySelector("ol");
+    result["8-3"] = !!ol;
+    if (ol) {
+      const olItems = Array.from(ol.querySelectorAll("li")).map((item) => item.textContent.trim());
+      result["8-4"] = olItems.length === 3 && olItems.includes("Step 1: Open browser") && olItems.includes("Step 2: Search for HTML tutorials") && olItems.includes("Step 3: Start learning");
     }
   } catch (error) {
     console.log(error);
   }
 
   return result;
+};
+
+const task9TestNames = {
+  ["9-1"]: {
+    en: "Checking if two <p> tags exist",
+  },
+  ["9-2"]: {
+    en: "Checking if <br> tag exists within the first <p> tag",
+  },
+  ["9-3"]: {
+    en: "Checking if <hr> tag exists between the two <p> tags",
+  },
 };
 
 const task9 = () => {
   const result = {
-    formElementExists: false,
-    formElementHas5InputsInside: false,
-    firstInputIsText: false,
-    secondInputIsEmail: false,
-    thirdInputIsPassword: false,
-    fourthInputIsDate: false,
-    fifthInputIsSubmit: false,
-    first4InputsHavePlaceholder: false,
+    ["9-1"]: false,
+    ["9-2"]: false,
+    ["9-3"]: false,
   };
 
   try {
-    const form = document.querySelector("form");
-    result.formElementExists = !!form;
-    if (form) {
-      const inputs = form.querySelectorAll("input");
-      result.formElementHas5InputsInside = inputs.length === 5;
-      result.firstInputIsText = inputs[0].type === "text";
-      result.secondInputIsEmail = inputs[1].type === "email";
-      result.thirdInputIsPassword = inputs[2].type === "password";
-      result.fourthInputIsDate = inputs[3].type === "date";
-      result.fifthInputIsSubmit = inputs[4].type === "submit";
-      result.first4InputsHavePlaceholder = inputs[0].placeholder !== "" && inputs[1].placeholder !== "" && inputs[2].placeholder !== "" && inputs[3].placeholder !== "";
+    const paragraphs = document.querySelectorAll("p");
+    result["9-1"] = paragraphs.length === 2;
+
+    if (paragraphs.length > 0) {
+      const firstParagraph = paragraphs[0];
+      result["9-2"] = firstParagraph.querySelector("br") !== null;
+    }
+
+    const hr = document.querySelector("hr");
+    if (paragraphs.length === 2 && hr) {
+      const firstParagraph = paragraphs[0];
+      const secondParagraph = paragraphs[1];
+      result["9-3"] = firstParagraph.nextElementSibling === hr && hr.nextElementSibling === secondParagraph;
     }
   } catch (error) {
     console.log(error);
@@ -355,8 +385,53 @@ const task9 = () => {
   return result;
 };
 
+const task10TestNames = {
+  ["10-1"]: {
+    en: "Checking if text input field for name exists with correct placeholder",
+  },
+  ["10-2"]: {
+    en: "Checking if email input field exists with correct placeholder",
+  },
+  ["10-3"]: {
+    en: "Checking if password input field exists with correct placeholder",
+  },
+  ["10-4"]: {
+    en: "Checking if date input field exists with correct placeholder",
+  },
+  ["10-5"]: {
+    en: "Checking if submit button exists",
+  },
+};
+
 const task10 = () => {
-  const result = {};
+  const result = {
+    ["10-1"]: false,
+    ["10-2"]: false,
+    ["10-3"]: false,
+    ["10-4"]: false,
+    ["10-5"]: false,
+  };
+
+  try {
+    const nameInput = document.querySelector('input[type="text"]');
+    result["10-1"] = !!nameInput && nameInput.getAttribute("placeholder") === "Enter your name";
+
+    const emailInput = document.querySelector('input[type="email"]');
+    result["10-2"] = !!emailInput && emailInput.getAttribute("placeholder") === "Enter your email";
+
+    const passwordInput = document.querySelector('input[type="password"]');
+    result["10-3"] = !!passwordInput && passwordInput.getAttribute("placeholder") === "Enter your password";
+
+    const dateInput = document.querySelector('input[type="date"]');
+    result["10-4"] = !!dateInput && dateInput.getAttribute("placeholder") === "Enter your birthdate";
+
+    const submitButton = document.querySelector('button[type="submit"]');
+    result["10-5"] = !!submitButton;
+  } catch (error) {
+    console.log(error);
+  }
+
+  return result;
 };
 
 export default {
@@ -373,9 +448,9 @@ export default {
   ["0b4f7b3e-38c3-46e9-aa57-886a427cdd72"]: { test: task5, testNames: task5TestNames },
 
   ["a07344b4-d6a2-47b5-bbcb-a7bb6c3a6b7c"]: { test: task7, testNames: task7TestNames },
-  ["25372cee-4261-4922-9d10-7ac323b8072d"]: task8,
-  ["04eb14f8-cf36-4e24-a0a7-48a6de26f604"]: task9,
-  ["f47d4836-b14f-472f-aa98-175c596d92f8"]: task10,
+  ["25372cee-4261-4922-9d10-7ac323b8072d"]: { test: task8, testNames: task8TestNames },
+  ["04eb14f8-cf36-4e24-a0a7-48a6de26f604"]: { test: task9, testNames: task9TestNames },
+  ["f47d4836-b14f-472f-aa98-175c596d92f8"]: { test: task10, testNames: task10TestNames },
 
   codeCheckTasks: {
     ["423cfe50-9982-4ebd-9c82-b9f8e126a7c8"]: { test: task6, testNames: task6TestNames },

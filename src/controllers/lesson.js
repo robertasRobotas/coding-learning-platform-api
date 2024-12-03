@@ -33,7 +33,7 @@ export const GET_LESSON_BY_ID = async (req, res) => {
 
     return res.status(200).json({
       message: `ok`,
-      task: { ...task.toObject(), nextLessonId: nextLessonId.id },
+      task: { ...task.toObject(), nextLessonId: nextLessonId?.id },
     });
   } catch (err) {
     console.log(err);
