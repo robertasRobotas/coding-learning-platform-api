@@ -7,7 +7,6 @@ export const CREATE_NEW_LESSON_PROGRESS = async (req, res) => {
       userId: req.body.userId,
       courseId: req.body.courseId,
       lessonId: req.body.lessonId,
-      lessonOrder: req.body.lessonOrder,
     });
 
     if (lessonProgress) {
@@ -146,12 +145,12 @@ export const GET_HIGHEST_FINISHED_LESSON = async (req, res) => {
       .sort({ lessonOrder: -1 })
       .limit(1);
 
-    if (!lessonProgress) {
+    if (!lessonProgress || lessonProgress.length === 0) {
       return res.status(404).json({ message: "Progress not found" });
     }
 
     return res.status(200).json({
-      progress: lessonProgress[0].lessonOrder,
+      progress: lessonProgress[0]?.lessonOrder,
       message: "Latest completed lesson ",
     });
   } catch (err) {
