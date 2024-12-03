@@ -3,11 +3,8 @@ import TaskModel from "../models/lesson.js";
 import puppeteer from "puppeteer";
 import UserModel from "../models/user.js";
 import taskTest from "../../taskTests/index.js";
-import {
-  isProgressExit,
-  completeLesson,
-  increaseAttempts,
-} from "../services/progress.js";
+import { isProgressExit, completeLesson, increaseAttempts } from "../services/progress.js";
+import tests from "../../taskTests/html_css/tests.js";
 
 export const GET_ALL_LESSONS_BY_COURSE_ID = async (req, res) => {
   try {
@@ -99,41 +96,15 @@ export const COMPLETE_TASK = async (req, res) => {
   }
 
   try {
-    const browser = await puppeteer.launch();
-    const page = await browser.newPage();
-    // Listen for console events and log them to the Node.js console
-    page.on("console", async (msg) => {
-      const args = msg.args();
-      for (let i = 0; i < args.length; ++i) {
-        const arg = args[i];
-        const value = await arg.jsonValue();
-        console.log(`${i}: ${value}`);
-      }
-    });
-    const combinedHtml = `
-    ${code.html.replace("</head>", `<style>${code.css}</style></head>`)}
-    <script defer>${code.js}</script>
-  `;
-    await page.setContent(combinedHtml);
-    const testToGive = taskTest[id].test;
-    const names = taskTest[id].testNames;
+    let testResponse = [];
 
-    const testResults = await page.evaluate((test) => {
-      const testFunction = new Function(`return ${test}`)();
-      return testFunction();
-    }, testToGive.toString());
+    if (Object.keys(tests.codeCheckTasks).includes(id)) {
+      testResponse = tests.codeCheckTasks[id].test(code);
+    } else {
+      testResponse = await runPuppeteerTest(code, id);
+    }
 
-    await browser.close();
-
-    const response = Object.entries(testResults).map(([key, value]) => {
-      const name = names[key];
-      return {
-        result: value,
-        name,
-      };
-    });
-
-    const isEveryTestPassed = response.every((r) => r.result);
+    const isEveryTestPassed = testResponse.every((r) => r.result);
 
     const isProgressExist = isProgressExit({
       userId: req.body.userId,
@@ -161,17 +132,54 @@ export const COMPLETE_TASK = async (req, res) => {
       });
     }
 
-    return res.status(200).json(response);
+    return res.status(200).json(testResponse);
   } catch (error) {
     console.log(error);
     return res.status(500).json({ message: error.message });
   }
 };
 
+const runPuppeteerTest = async (code, id) => {
+  const browser = await puppeteer.launch();
+  const page = await browser.newPage();
+  // Listen for console events and log them to the Node.js console
+  page.on("console", async (msg) => {
+    const args = msg.args();
+    for (let i = 0; i < args.length; ++i) {
+      const arg = args[i];
+      const value = await arg.jsonValue();
+      console.log(`${i}: ${value}`);
+    }
+  });
+  const combinedHtml = `
+  ${code.html.replace("</head>", `<style>${code.css}</style></head>`)}
+  <script defer>${code.js}</script>`;
+  await page.setContent(combinedHtml);
+  const testToGive = taskTest[id].test;
+  const names = taskTest[id].testNames;
+
+  const testResults = await page.evaluate((test) => {
+    const testFunction = new Function(`return ${test}`)();
+    return testFunction();
+  }, testToGive.toString());
+
+  await browser.close();
+
+  const response = Object.entries(testResults).map(([key, value]) => {
+    const name = names[key];
+    return {
+      result: value,
+      name,
+    };
+  });
+
+  return response;
+};
+
 export const GET_LESSON_TEST_NAMES = async (req, res) => {
   const { id } = req.params;
   try {
-    const testNames = taskTest[id].testNames;
+    const testNames = taskTest[id]?.testNames ?? taskTest.codeCheckTasks[id].testNames;
     return res.status(200).json(Object.values(testNames));
   } catch (error) {
     console.log(error);

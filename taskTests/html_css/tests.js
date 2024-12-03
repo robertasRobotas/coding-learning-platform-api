@@ -71,13 +71,11 @@ const task2 = () => {
 
     // Check if heading with text 'Welcome to My Page' exists
     const heading = document.querySelector("h1");
-    result["2-4"] =
-      !!heading && heading.textContent.includes("Welcome to My Page");
+    result["2-4"] = !!heading && heading.textContent.includes("Welcome to My Page");
 
     // Check if paragraph with text 'This is my first webpage!' exists
     const paragraph = document.querySelector("p");
-    result["2-5"] =
-      !!paragraph && paragraph.textContent.includes("This is my first webpage");
+    result["2-5"] = !!paragraph && paragraph.textContent.includes("This is my first webpage");
 
     // Check if <head> is inside <html>
     result["2-6"] = htmlTag && headTag && htmlTag.contains(headTag);
@@ -98,134 +96,169 @@ const task2 = () => {
 };
 
 const task3TestNames = {
-  divExists: {
-    en: "Checking if div exists",
+  ["3-1"]: {
+    en: "Checking if <a> tag exists",
   },
-  spanExists: {
-    en: "Checking if span exists",
+  ["3-2"]: {
+    en: "Checking if <a> tag has href attribute",
   },
-  divStylesCorrect: {
-    en: "Checking if div styles are correct",
+  ["3-3"]: {
+    en: "Checking if href attribute is 'https://google.com'",
   },
-  spanStylesCorrect: {
-    en: "Checking if span styles are correct",
+  ["3-4"]: {
+    en: "Checking if <a> tag leads to a valid website",
   },
 };
 
 const task3 = () => {
   const result = {
-    divExists: {
-      result: false,
-      testName: task3TestNames.divExists,
-    },
-    spanExists: {
-      result: false,
-      testName: task3TestNames.spanExists,
-    },
-    divStylesCorrect: {
-      result: false,
-      testName: task3TestNames.divStylesCorrect,
-    },
-    spanStylesCorrect: {
-      result: false,
-      testName: task3TestNames.spanStylesCorrect,
-    },
+    ["3-1"]: false,
+    ["3-2"]: false,
+    ["3-3"]: false,
+    ["3-4"]: false,
   };
 
   try {
-    const div = document.querySelector("div");
-    result.divExists.result = !!div;
-    if (div) {
-      const span = div.querySelector("span");
-      result.spanExists.result = !!span;
-      result.divStylesCorrect.result =
-        div.style.backgroundColor === "blue" && div.style.color === "red";
-      if (span) {
-        result.spanStylesCorrect.result =
-          span.style.backgroundColor === "blue" && span.style.color === "red";
-      }
+    const aTag = document.querySelector("a");
+    result["3-1"] = !!aTag;
+
+    if (aTag) {
+      result["3-2"] = aTag.hasAttribute("href");
+      result["3-3"] = aTag.getAttribute("href") === "https://google.com";
+
+      // Check if <a> tag leads to a valid website
+      const link = document.createElement("a");
+      link.href = aTag.getAttribute("href");
+      result["3-4"] = link.protocol === "https:" && link.hostname === "google.com";
     }
   } catch (error) {
     console.log(error);
   }
+
   return result;
+};
+
+const task4TestNames = {
+  ["4-1"]: {
+    en: "Checking if <div> tag exists",
+  },
+  ["4-2"]: {
+    en: "Checking if <span> tag exists inside <div>",
+  },
+  ["4-4"]: {
+    en: "Checking if <span> has correct inline styles",
+  },
 };
 
 const task4 = () => {
   const result = {
-    outerDivExists: false,
-    innerDivExists: false,
-    spanExists: false,
-    spanHasText: false,
+    ["4-1"]: false,
+    ["4-2"]: false,
+    ["4-4"]: false,
   };
+
   try {
-    const outerDiv = document.querySelector("div");
-    result.outerDivExists = !!outerDiv;
-    if (outerDiv) {
-      const innerDiv = outerDiv.querySelector("div");
-      result.innerDivExists = !!innerDiv;
-      if (innerDiv) {
-        const span = innerDiv.querySelector("span");
-        result.spanExists = !!span;
-        if (span) {
-          result.spanHasText = span.textContent.trim().length > 0;
-        }
+    const div = document.querySelector("div");
+    result["4-1"] = !!div;
+
+    if (div) {
+      const span = div.querySelector("span");
+      result["4-2"] = !!span;
+
+      if (span) {
+        // Check if <span> has correct inline styles
+        const spanStyles = span.getAttribute("style");
+        result["4-4"] = spanStyles && (spanStyles.includes("background: blue") || spanStyles.includes("background-color: blue")) && spanStyles.includes("color: red;");
       }
     }
   } catch (error) {
     console.log(error);
   }
+
   return result;
 };
 
-// TODO fix this shit
+const task5TestNames = {
+  ["5-1"]: {
+    en: "Checking if outer <div> tag exists",
+  },
+  ["5-2"]: {
+    en: "Checking if inner <div> tag exists inside outer <div>",
+  },
+  ["5-3"]: {
+    en: "Checking if <span> tag exists inside inner <div>",
+  },
+  ["5-4"]: {
+    en: "Checking if <span> tag has text content",
+  },
+};
+
 const task5 = () => {
   const result = {
-    commentExists: false,
+    ["5-1"]: false,
+    ["5-2"]: false,
+    ["5-3"]: false,
+    ["5-4"]: false,
   };
+
   try {
-    const divs = document.querySelectorAll("div");
-    if (divs.length > 1) {
-      const emailDiv = divs[1];
-      if (emailDiv) {
-        let previousSibling = emailDiv.previousSibling;
-        // Traverse previous siblings until a comment node is found
-        while (previousSibling) {
-          if (
-            previousSibling.nodeValue.trim().toLowerCase() ===
-            "this is a comment"
-          ) {
-            result.commentExists = true;
-            break;
-          }
-          previousSibling = previousSibling.previousSibling;
+    const outerDiv = document.querySelector("div");
+    result["5-1"] = !!outerDiv;
+
+    if (outerDiv) {
+      const innerDiv = outerDiv.querySelector("div");
+      result["5-2"] = !!innerDiv;
+
+      if (innerDiv) {
+        const span = innerDiv.querySelector("span");
+        result["5-3"] = !!span;
+
+        if (span) {
+          result["5-4"] = span.textContent.trim().length > 0;
         }
       }
     }
   } catch (error) {
     console.log(error);
   }
+
   return result;
 };
 
-const task6 = () => {
+const task6TestNames = {
+  ["6-1"]: {
+    en: "Checking if <div> tag exists",
+  },
+  ["6-2"]: {
+    en: "Checking if comment exists before email <div>",
+  },
+};
+
+const task6 = (code) => {
   const result = {
-    imageTagExists: false,
-    imageHasCorrectSrc: false,
-    imageHasSrc: false,
+    ["6-1"]: false,
+    ["6-2"]: false,
   };
 
   try {
-    const image = document.querySelector("img");
-    result.imageTagExists = true;
-    result.imageHasSrc = image.href !== "";
-    result.imageHasCorrectSrc =
-      image.src ===
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Larix_decidua_Aletschwald.jpg/1280px-Larix_decidua_Aletschwald.jpg";
+    const htmlCode = code.html;
+
+    // Check if <div> tags exist
+    const divRegex = /<div>/g;
+    result["6-1"] = divRegex.test(htmlCode);
+
+    // Check if any comment exists before email <div>
+    const commentBeforeEmailDivRegex = /<!--[\s\S]*?-->\s*<div>robert@gmail\.com<\/div>/;
+    result["6-2"] = commentBeforeEmailDivRegex.test(htmlCode);
   } catch (error) {
     console.log(error);
   }
-  return result;
+
+  // Map results to the specified format
+  return Object.keys(result).map((key) => ({
+    result: result[key],
+    name: task6TestNames[key],
+  }));
 };
 
 const task7 = () => {
@@ -269,14 +302,9 @@ const task8 = () => {
     const paragraphs = document.querySelectorAll("p");
     result.paragraphsExist = paragraphs.length === 2;
     if (paragraphs.length === 2) {
-      result.paragraphsAreNotInsideEachPOther =
-        paragraphs[1].parentElement.tagName !== "p" &&
-        paragraphs[0].parentElement.tagName !== "p";
-      result.firstParagraphHasBrTagInside =
-        paragraphs[0].querySelector("br") !== null;
-      result.paragraphsAreSeperatedByHrTag =
-        paragraphs[1].nextElementSibling.tagName === "HR" ||
-        paragraphs[0].nextElementSibling.tagName === "HR";
+      result.paragraphsAreNotInsideEachPOther = paragraphs[1].parentElement.tagName !== "p" && paragraphs[0].parentElement.tagName !== "p";
+      result.firstParagraphHasBrTagInside = paragraphs[0].querySelector("br") !== null;
+      result.paragraphsAreSeperatedByHrTag = paragraphs[1].nextElementSibling.tagName === "HR" || paragraphs[0].nextElementSibling.tagName === "HR";
     }
   } catch (error) {
     console.log(error);
@@ -308,11 +336,7 @@ const task9 = () => {
       result.thirdInputIsPassword = inputs[2].type === "password";
       result.fourthInputIsDate = inputs[3].type === "date";
       result.fifthInputIsSubmit = inputs[4].type === "submit";
-      result.first4InputsHavePlaceholder =
-        inputs[0].placeholder !== "" &&
-        inputs[1].placeholder !== "" &&
-        inputs[2].placeholder !== "" &&
-        inputs[3].placeholder !== "";
+      result.first4InputsHavePlaceholder = inputs[0].placeholder !== "" && inputs[1].placeholder !== "" && inputs[2].placeholder !== "" && inputs[3].placeholder !== "";
     }
   } catch (error) {
     console.log(error);
@@ -334,12 +358,16 @@ export default {
     test: task2,
     testNames: task2TestNames,
   },
-  ["46ae62bc-0db1-4e99-94af-d52d3f2cdfd5"]: task3,
-  ["d7639a1a-f9a1-4604-84b4-6d4f64396fc2"]: task4,
-  ["0b4f7b3e-38c3-46e9-aa57-886a427cdd72"]: task5,
-  ["423cfe50-9982-4ebd-9c82-b9f8e126a7c8"]: task6,
+  ["46ae62bc-0db1-4e99-94af-d52d3f2cdfd5"]: { test: task3, testNames: task3TestNames },
+  ["d7639a1a-f9a1-4604-84b4-6d4f64396fc2"]: { test: task4, testNames: task4TestNames },
+  ["0b4f7b3e-38c3-46e9-aa57-886a427cdd72"]: { test: task5, testNames: task5TestNames },
+
   ["a07344b4-d6a2-47b5-bbcb-a7bb6c3a6b7c"]: task7,
   ["25372cee-4261-4922-9d10-7ac323b8072d"]: task8,
   ["04eb14f8-cf36-4e24-a0a7-48a6de26f604"]: task9,
   ["f47d4836-b14f-472f-aa98-175c596d92f8"]: task10,
+
+  codeCheckTasks: {
+    ["423cfe50-9982-4ebd-9c82-b9f8e126a7c8"]: { test: task6, testNames: task6TestNames },
+  },
 };
