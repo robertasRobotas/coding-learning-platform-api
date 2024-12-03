@@ -434,6 +434,60 @@ const task10 = () => {
   return result;
 };
 
+const task11TestNames = {
+  ["11-1"]: {
+    en: "Checking if <link> tag exists in <head> section linking to styles.css",
+  },
+  ["11-2"]: {
+    en: "Checking if paragraph with specific text exists",
+  },
+  ["11-3"]: {
+    en: "Checking if styles.css file contains .text-blue class with correct style",
+  },
+  ["11-4"]: {
+    en: "Checking if paragraph has text-blue class applied",
+  },
+};
+
+const task11 = () => {
+  const result = {
+    ["11-1"]: false,
+    ["11-2"]: false,
+    ["11-3"]: false,
+    ["11-4"]: false,
+  };
+
+  try {
+    const link = document.querySelector('link[rel="stylesheet"][href="styles.css"]');
+    result["11-1"] = !!link;
+
+    const paragraph = document.querySelector("p");
+    result["11-2"] = !!paragraph && paragraph.textContent.includes("This text will be styled.");
+
+    // Check if styles.css file contains .text-blue class with correct style
+    if (link) {
+      const styleSheet = document.styleSheets[0];
+      for (let i = 0; i < styleSheet.cssRules.length; i++) {
+        const rule = styleSheet.cssRules[i];
+        if (rule.selectorText === ".text-blue" && rule.style.color === "blue") {
+          result["11-3"] = true;
+          break;
+        }
+      }
+    }
+
+    if (paragraph) {
+      // Check if paragraph has text-blue class applied
+      const paragraphStyles = window.getComputedStyle(paragraph);
+      result["11-4"] = paragraphStyles.color === "rgb(0, 0, 255)";
+    }
+  } catch (error) {
+    console.log(error);
+  }
+
+  return result;
+};
+
 export default {
   ["362abec3-81b2-4361-870c-a4e054781d73"]: {
     test: task1,
@@ -451,7 +505,7 @@ export default {
   ["25372cee-4261-4922-9d10-7ac323b8072d"]: { test: task8, testNames: task8TestNames },
   ["04eb14f8-cf36-4e24-a0a7-48a6de26f604"]: { test: task9, testNames: task9TestNames },
   ["f47d4836-b14f-472f-aa98-175c596d92f8"]: { test: task10, testNames: task10TestNames },
-
+  ["e7d0092c-324f-4879-8fc7-df9ddbccdbe2"]: { test: task11, testNames: task11TestNames },
   codeCheckTasks: {
     ["423cfe50-9982-4ebd-9c82-b9f8e126a7c8"]: { test: task6, testNames: task6TestNames },
   },
