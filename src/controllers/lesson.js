@@ -5,6 +5,9 @@ import UserModel from "../models/user.js";
 import taskTest from "../../taskTests/index.js";
 import { isProgressExit, completeLesson, increaseAttempts } from "../services/progress.js";
 import tests from "../../taskTests/html_css/tests.js";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 export const GET_ALL_LESSONS_BY_COURSE_ID = async (req, res) => {
   try {
@@ -130,7 +133,10 @@ export const COMPLETE_TASK = async (req, res) => {
 };
 
 const runPuppeteerTest = async (code, id) => {
-  const browser = await puppeteer.launch();
+  const browser = await puppeteer.launch({
+    args: ["--no-sandbox", "--disable-setuid-sandbox", "--single-process", "--no-zygote"],
+    executablePath: process.env.NODE_ENV === "production" ? process.env.PUPPETEER_EXECUTABLE_PATH : puppeteer.executablePath(),
+  });
   const page = await browser.newPage();
   console.log(code);
 
