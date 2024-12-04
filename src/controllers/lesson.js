@@ -80,20 +80,8 @@ export const INSERT_LESSON = async (req, res) => {
 };
 
 export const COMPLETE_TASK = async (req, res) => {
-  const { code, userId } = req.body;
+  const { code } = req.body;
   const { id } = req.params;
-
-  try {
-    const user = await UserModel.findOne({ id: userId });
-    if (!user) {
-      return res.status(404).json({ message: "User not found" });
-    }
-
-    // TODO pridėti +1 prei bandymų completint užduotį
-  } catch (error) {
-    console.log(error);
-    return res.status(500).json({ message: "err" });
-  }
 
   try {
     let testResponse = [];
@@ -103,6 +91,8 @@ export const COMPLETE_TASK = async (req, res) => {
     } else {
       testResponse = await runPuppeteerTest(code, id);
     }
+
+    console.log(testResponse);
 
     const isEveryTestPassed = testResponse.every((r) => r.result);
 
@@ -142,6 +132,16 @@ export const COMPLETE_TASK = async (req, res) => {
 const runPuppeteerTest = async (code, id) => {
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
+  console.log(code);
+
+  if (code.css) {
+    await page.addStyleTag({ content: code.css });
+  }
+  if (code.js) {
+    await page.addScriptTag({ content: code.js });
+  }
+
+  await page.setContent(code.html);
   // Listen for console events and log them to the Node.js console
   page.on("console", async (msg) => {
     const args = msg.args();
@@ -151,10 +151,6 @@ const runPuppeteerTest = async (code, id) => {
       console.log(`${i}: ${value}`);
     }
   });
-  const combinedHtml = `
-  ${code.html.replace("</head>", `<style>${code.css}</style></head>`)}
-  <script defer>${code.js}</script>`;
-  await page.setContent(combinedHtml);
   const testToGive = taskTest[id].test;
   const names = taskTest[id].testNames;
 

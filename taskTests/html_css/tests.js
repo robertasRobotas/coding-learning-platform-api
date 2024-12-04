@@ -9,7 +9,7 @@ const task1 = () => {
     "1-1": false,
   };
 
-  result["1-1"] = document.body.textContent.includes("Let's go");
+  result["1-1"] = document.body.textContent.trim() === "Let's go!";
   return result;
 };
 
