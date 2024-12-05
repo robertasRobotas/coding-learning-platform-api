@@ -28,7 +28,7 @@ const userSchema = mongoose.Schema({
   creationDate: { type: Date, required: true },
   lastLoginDate: { type: Date, required: true },
   country: { type: String, required: true },
-  phoneNumber: { type: String, required: true },
+  phoneNumber: { type: String, required: false },
   certificateURLs: { type: Array, required: false },
 });
 
