@@ -52,7 +52,7 @@ export const SIGN_IN = async (req, res) => {
     const response = await newUser.save();
 
     const jwt_token = jwt.sign(
-      { email: user.email, user_id: user.id },
+      { email: response.email, user_id: response.id },
       process.env.JWT_SECRET
     );
 
