@@ -9,7 +9,7 @@ const task1 = () => {
     "1-1": false,
   };
 
-  result["1-1"] = document.body.textContent.includes("Let's go");
+  result["1-1"] = document.body.textContent.trim() === "Let's go!";
   return result;
 };
 
@@ -41,58 +41,37 @@ const task2TestNames = {
   ["2-9"]: {
     en: "Checking if paragraph is inside <body>",
   },
+  ["2-10"]: {
+    en: "Checking if <body> does not open in <head> and close after <head>",
+  },
+  ["2-11"]: {
+    en: "Checking if all tags are properly nested and closed",
+  },
+  ["2-12"]: {
+    en: "Checking if <title> is inside <head>",
+  },
 };
 
-const task2 = () => {
+const task2 = ({ html }) => {
   const result = {
-    ["2-1"]: false,
-    ["2-2"]: false,
-    ["2-3"]: false,
-    ["2-4"]: false,
-    ["2-5"]: false,
-    ["2-6"]: false,
-    ["2-7"]: false,
-    ["2-8"]: false,
-    ["2-9"]: false,
+    ["2-1"]: /<html[^>]*>[\s\S]*<\/html>/i.test(html),
+    ["2-2"]: /<head[^>]*>[\s\S]*<\/head>/i.test(html),
+    ["2-3"]: /<body[^>]*>[\s\S]*<\/body>/i.test(html),
+    ["2-4"]: /<h1[^>]*>Welcome to My Page<\/h1>/i.test(html),
+    ["2-5"]: /<p[^>]*>This is my first webpage!<\/p>/i.test(html),
+    ["2-6"]: /<html[^>]*>[\s\S]*<head[^>]*>[\s\S]*<\/head>[\s\S]*<\/html>/i.test(html),
+    ["2-7"]: /<html[^>]*>[\s\S]*<body[^>]*>[\s\S]*<\/body>[\s\S]*<\/html>/i.test(html),
+    ["2-8"]: /<body[^>]*>[\s\S]*<h1[^>]*>Welcome to My Page<\/h1>[\s\S]*<\/body>/i.test(html),
+    ["2-9"]: /<body[^>]*>[\s\S]*<p[^>]*>This is my first webpage!<\/p>[\s\S]*<\/body>/i.test(html),
+    ["2-10"]: !/<head[^>]*>[\s\S]*<body[^>]*>[\s\S]*<\/head>/i.test(html),
+    ["2-11"]: /<html[^>]*>[\s\S]*<head[^>]*>[\s\S]*<\/head>[\s\S]*<body[^>]*>[\s\S]*<\/body>[\s\S]*<\/html>/i.test(html),
+    ["2-12"]: /<head[^>]*>[\s\S]*<title[^>]*>[\s\S]*<\/title>[\s\S]*<\/head>/i.test(html),
   };
 
-  try {
-    // Check if <html> root tag exists
-    const htmlTag = document.querySelector("html");
-    result["2-1"] = !!htmlTag;
-
-    // Check if <head> section exists
-    const headTag = document.querySelector("head");
-    result["2-2"] = !!headTag;
-
-    // Check if <body> section exists
-    const bodyTag = document.querySelector("body");
-    result["2-3"] = !!bodyTag;
-
-    // Check if heading with text 'Welcome to My Page' exists
-    const heading = document.querySelector("h1");
-    result["2-4"] = !!heading && heading.textContent.includes("Welcome to My Page");
-
-    // Check if paragraph with text 'This is my first webpage!' exists
-    const paragraph = document.querySelector("p");
-    result["2-5"] = !!paragraph && paragraph.textContent.includes("This is my first webpage");
-
-    // Check if <head> is inside <html>
-    result["2-6"] = htmlTag && headTag && htmlTag.contains(headTag);
-
-    // Check if <body> is inside <html>
-    result["2-7"] = htmlTag && bodyTag && htmlTag.contains(bodyTag);
-
-    // Check if heading is inside <body>
-    result["2-8"] = bodyTag && heading && bodyTag.contains(heading);
-
-    // Check if paragraph is inside <body>
-    result["2-9"] = bodyTag && paragraph && bodyTag.contains(paragraph);
-  } catch (error) {
-    console.log(error);
-  }
-
-  return result;
+  return Object.keys(result).map((key) => ({
+    result: result[key],
+    name: task2TestNames[key],
+  }));
 };
 
 const task3TestNames = {
@@ -493,10 +472,6 @@ export default {
     test: task1,
     testNames: task1TestNames,
   },
-  ["f038e5bc-1cff-4f1f-acb6-03f24becf1ed"]: {
-    test: task2,
-    testNames: task2TestNames,
-  },
   ["46ae62bc-0db1-4e99-94af-d52d3f2cdfd5"]: { test: task3, testNames: task3TestNames },
   ["d7639a1a-f9a1-4604-84b4-6d4f64396fc2"]: { test: task4, testNames: task4TestNames },
   ["0b4f7b3e-38c3-46e9-aa57-886a427cdd72"]: { test: task5, testNames: task5TestNames },
@@ -508,5 +483,9 @@ export default {
   ["e7d0092c-324f-4879-8fc7-df9ddbccdbe2"]: { test: task11, testNames: task11TestNames },
   codeCheckTasks: {
     ["423cfe50-9982-4ebd-9c82-b9f8e126a7c8"]: { test: task6, testNames: task6TestNames },
+    ["f038e5bc-1cff-4f1f-acb6-03f24becf1ed"]: {
+      test: task2,
+      testNames: task2TestNames,
+    },
   },
 };

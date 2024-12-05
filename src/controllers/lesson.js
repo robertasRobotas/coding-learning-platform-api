@@ -5,6 +5,9 @@ import UserModel from "../models/user.js";
 import taskTest from "../../taskTests/index.js";
 import { isProgressExit, completeLesson, increaseAttempts } from "../services/progress.js";
 import tests from "../../taskTests/html_css/tests.js";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 export const GET_ALL_LESSONS_BY_COURSE_ID = async (req, res) => {
   try {
@@ -80,20 +83,8 @@ export const INSERT_LESSON = async (req, res) => {
 };
 
 export const COMPLETE_TASK = async (req, res) => {
-  const { code, userId } = req.body;
+  const { code } = req.body;
   const { id } = req.params;
-
-  try {
-    const user = await UserModel.findOne({ id: userId });
-    if (!user) {
-      return res.status(404).json({ message: "User not found" });
-    }
-
-    // TODO pridėti +1 prei bandymų completint užduotį
-  } catch (error) {
-    console.log(error);
-    return res.status(500).json({ message: "err" });
-  }
 
   try {
     let testResponse = [];
@@ -140,8 +131,21 @@ export const COMPLETE_TASK = async (req, res) => {
 };
 
 const runPuppeteerTest = async (code, id) => {
-  const browser = await puppeteer.launch();
+  const browser = await puppeteer.launch({
+    args: ["--no-sandbox", "--disable-setuid-sandbox", "--single-process", "--no-zygote"],
+    executablePath: process.env.NODE_ENV === "production" ? process.env.PUPPETEER_EXECUTABLE_PATH : puppeteer.executablePath(),
+  });
   const page = await browser.newPage();
+  console.log(code);
+
+  if (code.css) {
+    await page.addStyleTag({ content: code.css });
+  }
+  if (code.js) {
+    await page.addScriptTag({ content: code.js });
+  }
+
+  await page.setContent(code.html);
   // Listen for console events and log them to the Node.js console
   page.on("console", async (msg) => {
     const args = msg.args();
@@ -151,10 +155,6 @@ const runPuppeteerTest = async (code, id) => {
       console.log(`${i}: ${value}`);
     }
   });
-  const combinedHtml = `
-  ${code.html.replace("</head>", `<style>${code.css}</style></head>`)}
-  <script defer>${code.js}</script>`;
-  await page.setContent(combinedHtml);
   const testToGive = taskTest[id].test;
   const names = taskTest[id].testNames;
 
