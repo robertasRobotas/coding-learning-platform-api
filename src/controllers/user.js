@@ -5,7 +5,13 @@ import UserModel from "../models/user.js";
 import { requiredUserFields } from "../utils/user.js";
 
 export const VALIDATE_USER = async (req, res) => {
-  res.status(200).json({ message: "user OK" });
+  const user = await UserModel.findOne({ id: req.body.userId });
+
+  if (!user) {
+    return res.status(500).json({ message: "user does not exist" });
+  }
+
+  return res.status(200).json({ message: "user OK" });
 };
 
 export const SIGN_IN = async (req, res) => {
