@@ -124,6 +124,9 @@ const task4TestNames = {
   ["4-2"]: {
     en: "Checking if <span> tag exists inside <div>",
   },
+  ["4-3"]: {
+    en: "Checking if <span> tag has text content",
+  },
   ["4-4"]: {
     en: "Checking if <span> has correct inline styles",
   },
@@ -133,6 +136,7 @@ const task4 = () => {
   const result = {
     ["4-1"]: false,
     ["4-2"]: false,
+    ["4-3"]: false,
     ["4-4"]: false,
   };
 
@@ -143,6 +147,8 @@ const task4 = () => {
     if (div) {
       const span = div.querySelector("span");
       result["4-2"] = !!span;
+
+      result["4-3"] = !!(span && span.textContent.trim());
 
       if (span) {
         // Check if <span> has correct inline styles
