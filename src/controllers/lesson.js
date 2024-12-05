@@ -95,8 +95,6 @@ export const COMPLETE_TASK = async (req, res) => {
       testResponse = await runPuppeteerTest(code, id);
     }
 
-    console.log(testResponse);
-
     const isEveryTestPassed = testResponse.every((r) => r.result);
 
     const isProgressExist = isProgressExit({
