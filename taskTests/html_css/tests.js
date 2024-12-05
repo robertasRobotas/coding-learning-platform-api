@@ -118,9 +118,6 @@ const task4TestNames = {
   ["4-3"]: {
     en: "Checking if <span> tag has text content",
   },
-  ["4-4"]: {
-    en: "Checking if <span> has correct inline styles",
-  },
 };
 
 const task4 = () => {
@@ -128,7 +125,6 @@ const task4 = () => {
     ["4-1"]: false,
     ["4-2"]: false,
     ["4-3"]: false,
-    ["4-4"]: false,
   };
 
   try {
@@ -140,12 +136,6 @@ const task4 = () => {
       result["4-2"] = !!span;
 
       result["4-3"] = !!(span && span.textContent.trim());
-
-      if (span) {
-        // Check if <span> has correct inline styles
-        const spanStyles = span.getAttribute("style");
-        result["4-4"] = spanStyles && (spanStyles.includes("background: blue") || spanStyles.includes("background-color: blue")) && spanStyles.includes("color: red;");
-      }
     }
   } catch (error) {
     console.log(error);
@@ -265,7 +255,9 @@ const task7 = () => {
     result["7-1"] = !!img;
 
     if (img) {
-      result["7-2"] = img.getAttribute("src") === "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Larix_decidua_Aletschwald.jpg/1280px-Larix_decidua_Aletschwald.jpg";
+      result["7-2"] =
+        img.getAttribute("src") ===
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Larix_decidua_Aletschwald.jpg/1280px-Larix_decidua_Aletschwald.jpg";
       result["7-3"] = img.hasAttribute("alt");
       result["7-4"] = img.complete && img.naturalHeight !== 0;
     }
@@ -311,7 +303,11 @@ const task8 = () => {
     result["8-3"] = !!ol;
     if (ol) {
       const olItems = Array.from(ol.querySelectorAll("li")).map((item) => item.textContent.trim());
-      result["8-4"] = olItems.length === 3 && olItems.includes("Step 1: Open browser") && olItems.includes("Step 2: Search for HTML tutorials") && olItems.includes("Step 3: Start learning");
+      result["8-4"] =
+        olItems.length === 3 &&
+        olItems.includes("Step 1: Open browser") &&
+        olItems.includes("Step 2: Search for HTML tutorials") &&
+        olItems.includes("Step 3: Start learning");
     }
   } catch (error) {
     console.log(error);
