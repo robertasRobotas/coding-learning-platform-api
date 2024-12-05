@@ -6,5 +6,5 @@ export const requiredUserFields = [
   "dateOfBirth",
   "occupation",
   "country",
-  "phoneNumber",
+  // "phoneNumber",
 ];
