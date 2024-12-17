@@ -110,7 +110,7 @@ export const UPDATE_PASSWORD = async (req, res) => {
   const salt = bcrypt.genSaltSync(10);
   var hash = bcrypt.hashSync(req.body.password, salt);
 
-  const user = await UserModel.findOneAdnUpdate(
+  const user = await UserModel.findOneAndUpdate(
     { id: req.body.userId },
     { password: hash }
   );
@@ -124,14 +124,14 @@ export const UPDATE_PASSWORD = async (req, res) => {
 
 export const UPDATE_PASSWORD_ADMIN = async (req, res) => {
   if (req.body.secret !== "kj23b4i23bh2") {
-    return res.status(401).json({ message: "Password updated" });
+    return res.status(401).json({ message: "Bad secret" });
   }
 
   const salt = bcrypt.genSaltSync(10);
   var hash = bcrypt.hashSync(req.body.password, salt);
 
-  const user = await UserModel.findOneAdnUpdate(
-    { id: req.body.email },
+  const user = await UserModel.findOneAndUpdate(
+    { email: req.body.email },
     { password: hash }
   );
 
