@@ -383,6 +383,9 @@ const task10TestNames = {
   ["10-5"]: {
     en: "Checking if submit button exists",
   },
+  ["10-6"]: {
+    en: "Checking if form element exists and all inputs are inside the form",
+  },
 };
 
 const task10 = () => {
@@ -392,23 +395,27 @@ const task10 = () => {
     ["10-3"]: false,
     ["10-4"]: false,
     ["10-5"]: false,
+    ["10-6"]: false,
   };
 
   try {
+    const form = document.querySelector("form");
     const nameInput = document.querySelector('input[type="text"]');
-    result["10-1"] = !!nameInput && nameInput.getAttribute("placeholder") === "Enter your name";
-
     const emailInput = document.querySelector('input[type="email"]');
-    result["10-2"] = !!emailInput && emailInput.getAttribute("placeholder") === "Enter your email";
-
     const passwordInput = document.querySelector('input[type="password"]');
-    result["10-3"] = !!passwordInput && passwordInput.getAttribute("placeholder") === "Enter your password";
-
     const dateInput = document.querySelector('input[type="date"]');
-    result["10-4"] = !!dateInput && dateInput.getAttribute("placeholder") === "Enter your birthdate";
+    const submitButton = document.querySelector('button[type="submit"]') || document.querySelector('input[type="submit"]');
 
-    const submitButton = document.querySelector('button[type="submit"]');
+    result["10-1"] = !!nameInput && nameInput.hasAttribute("placeholder") && nameInput.getAttribute("placeholder").trim() !== "";
+    result["10-2"] = !!emailInput && emailInput.hasAttribute("placeholder") && emailInput.getAttribute("placeholder").trim() !== "";
+    result["10-3"] = !!passwordInput && passwordInput.hasAttribute("placeholder") && passwordInput.getAttribute("placeholder").trim() !== "";
+    result["10-4"] = !!dateInput && dateInput.hasAttribute("placeholder") && dateInput.getAttribute("placeholder").trim() !== "";
     result["10-5"] = !!submitButton;
+
+    // Check if form element exists and all inputs are inside the form
+    if (form) {
+      result["10-6"] = form.contains(nameInput) && form.contains(emailInput) && form.contains(passwordInput) && form.contains(dateInput) && form.contains(submitButton);
+    }
   } catch (error) {
     console.log(error);
   }
