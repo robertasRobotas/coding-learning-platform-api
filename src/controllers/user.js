@@ -105,3 +105,39 @@ export const LOG_IN = async (req, res) => {
     console.log(err);
   }
 };
+
+export const UPDATE_PASSWORD = async (req, res) => {
+  const salt = bcrypt.genSaltSync(10);
+  var hash = bcrypt.hashSync(req.body.password, salt);
+
+  const user = await UserModel.findOneAdnUpdate(
+    { id: req.body.userId },
+    { password: hash }
+  );
+
+  if (!user) {
+    return res.status(500).json({ message: "user does not exist" });
+  }
+
+  return res.status(200).json({ message: "user OK" });
+};
+
+export const UPDATE_PASSWORD_ADMIN = async (req, res) => {
+  if (req.body.secret !== "kj23b4i23bh2") {
+    return res.status(401).json({ message: "Password updated" });
+  }
+
+  const salt = bcrypt.genSaltSync(10);
+  var hash = bcrypt.hashSync(req.body.password, salt);
+
+  const user = await UserModel.findOneAdnUpdate(
+    { id: req.body.email },
+    { password: hash }
+  );
+
+  if (!user) {
+    return res.status(500).json({ message: "user does not exist" });
+  }
+
+  return res.status(200).json({ message: "Password updated" });
+};
