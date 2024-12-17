@@ -110,13 +110,22 @@ const task3 = () => {
 
 const task4TestNames = {
   ["4-1"]: {
-    en: "Checking if <div> tag exists",
+    en: "Checking if parent <div> tag exists",
   },
   ["4-2"]: {
-    en: "Checking if <span> tag exists inside <div>",
+    en: "Checking if first child <div> tag exists with correct text",
   },
   ["4-3"]: {
-    en: "Checking if <span> tag has text content",
+    en: "Checking if second child <div> tag exists with correct text",
+  },
+  ["4-4"]: {
+    en: "Checking if first <span> tag exists with correct text",
+  },
+  ["4-5"]: {
+    en: "Checking if second <span> tag exists with correct text",
+  },
+  ["4-6"]: {
+    en: "Checking if third child <div> tag exists with correct text",
   },
 };
 
@@ -125,17 +134,24 @@ const task4 = () => {
     ["4-1"]: false,
     ["4-2"]: false,
     ["4-3"]: false,
+    ["4-4"]: false,
+    ["4-5"]: false,
+    ["4-6"]: false,
   };
 
   try {
-    const div = document.querySelector("div");
-    result["4-1"] = !!div;
+    const parentDiv = document.querySelector("div");
+    result["4-1"] = !!parentDiv;
 
-    if (div) {
-      const span = div.querySelector("span");
-      result["4-2"] = !!span;
+    if (parentDiv) {
+      const childDivs = parentDiv.querySelectorAll("div");
+      const spans = parentDiv.querySelectorAll("span");
 
-      result["4-3"] = !!(span && span.textContent.trim());
+      result["4-2"] = childDivs.length > 0 && childDivs[0].textContent.trim() === "This is a first div";
+      result["4-3"] = childDivs.length > 1 && childDivs[1].textContent.trim() === "This is a second div.";
+      result["4-4"] = spans.length > 0 && spans[0].textContent.trim() === "This is a first span.";
+      result["4-5"] = spans.length > 1 && spans[1].textContent.trim() === "This is a second span.";
+      result["4-6"] = childDivs.length > 2 && childDivs[2].textContent.trim() === "This is a piece of the text inside element. And this text won't break to another line.";
     }
   } catch (error) {
     console.log(error);
@@ -255,9 +271,7 @@ const task7 = () => {
     result["7-1"] = !!img;
 
     if (img) {
-      result["7-2"] =
-        img.getAttribute("src") ===
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Larix_decidua_Aletschwald.jpg/1280px-Larix_decidua_Aletschwald.jpg";
+      result["7-2"] = img.getAttribute("src") === "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Larix_decidua_Aletschwald.jpg/1280px-Larix_decidua_Aletschwald.jpg";
       result["7-3"] = img.hasAttribute("alt");
       result["7-4"] = img.complete && img.naturalHeight !== 0;
     }
@@ -303,11 +317,7 @@ const task8 = () => {
     result["8-3"] = !!ol;
     if (ol) {
       const olItems = Array.from(ol.querySelectorAll("li")).map((item) => item.textContent.trim());
-      result["8-4"] =
-        olItems.length === 3 &&
-        olItems.includes("Step 1: Open browser") &&
-        olItems.includes("Step 2: Search for HTML tutorials") &&
-        olItems.includes("Step 3: Start learning");
+      result["8-4"] = olItems.length === 3 && olItems.includes("Step 1: Open browser") && olItems.includes("Step 2: Search for HTML tutorials") && olItems.includes("Step 3: Start learning");
     }
   } catch (error) {
     console.log(error);
@@ -373,6 +383,9 @@ const task10TestNames = {
   ["10-5"]: {
     en: "Checking if submit button exists",
   },
+  ["10-6"]: {
+    en: "Checking if form element exists and all inputs are inside the form",
+  },
 };
 
 const task10 = () => {
@@ -382,23 +395,27 @@ const task10 = () => {
     ["10-3"]: false,
     ["10-4"]: false,
     ["10-5"]: false,
+    ["10-6"]: false,
   };
 
   try {
+    const form = document.querySelector("form");
     const nameInput = document.querySelector('input[type="text"]');
-    result["10-1"] = !!nameInput && nameInput.getAttribute("placeholder") === "Enter your name";
-
     const emailInput = document.querySelector('input[type="email"]');
-    result["10-2"] = !!emailInput && emailInput.getAttribute("placeholder") === "Enter your email";
-
     const passwordInput = document.querySelector('input[type="password"]');
-    result["10-3"] = !!passwordInput && passwordInput.getAttribute("placeholder") === "Enter your password";
-
     const dateInput = document.querySelector('input[type="date"]');
-    result["10-4"] = !!dateInput && dateInput.getAttribute("placeholder") === "Enter your birthdate";
+    const submitButton = document.querySelector('button[type="submit"]') || document.querySelector('input[type="submit"]');
 
-    const submitButton = document.querySelector('button[type="submit"]');
+    result["10-1"] = !!nameInput && nameInput.hasAttribute("placeholder") && nameInput.getAttribute("placeholder").trim() !== "";
+    result["10-2"] = !!emailInput && emailInput.hasAttribute("placeholder") && emailInput.getAttribute("placeholder").trim() !== "";
+    result["10-3"] = !!passwordInput && passwordInput.hasAttribute("placeholder") && passwordInput.getAttribute("placeholder").trim() !== "";
+    result["10-4"] = !!dateInput && dateInput.hasAttribute("placeholder") && dateInput.getAttribute("placeholder").trim() !== "";
     result["10-5"] = !!submitButton;
+
+    // Check if form element exists and all inputs are inside the form
+    if (form) {
+      result["10-6"] = form.contains(nameInput) && form.contains(emailInput) && form.contains(passwordInput) && form.contains(dateInput) && form.contains(submitButton);
+    }
   } catch (error) {
     console.log(error);
   }
