@@ -1,9 +1,12 @@
 import { v4 as uuidv4 } from "uuid";
 import TaskModel from "../models/lesson.js";
 import puppeteer from "puppeteer";
-import UserModel from "../models/user.js";
 import taskTest from "../../taskTests/index.js";
-import { isProgressExit, completeLesson, increaseAttempts } from "../services/progress.js";
+import {
+  isProgressExit,
+  completeLesson,
+  increaseAttempts,
+} from "../services/progress.js";
 import tests from "../../taskTests/html_css/tests.js";
 import dotenv from "dotenv";
 
@@ -55,7 +58,7 @@ export const INSERT_LESSON = async (req, res) => {
       hint: req.body.hint,
       orderId: req.body.orderId,
       durationMins: req.body.durationMins,
-      testsId: req.body.testsId,
+      testsId: uuidv4(),
       lessonContent_en: req.body.lessonContent_en,
       lessonContent_lt: req.body.lessonContent_lt,
       taskContent_en: req.body.taskContent_en,
@@ -132,8 +135,16 @@ export const COMPLETE_TASK = async (req, res) => {
 
 const runPuppeteerTest = async (code, id) => {
   const browser = await puppeteer.launch({
-    args: ["--no-sandbox", "--disable-setuid-sandbox", "--single-process", "--no-zygote"],
-    executablePath: process.env.NODE_ENV === "production" ? process.env.PUPPETEER_EXECUTABLE_PATH : puppeteer.executablePath(),
+    args: [
+      "--no-sandbox",
+      "--disable-setuid-sandbox",
+      "--single-process",
+      "--no-zygote",
+    ],
+    executablePath:
+      process.env.NODE_ENV === "production"
+        ? process.env.PUPPETEER_EXECUTABLE_PATH
+        : puppeteer.executablePath(),
   });
   const page = await browser.newPage();
   console.log(code);
@@ -179,7 +190,8 @@ const runPuppeteerTest = async (code, id) => {
 export const GET_LESSON_TEST_NAMES = async (req, res) => {
   const { id } = req.params;
   try {
-    const testNames = taskTest[id]?.testNames ?? taskTest.codeCheckTasks[id].testNames;
+    const testNames =
+      taskTest[id]?.testNames ?? taskTest.codeCheckTasks[id].testNames;
     return res.status(200).json(Object.values(testNames));
   } catch (error) {
     console.log(error);
