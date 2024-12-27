@@ -480,6 +480,52 @@ const task11 = () => {
   return result;
 };
 
+const task12TestNames = {
+  ["12-1"]: {
+    en: "Checking if paragraph with specific text exists",
+  },
+  ["12-2"]: {
+    en: "Checking if paragraph has .styled-paragraph class applied with correct styles",
+  },
+  ["12-3"]: {
+    en: "Checking if the word 'CSS' is wrapped in a <span> tag with .highlighted-word class",
+  },
+  ["12-4"]: {
+    en: "Checking if .highlighted-word class has correct styles",
+  },
+};
+
+const task12 = () => {
+  const result = {
+    ["12-1"]: false,
+    ["12-2"]: false,
+    ["12-3"]: false,
+    ["12-4"]: false,
+  };
+
+  try {
+    const paragraph = document.querySelector("p.styled-paragraph");
+    result["12-1"] = !!paragraph && paragraph.textContent.includes("Learning CSS makes styling webpages much easier and more effective. It allows developers to control the layout, colors, and overall design of a webpage.");
+
+    if (paragraph) {
+      const paragraphStyles = window.getComputedStyle(paragraph);
+      result["12-2"] = paragraphStyles.fontSize === "18px" && paragraphStyles.color === "rgb(51, 51, 51)" && paragraphStyles.textAlign === "center";
+
+      const span = paragraph.querySelector("span.highlighted-word");
+      result["12-3"] = !!span && span.textContent === "CSS";
+
+      if (span) {
+        const spanStyles = window.getComputedStyle(span);
+        result["12-4"] = spanStyles.color === "rgb(255, 0, 0)" && spanStyles.fontWeight === "bold" && spanStyles.backgroundColor === "rgb(255, 255, 0)" && spanStyles.textTransform === "uppercase";
+      }
+    }
+  } catch (error) {
+    console.log(error);
+  }
+
+  return result;
+};
+
 export default {
   ["362abec3-81b2-4361-870c-a4e054781d73"]: {
     test: task1,
@@ -494,6 +540,7 @@ export default {
   ["04eb14f8-cf36-4e24-a0a7-48a6de26f604"]: { test: task9, testNames: task9TestNames },
   ["f47d4836-b14f-472f-aa98-175c596d92f8"]: { test: task10, testNames: task10TestNames },
   ["e7d0092c-324f-4879-8fc7-df9ddbccdbe2"]: { test: task11, testNames: task11TestNames },
+  ["9c5cfae4-07a5-4302-829c-d0981558e4d5"]: { test: task12, testNames: task12TestNames },
   codeCheckTasks: {
     ["423cfe50-9982-4ebd-9c82-b9f8e126a7c8"]: { test: task6, testNames: task6TestNames },
     ["f038e5bc-1cff-4f1f-acb6-03f24becf1ed"]: {
