@@ -431,10 +431,10 @@ const task11TestNames = {
     en: "Checking if paragraph with specific text exists",
   },
   ["11-3"]: {
-    en: "Checking if styles.css file contains .text-blue class with correct style",
+    en: "Checking if styles.css file contains .content-text class with correct style",
   },
   ["11-4"]: {
-    en: "Checking if paragraph has text-blue class applied",
+    en: "Checking if paragraph has .content-text class applied",
   },
 };
 
@@ -453,20 +453,23 @@ const task11 = () => {
     const paragraph = document.querySelector("p");
     result["11-2"] = !!paragraph && paragraph.textContent.includes("This text will be styled.");
 
-    // Check if styles.css file contains .text-blue class with correct style
-    if (link) {
-      const styleSheet = document.styleSheets[0];
-      for (let i = 0; i < styleSheet.cssRules.length; i++) {
-        const rule = styleSheet.cssRules[i];
-        if (rule.selectorText === ".text-blue" && rule.style.color === "blue") {
-          result["11-3"] = true;
-          break;
+    // Check if styles.css file contains .content-text class with correct style
+    const styleTag = Array.from(document.querySelectorAll("style")).find((style) => style.textContent.includes(".content-text"));
+    if (styleTag) {
+      const styleSheet = Array.from(document.styleSheets).find((sheet) => sheet.ownerNode === styleTag);
+      if (styleSheet) {
+        for (let i = 0; i < styleSheet.cssRules.length; i++) {
+          const rule = styleSheet.cssRules[i];
+          if (rule.selectorText === ".content-text" && rule.style.color === "blue") {
+            result["11-3"] = true;
+            break;
+          }
         }
       }
     }
 
     if (paragraph) {
-      // Check if paragraph has text-blue class applied
+      // Check if paragraph has content-text class applied
       const paragraphStyles = window.getComputedStyle(paragraph);
       result["11-4"] = paragraphStyles.color === "rgb(0, 0, 255)";
     }

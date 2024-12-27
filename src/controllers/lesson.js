@@ -2,11 +2,7 @@ import { v4 as uuidv4 } from "uuid";
 import TaskModel from "../models/lesson.js";
 import puppeteer from "puppeteer";
 import taskTest from "../../taskTests/index.js";
-import {
-  isProgressExit,
-  completeLesson,
-  increaseAttempts,
-} from "../services/progress.js";
+import { isProgressExit, completeLesson, increaseAttempts } from "../services/progress.js";
 import tests from "../../taskTests/html_css/tests.js";
 import dotenv from "dotenv";
 
@@ -135,19 +131,11 @@ export const COMPLETE_TASK = async (req, res) => {
 
 const runPuppeteerTest = async (code, id) => {
   const browser = await puppeteer.launch({
-    args: [
-      "--no-sandbox",
-      "--disable-setuid-sandbox",
-      "--single-process",
-      "--no-zygote",
-    ],
-    executablePath:
-      process.env.NODE_ENV === "production"
-        ? process.env.PUPPETEER_EXECUTABLE_PATH
-        : puppeteer.executablePath(),
+    args: ["--no-sandbox", "--disable-setuid-sandbox", "--single-process", "--no-zygote"],
+    executablePath: process.env.NODE_ENV === "production" ? process.env.PUPPETEER_EXECUTABLE_PATH : puppeteer.executablePath(),
   });
   const page = await browser.newPage();
-  console.log(code);
+  await page.setContent(code.html);
 
   if (code.css) {
     await page.addStyleTag({ content: code.css });
@@ -156,7 +144,6 @@ const runPuppeteerTest = async (code, id) => {
     await page.addScriptTag({ content: code.js });
   }
 
-  await page.setContent(code.html);
   // Listen for console events and log them to the Node.js console
   page.on("console", async (msg) => {
     const args = msg.args();
@@ -190,8 +177,7 @@ const runPuppeteerTest = async (code, id) => {
 export const GET_LESSON_TEST_NAMES = async (req, res) => {
   const { id } = req.params;
   try {
-    const testNames =
-      taskTest[id]?.testNames ?? taskTest.codeCheckTasks[id].testNames;
+    const testNames = taskTest[id]?.testNames ?? taskTest.codeCheckTasks[id].testNames;
     return res.status(200).json(Object.values(testNames));
   } catch (error) {
     console.log(error);
