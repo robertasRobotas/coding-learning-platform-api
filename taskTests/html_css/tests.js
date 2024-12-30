@@ -505,18 +505,21 @@ const task12 = () => {
 
   try {
     const paragraph = document.querySelector("p.styled-paragraph");
-    result["12-1"] = !!paragraph && paragraph.textContent.includes("Learning CSS makes styling webpages much easier and more effective. It allows developers to control the layout, colors, and overall design of a webpage.");
+    result["12-1"] = !!paragraph && paragraph.textContent.includes("Learning css makes styling webpages much easier and more effective. It allows developers to control the layout, colors, and overall design of a webpage.");
 
     if (paragraph) {
       const paragraphStyles = window.getComputedStyle(paragraph);
       result["12-2"] = paragraphStyles.fontSize === "18px" && paragraphStyles.color === "rgb(51, 51, 51)" && paragraphStyles.textAlign === "center";
 
       const span = paragraph.querySelector("span.highlighted-word");
-      result["12-3"] = !!span && span.textContent === "CSS";
+      result["12-3"] = !!span && span.textContent === "css";
 
       if (span) {
         const spanStyles = window.getComputedStyle(span);
-        result["12-4"] = spanStyles.color === "rgb(255, 0, 0)" && spanStyles.fontWeight === "bold" && spanStyles.backgroundColor === "rgb(255, 255, 0)" && spanStyles.textTransform === "uppercase";
+        const correctSpanColor = spanStyles.color === "rgb(255, 0, 0)" || spanStyles.color === "red";
+        const correntFontWeight = spanStyles.fontWeight === "bold" || spanStyles.fontWeight === "700" || spanStyles.fontWeight === "800" || spanStyles.fontWeight === "900";
+        const correctBackgroundColor = spanStyles.backgroundColor === "rgb(255, 255, 0)" || spanStyles.backgroundColor === "yellow";
+        result["12-4"] = correctSpanColor && correntFontWeight && correctBackgroundColor && spanStyles.textTransform === "uppercase";
       }
     }
   } catch (error) {
