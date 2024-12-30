@@ -529,6 +529,72 @@ const task12 = () => {
   return result;
 };
 
+const taskPracticeWithStylesTestNames = {
+  ["13-1"]: {
+    en: "Checking if heading with specific text exists",
+  },
+  ["13-2"]: {
+    en: "Checking if heading has .main-heading class applied with correct styles",
+  },
+  ["13-3"]: {
+    en: "Checking if subheading with specific text exists",
+  },
+  ["13-4"]: {
+    en: "Checking if subheading has .sub-heading class applied with correct styles",
+  },
+  ["13-5"]: {
+    en: "Checking if paragraph with specific text exists",
+  },
+  ["13-6"]: {
+    en: "Checking if paragraph has .styled-paragraph class applied with correct styles",
+  },
+};
+
+const taskPracticeWithStyles = () => {
+  const result = {
+    ["13-1"]: false,
+    ["13-2"]: false,
+    ["13-3"]: false,
+    ["13-4"]: false,
+    ["13-5"]: false,
+    ["13-6"]: false,
+  };
+
+  try {
+    const heading = document.querySelector("h1.main-heading");
+    result["13-1"] = !!heading && heading.textContent.includes("Welcome to My Styled Page.");
+
+    if (heading) {
+      const headingStyles = window.getComputedStyle(heading);
+      result["13-2"] = headingStyles.fontSize === "36px" && (headingStyles.color === "rgb(0, 0, 139)" || headingStyles.color === "darkblue") && headingStyles.textAlign === "center" && headingStyles.textTransform === "uppercase";
+    }
+
+    const subheading = document.querySelector("h2.sub-heading");
+    result["13-3"] = !!subheading && subheading.textContent.includes("Learn how CSS transforms plain text into stunning designs.");
+
+    if (subheading) {
+      const subheadingStyles = window.getComputedStyle(subheading);
+      result["13-4"] = subheadingStyles.fontSize === "24px" && (subheadingStyles.color === "rgb(0, 0, 205)" || subheadingStyles.color === "mediumblue") && subheadingStyles.letterSpacing === "2px" && subheadingStyles.fontStyle === "italic";
+    }
+
+    const paragraph = document.querySelector("p.styled-paragraph");
+    result["13-5"] = !!paragraph && paragraph.textContent.includes("CSS is powerful, flexible, and fun to learn. With just a few commands, you can change how text looks, feels, and interacts with your webpage visitors.");
+
+    if (paragraph) {
+      const paragraphStyles = window.getComputedStyle(paragraph);
+      const correctFontSize = paragraphStyles.fontSize === "18px";
+      const correctFontColor = paragraphStyles.color === "rgb(169, 169, 169)" || paragraphStyles.color === "#555";
+      const correctLineHeight = paragraphStyles.lineHeight === "28.8px";
+
+      result["13-6"] = correctFontSize && correctFontColor && correctLineHeight;
+    }
+  } catch (error) {
+    console.log(error);
+  }
+
+  return result;
+};
+
 export default {
   ["362abec3-81b2-4361-870c-a4e054781d73"]: {
     test: task1,
@@ -544,6 +610,7 @@ export default {
   ["f47d4836-b14f-472f-aa98-175c596d92f8"]: { test: task10, testNames: task10TestNames },
   ["e7d0092c-324f-4879-8fc7-df9ddbccdbe2"]: { test: task11, testNames: task11TestNames },
   ["9c5cfae4-07a5-4302-829c-d0981558e4d5"]: { test: task12, testNames: task12TestNames },
+  ["d5bbf42d-8396-4bc3-a974-5fa4a94a0f2b"]: { test: taskPracticeWithStyles, testNames: taskPracticeWithStylesTestNames },
   codeCheckTasks: {
     ["423cfe50-9982-4ebd-9c82-b9f8e126a7c8"]: { test: task6, testNames: task6TestNames },
     ["f038e5bc-1cff-4f1f-acb6-03f24becf1ed"]: {
