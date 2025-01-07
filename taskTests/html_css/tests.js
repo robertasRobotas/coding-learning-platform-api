@@ -678,7 +678,133 @@ const taskElementSize = () => {
       const correctTextAlign = roundedBoxStyles.textAlign === "center";
 
       result["6-4"] = correctWidth && correctHeight && correctBackgroundColor && correctTextColor && correctBorderRadius && correctTextAlign;
-      // result["6-4"] = roundedBoxStyles.color;
+    }
+  } catch (error) {
+    console.log(error);
+  }
+
+  return result;
+};
+
+const moreStylesTestNames = {
+  ["7-1"]: {
+    en: "Checking if <div> with class 'styled-div' exists",
+  },
+  ["7-2"]: {
+    en: "Checking if 'styled-div' has correct width, text alignment, background color, and border radius",
+  },
+  ["7-3"]: {
+    en: "Checking if <img> with class 'styled-image' exists",
+  },
+  ["7-4"]: {
+    en: "Checking if 'styled-image' has correct width, height, object-fit, and border radius",
+  },
+};
+
+const moreStylesTestNamesString = {
+  ["7-5"]: {
+    en: "Checking if div has correct width",
+  },
+};
+
+const moreStylesTaskStringCheck = ({ css }) => {
+  const result = {
+    ["7-5"]: false,
+  };
+  const regex = /\.styled-div\s*\{\s*[^}]*\bwidth\s*:\s*50%\s*;[^}]*\}/;
+  result["7-5"] = regex.test(css);
+
+  return [
+    {
+      result: result["7-5"],
+      name: moreStylesTestNamesString["7-5"],
+    },
+  ];
+};
+
+const moreStylesTask = () => {
+  const result = {
+    ["7-1"]: false,
+    ["7-2"]: false,
+    ["7-3"]: false,
+    ["7-4"]: false,
+  };
+  try {
+    const styledDiv = document.querySelector(".styled-div");
+    result["7-1"] = !!styledDiv;
+
+    if (styledDiv) {
+      const styledDivStyles = window.getComputedStyle(styledDiv);
+      const correctTextAlign = styledDivStyles.textAlign === "center";
+      const correctBackgroundColor = styledDivStyles.backgroundColor === "rgb(211, 211, 211)";
+      const correctBorderRadius = styledDivStyles.borderRadius === "15px";
+
+      result["7-2"] = correctTextAlign && correctBackgroundColor && correctBorderRadius;
+    }
+
+    const styledImage = document.querySelector(".styled-image");
+    result["7-3"] = !!styledImage;
+
+    if (styledImage) {
+      const styledImageStyles = window.getComputedStyle(styledImage);
+      const correctWidth = styledImageStyles.width === "300px";
+      const correctHeight = styledImageStyles.height === "200px";
+      const correctObjectFit = styledImageStyles.objectFit === "cover";
+      const correctBorderRadius = styledImageStyles.borderRadius === "20px";
+
+      result["7-4"] = correctWidth && correctHeight && correctObjectFit && correctBorderRadius;
+    }
+  } catch (error) {
+    console.log(error);
+  }
+
+  return result;
+};
+
+const taskFontsNames = {
+  ["8-1"]: {
+    en: "Checking if <link> tag for Google Font 'Lobster' exists",
+  },
+  ["8-2"]: {
+    en: "Checking if <h1> tag exists with correct text",
+  },
+  ["8-3"]: {
+    en: "Checking if <p> tag exists with correct text",
+  },
+  ["8-4"]: {
+    en: "Checking if 'lobster-text' class is applied to <p> tag",
+  },
+  ["8-5"]: {
+    en: "Checking if 'lobster-text' class has correct font-family",
+  },
+};
+
+const taskFontsTests = () => {
+  const result = {
+    ["8-1"]: false,
+    ["8-2"]: false,
+    ["8-3"]: false,
+    ["8-4"]: false,
+    ["8-5"]: false,
+  };
+
+  try {
+    const linkTag = document.querySelector("link[href='https://fonts.googleapis.com/css2?family=Lobster&display=swap']");
+    result["8-1"] = !!linkTag;
+
+    const h1Tag = document.querySelector("h1");
+    result["8-2"] = h1Tag && h1Tag.textContent === "Welcome to My Styled Page";
+
+    const pTag = document.querySelector("p.lobster-text");
+    result["8-3"] =
+      pTag &&
+      pTag.textContent === "This is an example paragraph styled with the Lobster font. Using custom fonts makes webpages more visually appealing.";
+    result["8-4"] = !!pTag;
+
+    if (pTag) {
+      const pTagStyles = window.getComputedStyle(pTag);
+      const correctFontFamily = pTagStyles.fontFamily.includes("Lobster");
+      result["8-5"] = correctFontFamily;
     }
   } catch (error) {
     console.log(error);
@@ -704,11 +830,17 @@ export default {
   ["9c5cfae4-07a5-4302-829c-d0981558e4d5"]: { test: task12, testNames: task12TestNames },
   ["d5bbf42d-8396-4bc3-a974-5fa4a94a0f2b"]: { test: taskPracticeWithStyles, testNames: taskPracticeWithStylesTestNames },
   ["91f1beff-ccfb-4e58-a610-681d0c0cb004"]: { test: taskElementSize, testNames: testNamesElementSize },
+  ["5c9cebf8-a4ba-49b4-8b99-1bd50add8fa9"]: { test: moreStylesTask, testNames: moreStylesTestNames },
+  ["47eb8acf-e1d5-435c-b53c-bd90d8ce1d93"]: { test: taskFontsTests, testNames: taskFontsNames },
   codeCheckTasks: {
     ["423cfe50-9982-4ebd-9c82-b9f8e126a7c8"]: { test: task6, testNames: task6TestNames },
     ["f038e5bc-1cff-4f1f-acb6-03f24becf1ed"]: {
       test: task2,
       testNames: task2TestNames,
+    },
+    ["5c9cebf8-a4ba-49b4-8b99-1bd50add8fa9"]: {
+      testNames: moreStylesTestNamesString,
+      test: moreStylesTaskStringCheck,
     },
   },
 };

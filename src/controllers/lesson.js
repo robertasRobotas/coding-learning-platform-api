@@ -90,8 +90,16 @@ export const COMPLETE_TASK = async (req, res) => {
 
     if (Object.keys(tests.codeCheckTasks).includes(id)) {
       testResponse = tests.codeCheckTasks[id].test(code);
-    } else {
-      testResponse = await runPuppeteerTest(code, id);
+      console.log("testResponse", testResponse);
+    }
+
+    if (Object.keys(tests).includes(id)) {
+      if (testResponse.length === 0) {
+        testResponse = await runPuppeteerTest(code, id);
+        console.log("testResponse", testResponse);
+      } else {
+        testResponse = [...testResponse, ...(await runPuppeteerTest(code, id))];
+      }
     }
 
     const isEveryTestPassed = testResponse.every((r) => r.result);
@@ -155,7 +163,6 @@ const runPuppeteerTest = async (code, id) => {
   });
   const testToGive = taskTest[id].test;
   const names = taskTest[id].testNames;
-  console.log("here -------------------------");
 
   const testResults = await page.evaluate((test) => {
     const testFunction = new Function(`return ${test}`)();
