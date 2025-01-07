@@ -151,7 +151,9 @@ const task4 = () => {
       result["4-3"] = childDivs.length > 1 && childDivs[1].textContent.trim() === "This is a second div.";
       result["4-4"] = spans.length > 0 && spans[0].textContent.trim() === "This is a first span.";
       result["4-5"] = spans.length > 1 && spans[1].textContent.trim() === "This is a second span.";
-      result["4-6"] = childDivs.length > 2 && childDivs[2].textContent.trim() === "This is a piece of the text inside element. And this text won't break to another line.";
+      result["4-6"] =
+        childDivs.length > 2 &&
+        childDivs[2].textContent.trim() === "This is a piece of the text inside element. And this text won't break to another line.";
     }
   } catch (error) {
     console.log(error);
@@ -271,7 +273,9 @@ const task7 = () => {
     result["7-1"] = !!img;
 
     if (img) {
-      result["7-2"] = img.getAttribute("src") === "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Larix_decidua_Aletschwald.jpg/1280px-Larix_decidua_Aletschwald.jpg";
+      result["7-2"] =
+        img.getAttribute("src") ===
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Larix_decidua_Aletschwald.jpg/1280px-Larix_decidua_Aletschwald.jpg";
       result["7-3"] = img.hasAttribute("alt");
       result["7-4"] = img.complete && img.naturalHeight !== 0;
     }
@@ -317,7 +321,11 @@ const task8 = () => {
     result["8-3"] = !!ol;
     if (ol) {
       const olItems = Array.from(ol.querySelectorAll("li")).map((item) => item.textContent.trim());
-      result["8-4"] = olItems.length === 3 && olItems.includes("Step 1: Open browser") && olItems.includes("Step 2: Search for HTML tutorials") && olItems.includes("Step 3: Start learning");
+      result["8-4"] =
+        olItems.length === 3 &&
+        olItems.includes("Step 1: Open browser") &&
+        olItems.includes("Step 2: Search for HTML tutorials") &&
+        olItems.includes("Step 3: Start learning");
     }
   } catch (error) {
     console.log(error);
@@ -414,7 +422,12 @@ const task10 = () => {
 
     // Check if form element exists and all inputs are inside the form
     if (form) {
-      result["10-6"] = form.contains(nameInput) && form.contains(emailInput) && form.contains(passwordInput) && form.contains(dateInput) && form.contains(submitButton);
+      result["10-6"] =
+        form.contains(nameInput) &&
+        form.contains(emailInput) &&
+        form.contains(passwordInput) &&
+        form.contains(dateInput) &&
+        form.contains(submitButton);
     }
   } catch (error) {
     console.log(error);
@@ -505,7 +518,11 @@ const task12 = () => {
 
   try {
     const paragraph = document.querySelector("p.styled-paragraph");
-    result["12-1"] = !!paragraph && paragraph.textContent.includes("Learning css makes styling webpages much easier and more effective. It allows developers to control the layout, colors, and overall design of a webpage.");
+    result["12-1"] =
+      !!paragraph &&
+      paragraph.textContent.includes(
+        "Learning css makes styling webpages much easier and more effective. It allows developers to control the layout, colors, and overall design of a webpage."
+      );
 
     if (paragraph) {
       const paragraphStyles = window.getComputedStyle(paragraph);
@@ -517,7 +534,8 @@ const task12 = () => {
       if (span) {
         const spanStyles = window.getComputedStyle(span);
         const correctSpanColor = spanStyles.color === "rgb(255, 0, 0)" || spanStyles.color === "red";
-        const correntFontWeight = spanStyles.fontWeight === "bold" || spanStyles.fontWeight === "700" || spanStyles.fontWeight === "800" || spanStyles.fontWeight === "900";
+        const correntFontWeight =
+          spanStyles.fontWeight === "bold" || spanStyles.fontWeight === "700" || spanStyles.fontWeight === "800" || spanStyles.fontWeight === "900";
         const correctBackgroundColor = spanStyles.backgroundColor === "rgb(255, 255, 0)" || spanStyles.backgroundColor === "yellow";
         result["12-4"] = correctSpanColor && correntFontWeight && correctBackgroundColor && spanStyles.textTransform === "uppercase";
       }
@@ -566,7 +584,11 @@ const taskPracticeWithStyles = () => {
 
     if (heading) {
       const headingStyles = window.getComputedStyle(heading);
-      result["13-2"] = headingStyles.fontSize === "36px" && (headingStyles.color === "rgb(0, 0, 139)" || headingStyles.color === "darkblue") && headingStyles.textAlign === "center" && headingStyles.textTransform === "uppercase";
+      result["13-2"] =
+        headingStyles.fontSize === "36px" &&
+        (headingStyles.color === "rgb(0, 0, 139)" || headingStyles.color === "darkblue") &&
+        headingStyles.textAlign === "center" &&
+        headingStyles.textTransform === "uppercase";
     }
 
     const subheading = document.querySelector("h2.sub-heading");
@@ -574,19 +596,89 @@ const taskPracticeWithStyles = () => {
 
     if (subheading) {
       const subheadingStyles = window.getComputedStyle(subheading);
-      result["13-4"] = subheadingStyles.fontSize === "24px" && (subheadingStyles.color === "rgb(0, 0, 205)" || subheadingStyles.color === "mediumblue") && subheadingStyles.letterSpacing === "2px" && subheadingStyles.fontStyle === "italic";
+      result["13-4"] =
+        subheadingStyles.fontSize === "24px" &&
+        (subheadingStyles.color === "rgb(0, 0, 205)" || subheadingStyles.color === "mediumblue") &&
+        subheadingStyles.letterSpacing === "2px" &&
+        subheadingStyles.fontStyle === "italic";
     }
 
     const paragraph = document.querySelector("p.styled-paragraph");
-    result["13-5"] = !!paragraph && paragraph.textContent.includes("CSS is powerful, flexible, and fun to learn. With just a few commands, you can change how text looks, feels, and interacts with your webpage visitors.");
+    result["13-5"] =
+      !!paragraph &&
+      paragraph.textContent.includes(
+        "CSS is powerful, flexible, and fun to learn. With just a few commands, you can change how text looks, feels, and interacts with your webpage visitors."
+      );
 
     if (paragraph) {
       const paragraphStyles = window.getComputedStyle(paragraph);
       const correctFontSize = paragraphStyles.fontSize === "18px";
-      const correctFontColor = paragraphStyles.color === "rgb(169, 169, 169)" || paragraphStyles.color === "#555";
+      const correctFontColor = paragraphStyles.color === "rgb(85, 85, 85)" || paragraphStyles.color === "#555";
       const correctLineHeight = paragraphStyles.lineHeight === "28.8px";
 
       result["13-6"] = correctFontSize && correctFontColor && correctLineHeight;
+    }
+  } catch (error) {
+    console.log(error);
+  }
+
+  return result;
+};
+
+const testNamesElementSize = {
+  ["6-1"]: {
+    en: "Checking if <div> with class 'styled-box' exists",
+  },
+  ["6-2"]: {
+    en: "Checking if 'styled-box' has correct width, height, background color, text color, border, and border-radius",
+  },
+  ["6-3"]: {
+    en: "Checking if <div> with class 'rounded-box' exists",
+  },
+  ["6-4"]: {
+    en: "Checking if 'rounded-box' has correct width, height, background color, text color, border-radius, and text alignment",
+  },
+};
+
+const taskElementSize = () => {
+  const result = {
+    ["6-1"]: false,
+    ["6-2"]: false,
+    ["6-3"]: false,
+    ["6-4"]: false,
+  };
+
+  try {
+    const styledBox = document.querySelector(".styled-box");
+    result["6-1"] = !!styledBox;
+
+    if (styledBox) {
+      const styledBoxStyles = window.getComputedStyle(styledBox);
+      const correctWidth = styledBoxStyles.width === "300px";
+      const correctHeight = styledBoxStyles.height === "150px";
+      const correctBackgroundColor = styledBoxStyles.backgroundColor === "rgb(173, 216, 230)";
+      const correctTextColor = styledBoxStyles.color === "rgb(0, 0, 139)";
+      const correctBorder = styledBoxStyles.border === "3px solid rgb(255, 0, 0)";
+      const correctBorderRadius = styledBoxStyles.borderRadius === "15px";
+
+      result["6-2"] = correctWidth && correctHeight && correctBackgroundColor && correctTextColor && correctBorder && correctBorderRadius;
+      result["6-2"] = styledBoxStyles.border;
+    }
+
+    const roundedBox = document.querySelector(".rounded-box");
+    result["6-3"] = !!roundedBox;
+
+    if (roundedBox) {
+      const roundedBoxStyles = window.getComputedStyle(roundedBox);
+      const correctWidth = roundedBoxStyles.width === "100px";
+      const correctHeight = roundedBoxStyles.height === "100px";
+      const correctBackgroundColor = roundedBoxStyles.backgroundColor === "rgb(144, 238, 144)";
+      const correctTextColor = roundedBoxStyles.color === "rgb(0, 100, 0)";
+      const correctBorderRadius = roundedBoxStyles.borderRadius === "50%";
+      const correctTextAlign = roundedBoxStyles.textAlign === "center";
+
+      result["6-4"] = correctWidth && correctHeight && correctBackgroundColor && correctTextColor && correctBorderRadius && correctTextAlign;
+      // result["6-4"] = roundedBoxStyles.color;
     }
   } catch (error) {
     console.log(error);
@@ -611,6 +703,7 @@ export default {
   ["e7d0092c-324f-4879-8fc7-df9ddbccdbe2"]: { test: task11, testNames: task11TestNames },
   ["9c5cfae4-07a5-4302-829c-d0981558e4d5"]: { test: task12, testNames: task12TestNames },
   ["d5bbf42d-8396-4bc3-a974-5fa4a94a0f2b"]: { test: taskPracticeWithStyles, testNames: taskPracticeWithStylesTestNames },
+  ["91f1beff-ccfb-4e58-a610-681d0c0cb004"]: { test: taskElementSize, testNames: testNamesElementSize },
   codeCheckTasks: {
     ["423cfe50-9982-4ebd-9c82-b9f8e126a7c8"]: { test: task6, testNames: task6TestNames },
     ["f038e5bc-1cff-4f1f-acb6-03f24becf1ed"]: {

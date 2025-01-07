@@ -155,6 +155,7 @@ const runPuppeteerTest = async (code, id) => {
   });
   const testToGive = taskTest[id].test;
   const names = taskTest[id].testNames;
+  console.log("here -------------------------");
 
   const testResults = await page.evaluate((test) => {
     const testFunction = new Function(`return ${test}`)();
