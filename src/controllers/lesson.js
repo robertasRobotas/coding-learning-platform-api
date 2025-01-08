@@ -90,13 +90,11 @@ export const COMPLETE_TASK = async (req, res) => {
 
     if (Object.keys(tests.codeCheckTasks).includes(id)) {
       testResponse = tests.codeCheckTasks[id].test(code);
-      console.log("testResponse", testResponse);
     }
 
     if (Object.keys(tests).includes(id)) {
       if (testResponse.length === 0) {
         testResponse = await runPuppeteerTest(code, id);
-        console.log("testResponse", testResponse);
       } else {
         testResponse = [...testResponse, ...(await runPuppeteerTest(code, id))];
       }
