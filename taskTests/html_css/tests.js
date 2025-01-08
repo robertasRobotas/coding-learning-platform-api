@@ -839,6 +839,129 @@ const taskCSSPriorities = () => {
   return result;
 };
 
+const taskCSSBoxModelTestNames = {
+  ["15-1"]: {
+    en: "Checking if card <div> element exists with correct text",
+  },
+  ["15-2"]: {
+    en: "Checking if card <div> element has correct padding",
+  },
+  ["15-3"]: {
+    en: "Checking if card <div> element has correct margin",
+  },
+  ["15-4"]: {
+    en: "Checking if card <div> element has correct border",
+  },
+  ["15-5"]: {
+    en: "Checking if card <div> element has correct border-radius",
+  },
+  ["15-6"]: {
+    en: "Checking if card <div> element has correct background color",
+  },
+};
+
+const taskCSSBoxModel = () => {
+  const result = {
+    ["15-1"]: false,
+    ["15-2"]: false,
+    ["15-3"]: false,
+    ["15-4"]: false,
+    ["15-5"]: false,
+    ["15-6"]: false,
+  };
+
+  try {
+    const cardDiv = document.querySelector("div.card");
+    result["15-1"] = !!cardDiv && cardDiv.textContent.includes("This is an information card. It demonstrates padding, margin, border, and border-radius styling.");
+
+    if (cardDiv) {
+      const cardDivStyles = window.getComputedStyle(cardDiv);
+      result["15-2"] = cardDivStyles.padding === "16px";
+      result["15-3"] = cardDivStyles.margin === "16px";
+      result["15-4"] = cardDivStyles.border === "1px solid rgb(128, 128, 128)"; // gray
+      result["15-5"] = cardDivStyles.borderRadius === "5px";
+      result["15-6"] = cardDivStyles.backgroundColor === "rgb(173, 216, 230)"; // lightblue
+    }
+  } catch (error) {
+    console.log(error);
+  }
+
+  return result;
+};
+
+const taskCSSCardWithImageTestNames = {
+  ["16-1"]: {
+    en: "Checking if card <div> element exists with correct structure",
+  },
+  ["16-2"]: {
+    en: "Checking if card <div> element has correct box-sizing",
+  },
+  ["16-3"]: {
+    en: "Checking if card <div> element has correct padding",
+  },
+  ["16-4"]: {
+    en: "Checking if card <div> element has correct margin",
+  },
+  ["16-5"]: {
+    en: "Checking if card <div> element has correct border",
+  },
+  ["16-6"]: {
+    en: "Checking if card <div> element has correct border-radius",
+  },
+  ["16-7"]: {
+    en: "Checking if card <div> element has correct background color",
+  },
+  ["16-9"]: {
+    en: "Checking if image inside card has correct height",
+  },
+  ["16-10"]: {
+    en: "Checking if image inside card has correct object-fit",
+  },
+};
+
+const taskCSSCardWithImage = () => {
+  const result = {
+    ["16-1"]: false,
+    ["16-2"]: false,
+    ["16-3"]: false,
+    ["16-4"]: false,
+    ["16-5"]: false,
+    ["16-6"]: false,
+    ["16-7"]: false,
+    ["16-9"]: false,
+    ["16-10"]: false,
+  };
+
+  try {
+    const cardDiv = document.querySelector("div.card");
+    const img = cardDiv.querySelector("img");
+    const heading = cardDiv.querySelector("h4");
+    const paragraph = cardDiv.querySelector("p");
+
+    result["16-1"] = !!cardDiv && !!img && !!heading && !!paragraph && heading.textContent === "Card Title" && paragraph.textContent === "This is an example card created using the CSS Box Model.";
+
+    if (cardDiv) {
+      const cardDivStyles = window.getComputedStyle(cardDiv);
+      result["16-2"] = cardDivStyles.boxSizing === "border-box";
+      result["16-3"] = cardDivStyles.padding === "16px";
+      result["16-4"] = cardDivStyles.margin === "16px";
+      result["16-5"] = cardDivStyles.border === "1px solid rgb(128, 128, 128)"; // gray
+      result["16-6"] = cardDivStyles.borderRadius === "10px";
+      result["16-7"] = cardDivStyles.backgroundColor === "rgb(173, 216, 230)"; // lightblue
+    }
+
+    if (img) {
+      const imgStyles = window.getComputedStyle(img);
+      result["16-9"] = imgStyles.height === "200px";
+      result["16-10"] = imgStyles.objectFit === "cover";
+    }
+  } catch (error) {
+    console.log(error);
+  }
+
+  return result;
+};
+
 export default {
   ["362abec3-81b2-4361-870c-a4e054781d73"]: {
     test: task1,
@@ -859,6 +982,8 @@ export default {
   ["5c9cebf8-a4ba-49b4-8b99-1bd50add8fa9"]: { test: moreStylesTask, testNames: moreStylesTestNames },
   ["47eb8acf-e1d5-435c-b53c-bd90d8ce1d93"]: { test: taskFontsTests, testNames: taskFontsNames },
   ["24906b81-dc65-44fa-9cce-940935ded21d"]: { test: taskCSSPriorities, testNames: taskCSSPrioritiesTestNames },
+  ["100d0335-b9fb-476f-bfe6-a0d4ee0125e0"]: { test: taskCSSBoxModel, testNames: taskCSSBoxModelTestNames },
+  ["c372bb5a-f392-4b4a-b8e8-f23a42d33a2d"]: { test: taskCSSCardWithImage, testNames: taskCSSCardWithImageTestNames },
   codeCheckTasks: {
     ["423cfe50-9982-4ebd-9c82-b9f8e126a7c8"]: { test: task6, testNames: task6TestNames },
     ["f038e5bc-1cff-4f1f-acb6-03f24becf1ed"]: {
