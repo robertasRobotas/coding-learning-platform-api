@@ -962,6 +962,91 @@ const taskCSSCardWithImage = () => {
   return result;
 };
 
+const taskCSSCardsSideBySideTestNames = {
+  ["17-1"]: {
+    en: "Checking if both card <div> elements exist with correct structure",
+  },
+  ["17-2"]: {
+    en: "Checking if both card <div> elements have correct display property",
+  },
+  ["17-3"]: {
+    en: "Checking if both card <div> elements have correct box-sizing",
+  },
+  ["17-4"]: {
+    en: "Checking if both card <div> elements have correct padding",
+  },
+  ["17-5"]: {
+    en: "Checking if both card <div> elements have correct margin",
+  },
+  ["17-6"]: {
+    en: "Checking if both card <div> elements have correct border",
+  },
+  ["17-7"]: {
+    en: "Checking if both card <div> elements have correct border-radius",
+  },
+  ["17-8"]: {
+    en: "Checking if both card <div> elements have correct background color",
+  },
+  ["17-10"]: {
+    en: "Checking if images inside cards have correct height",
+  },
+  ["17-11"]: {
+    en: "Checking if images inside cards have correct object-fit",
+  },
+};
+
+const taskCSSCardsSideBySide = () => {
+  const result = {
+    ["17-1"]: false,
+    ["17-2"]: false,
+    ["17-3"]: false,
+    ["17-4"]: false,
+    ["17-5"]: false,
+    ["17-6"]: false,
+    ["17-7"]: false,
+    ["17-8"]: false,
+    ["17-10"]: false,
+    ["17-11"]: false,
+  };
+
+  try {
+    const cards = document.querySelectorAll("body > div");
+    const card1 = cards[0];
+    const card2 = cards[1];
+    const img1 = card1.querySelector("img");
+    const img2 = card2.querySelector("img");
+    const heading1 = card1.querySelector("h4");
+    const heading2 = card2.querySelector("h4");
+    const paragraph1 = card1.querySelector("p");
+    const paragraph2 = card2.querySelector("p");
+
+    result["17-1"] = cards.length === 2 && !!img1 && !!heading1 && !!paragraph1 && !!img2 && !!heading2 && !!paragraph2 && heading1.textContent === "Short Title" && heading2.textContent === "This is a longer title to demonstrate alignment.";
+
+    if (card1 && card2) {
+      const card1Styles = window.getComputedStyle(card1);
+      const card2Styles = window.getComputedStyle(card2);
+      result["17-2"] = card1Styles.display === "inline-block" && card2Styles.display === "inline-block";
+      result["17-3"] = card1Styles.boxSizing === "border-box" && card2Styles.boxSizing === "border-box";
+      result["17-4"] = card1Styles.padding === "16px" && card2Styles.padding === "16px";
+      result["17-5"] = card1Styles.margin === "16px" && card2Styles.margin === "16px";
+      result["17-6"] = card1Styles.border === "1px solid rgb(128, 128, 128)" && card2Styles.border === "1px solid rgb(128, 128, 128)"; // gray
+      result["17-7"] = card1Styles.borderRadius === "10px" && card2Styles.borderRadius === "10px";
+      result["17-8"] = card1Styles.backgroundColor === "rgb(211, 211, 211)" && card2Styles.backgroundColor === "rgb(211, 211, 211)"; // lightgray
+    }
+
+    if (img1 && img2) {
+      const img1Styles = window.getComputedStyle(img1);
+      const img2Styles = window.getComputedStyle(img2);
+      result["17-10"] = img1Styles.height === "150px" && img2Styles.height === "150px";
+      result["17-11"] = img1Styles.objectFit === "cover" && img2Styles.objectFit === "cover";
+    }
+  } catch (error) {
+    console.log(error);
+  }
+
+  return result;
+};
+
 export default {
   ["362abec3-81b2-4361-870c-a4e054781d73"]: {
     test: task1,
@@ -984,6 +1069,7 @@ export default {
   ["24906b81-dc65-44fa-9cce-940935ded21d"]: { test: taskCSSPriorities, testNames: taskCSSPrioritiesTestNames },
   ["100d0335-b9fb-476f-bfe6-a0d4ee0125e0"]: { test: taskCSSBoxModel, testNames: taskCSSBoxModelTestNames },
   ["c372bb5a-f392-4b4a-b8e8-f23a42d33a2d"]: { test: taskCSSCardWithImage, testNames: taskCSSCardWithImageTestNames },
+  ["ef53c5ae-1d38-45c8-b24e-69ac25bfd249"]: { test: taskCSSCardsSideBySide, testNames: taskCSSCardsSideBySideTestNames },
   codeCheckTasks: {
     ["423cfe50-9982-4ebd-9c82-b9f8e126a7c8"]: { test: task6, testNames: task6TestNames },
     ["f038e5bc-1cff-4f1f-acb6-03f24becf1ed"]: {
