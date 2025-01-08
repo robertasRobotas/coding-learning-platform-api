@@ -1047,6 +1047,77 @@ const taskCSSCardsSideBySide = () => {
   return result;
 };
 
+const taskSemanticHTMLStructureTestNames = {
+  ["18-1"]: {
+    en: "Checking if <div> element with class page-wrapper exists with correct structure",
+  },
+  ["18-2"]: {
+    en: "Checking if <div> element with class page-wrapper has correct font-size",
+  },
+  ["18-3"]: {
+    en: "Checking if <header> and <footer> elements have correct height and background color",
+  },
+  ["18-4"]: {
+    en: "Checking if <main> and <aside> elements have correct width, height, and background color",
+  },
+  ["18-5"]: {
+    en: "Checking if <main> and <aside> elements have correct display property",
+  },
+};
+
+const taskSemanticHTMLStructure = () => {
+  const result = {
+    ["18-1"]: false,
+    ["18-2"]: false,
+    ["18-3"]: false,
+    ["18-4"]: false,
+    ["18-5"]: false,
+  };
+
+  try {
+    const pageWrapper = document.querySelector("div.page-wrapper");
+    const header = pageWrapper.querySelector("header");
+    const main = pageWrapper.querySelector("main");
+    const aside = pageWrapper.querySelector("aside");
+    const footer = pageWrapper.querySelector("footer");
+
+    result["18-1"] = !!pageWrapper && !!header && !!main && !!aside && !!footer;
+
+    if (pageWrapper) {
+      const pageWrapperStyles = window.getComputedStyle(pageWrapper);
+      result["18-2"] = pageWrapperStyles.fontSize === "0px";
+    }
+
+    if (header && footer) {
+      const headerStyles = window.getComputedStyle(header);
+      const footerStyles = window.getComputedStyle(footer);
+      result["18-3"] =
+        headerStyles.height === "80px" &&
+        footerStyles.height === "80px" &&
+        headerStyles.backgroundColor === "rgb(211, 211, 211)" && // lightgray
+        footerStyles.backgroundColor === "rgb(169, 169, 169)"; // darkgray
+    }
+
+    if (main && aside) {
+      const mainStyles = window.getComputedStyle(main);
+      const asideStyles = window.getComputedStyle(aside);
+      const pageWrapperRect = pageWrapper.getBoundingClientRect();
+      const mainRect = main.getBoundingClientRect();
+      const asideRect = aside.getBoundingClientRect();
+
+      const mainWidthPercentage = Math.round((mainRect.width / pageWrapperRect.width) * 100);
+      const asideWidthPercentage = Math.round((asideRect.width / pageWrapperRect.width) * 100);
+
+      result["18-4"] = mainWidthPercentage === 70 && mainStyles.height === "50px" && asideWidthPercentage === 30 && asideStyles.height === "50px" && mainStyles.backgroundColor !== asideStyles.backgroundColor;
+      result["18-5"] = mainStyles.display === "inline-block" && asideStyles.display === "inline-block";
+    }
+  } catch (error) {
+    console.log(error);
+  }
+
+  return result;
+};
+
 export default {
   ["362abec3-81b2-4361-870c-a4e054781d73"]: {
     test: task1,
@@ -1070,6 +1141,7 @@ export default {
   ["100d0335-b9fb-476f-bfe6-a0d4ee0125e0"]: { test: taskCSSBoxModel, testNames: taskCSSBoxModelTestNames },
   ["c372bb5a-f392-4b4a-b8e8-f23a42d33a2d"]: { test: taskCSSCardWithImage, testNames: taskCSSCardWithImageTestNames },
   ["ef53c5ae-1d38-45c8-b24e-69ac25bfd249"]: { test: taskCSSCardsSideBySide, testNames: taskCSSCardsSideBySideTestNames },
+  ["138ebf7c-6a6f-4af2-a97a-8a365cbf3a9e"]: { test: taskSemanticHTMLStructure, testNames: taskSemanticHTMLStructureTestNames },
   codeCheckTasks: {
     ["423cfe50-9982-4ebd-9c82-b9f8e126a7c8"]: { test: task6, testNames: task6TestNames },
     ["f038e5bc-1cff-4f1f-acb6-03f24becf1ed"]: {
