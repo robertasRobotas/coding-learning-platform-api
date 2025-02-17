@@ -22,6 +22,7 @@ const taskSchema = mongoose.Schema({
   isHtmlEditor: { type: Boolean, required: false },
   isCssEditor: { type: Boolean, required: false },
   isJsEditor: { type: Boolean, required: false },
+  isFinal: { type: Boolean, required: false },
 });
 
 export default mongoose.model("Lesson", taskSchema);
