@@ -95,8 +95,14 @@ export const COMPLETE_TASK = async (req, res) => {
 
     if (Object.keys(tests.codeCheckTasks).includes(id)) {
       testResponse = tests.codeCheckTasks[id].test(code);
-    } else {
-      testResponse = await runPuppeteerTest(code, id);
+    }
+
+    if (Object.keys(tests).includes(id)) {
+      if (testResponse.length === 0) {
+        testResponse = await runPuppeteerTest(code, id);
+      } else {
+        testResponse = [...testResponse, ...(await runPuppeteerTest(code, id))];
+      }
     }
 
     const isEveryTestPassed = testResponse.every((r) => r.result);

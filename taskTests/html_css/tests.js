@@ -505,19 +505,611 @@ const task12 = () => {
 
   try {
     const paragraph = document.querySelector("p.styled-paragraph");
-    result["12-1"] = !!paragraph && paragraph.textContent.includes("Learning CSS makes styling webpages much easier and more effective. It allows developers to control the layout, colors, and overall design of a webpage.");
+    result["12-1"] = !!paragraph && paragraph.textContent.includes("Learning css makes styling webpages much easier and more effective. It allows developers to control the layout, colors, and overall design of a webpage.");
 
     if (paragraph) {
       const paragraphStyles = window.getComputedStyle(paragraph);
       result["12-2"] = paragraphStyles.fontSize === "18px" && paragraphStyles.color === "rgb(51, 51, 51)" && paragraphStyles.textAlign === "center";
 
       const span = paragraph.querySelector("span.highlighted-word");
-      result["12-3"] = !!span && span.textContent === "CSS";
+      result["12-3"] = !!span && span.textContent === "css";
 
       if (span) {
         const spanStyles = window.getComputedStyle(span);
-        result["12-4"] = spanStyles.color === "rgb(255, 0, 0)" && spanStyles.fontWeight === "bold" && spanStyles.backgroundColor === "rgb(255, 255, 0)" && spanStyles.textTransform === "uppercase";
+        const correctSpanColor = spanStyles.color === "rgb(255, 0, 0)" || spanStyles.color === "red";
+        const correntFontWeight = spanStyles.fontWeight === "bold" || spanStyles.fontWeight === "700" || spanStyles.fontWeight === "800" || spanStyles.fontWeight === "900";
+        const correctBackgroundColor = spanStyles.backgroundColor === "rgb(255, 255, 0)" || spanStyles.backgroundColor === "yellow";
+        result["12-4"] = correctSpanColor && correntFontWeight && correctBackgroundColor && spanStyles.textTransform === "uppercase";
       }
+    }
+  } catch (error) {
+    console.log(error);
+  }
+
+  return result;
+};
+
+const taskPracticeWithStylesTestNames = {
+  ["13-1"]: {
+    en: "Checking if heading with specific text exists",
+  },
+  ["13-2"]: {
+    en: "Checking if heading has .main-heading class applied with correct styles",
+  },
+  ["13-3"]: {
+    en: "Checking if subheading with specific text exists",
+  },
+  ["13-4"]: {
+    en: "Checking if subheading has .sub-heading class applied with correct styles",
+  },
+  ["13-5"]: {
+    en: "Checking if paragraph with specific text exists",
+  },
+  ["13-6"]: {
+    en: "Checking if paragraph has .styled-paragraph class applied with correct styles",
+  },
+};
+
+const taskPracticeWithStyles = () => {
+  const result = {
+    ["13-1"]: false,
+    ["13-2"]: false,
+    ["13-3"]: false,
+    ["13-4"]: false,
+    ["13-5"]: false,
+    ["13-6"]: false,
+  };
+
+  try {
+    const heading = document.querySelector("h1.main-heading");
+    result["13-1"] = !!heading && heading.textContent.includes("Welcome to My Styled Page.");
+
+    if (heading) {
+      const headingStyles = window.getComputedStyle(heading);
+      result["13-2"] = headingStyles.fontSize === "36px" && (headingStyles.color === "rgb(0, 0, 139)" || headingStyles.color === "darkblue") && headingStyles.textAlign === "center" && headingStyles.textTransform === "uppercase";
+    }
+
+    const subheading = document.querySelector("h2.sub-heading");
+    result["13-3"] = !!subheading && subheading.textContent.includes("Learn how CSS transforms plain text into stunning designs.");
+
+    if (subheading) {
+      const subheadingStyles = window.getComputedStyle(subheading);
+      result["13-4"] = subheadingStyles.fontSize === "24px" && (subheadingStyles.color === "rgb(0, 0, 205)" || subheadingStyles.color === "mediumblue") && subheadingStyles.letterSpacing === "2px" && subheadingStyles.fontStyle === "italic";
+    }
+
+    const paragraph = document.querySelector("p.styled-paragraph");
+    result["13-5"] = !!paragraph && paragraph.textContent.includes("CSS is powerful, flexible, and fun to learn. With just a few commands, you can change how text looks, feels, and interacts with your webpage visitors.");
+
+    if (paragraph) {
+      const paragraphStyles = window.getComputedStyle(paragraph);
+      const correctFontSize = paragraphStyles.fontSize === "18px";
+      const correctFontColor = paragraphStyles.color === "rgb(85, 85, 85)" || paragraphStyles.color === "#555";
+      const correctLineHeight = paragraphStyles.lineHeight === "28.8px";
+
+      result["13-6"] = correctFontSize && correctFontColor && correctLineHeight;
+    }
+  } catch (error) {
+    console.log(error);
+  }
+
+  return result;
+};
+
+const testNamesElementSize = {
+  ["6-1"]: {
+    en: "Checking if <div> with class 'styled-box' exists",
+  },
+  ["6-2"]: {
+    en: "Checking if 'styled-box' has correct width, height, background color, text color, border, and border-radius",
+  },
+  ["6-3"]: {
+    en: "Checking if <div> with class 'rounded-box' exists",
+  },
+  ["6-4"]: {
+    en: "Checking if 'rounded-box' has correct width, height, background color, text color, border-radius, and text alignment",
+  },
+};
+
+const taskElementSize = () => {
+  const result = {
+    ["6-1"]: false,
+    ["6-2"]: false,
+    ["6-3"]: false,
+    ["6-4"]: false,
+  };
+
+  try {
+    const styledBox = document.querySelector(".styled-box");
+    result["6-1"] = !!styledBox;
+
+    if (styledBox) {
+      const styledBoxStyles = window.getComputedStyle(styledBox);
+      const correctWidth = styledBoxStyles.width === "300px";
+      const correctHeight = styledBoxStyles.height === "150px";
+      const correctBackgroundColor = styledBoxStyles.backgroundColor === "rgb(173, 216, 230)";
+      const correctTextColor = styledBoxStyles.color === "rgb(0, 0, 139)";
+      const correctBorder = styledBoxStyles.border === "3px solid rgb(255, 0, 0)";
+      const correctBorderRadius = styledBoxStyles.borderRadius === "15px";
+
+      result["6-2"] = correctWidth && correctHeight && correctBackgroundColor && correctTextColor && correctBorder && correctBorderRadius;
+      result["6-2"] = styledBoxStyles.border;
+    }
+
+    const roundedBox = document.querySelector(".rounded-box");
+    result["6-3"] = !!roundedBox;
+
+    if (roundedBox) {
+      const roundedBoxStyles = window.getComputedStyle(roundedBox);
+      const correctWidth = roundedBoxStyles.width === "100px";
+      const correctHeight = roundedBoxStyles.height === "100px";
+      const correctBackgroundColor = roundedBoxStyles.backgroundColor === "rgb(144, 238, 144)";
+      const correctTextColor = roundedBoxStyles.color === "rgb(0, 100, 0)";
+      const correctBorderRadius = roundedBoxStyles.borderRadius === "50%";
+      const correctTextAlign = roundedBoxStyles.textAlign === "center";
+
+      result["6-4"] = correctWidth && correctHeight && correctBackgroundColor && correctTextColor && correctBorderRadius && correctTextAlign;
+    }
+  } catch (error) {
+    console.log(error);
+  }
+
+  return result;
+};
+
+const moreStylesTestNames = {
+  ["7-1"]: {
+    en: "Checking if <div> with class 'styled-div' exists",
+  },
+  ["7-2"]: {
+    en: "Checking if 'styled-div' has correct width, text alignment, background color, and border radius",
+  },
+  ["7-3"]: {
+    en: "Checking if <img> with class 'styled-image' exists",
+  },
+  ["7-4"]: {
+    en: "Checking if 'styled-image' has correct width, height, object-fit, and border radius",
+  },
+};
+
+const moreStylesTestNamesString = {
+  ["7-5"]: {
+    en: "Checking if div has correct width",
+  },
+};
+
+const moreStylesTaskStringCheck = ({ css }) => {
+  const result = {
+    ["7-5"]: false,
+  };
+  const regex = /\.styled-div\s*\{\s*[^}]*\bwidth\s*:\s*50%\s*;[^}]*\}/;
+  result["7-5"] = regex.test(css);
+
+  return [
+    {
+      result: result["7-5"],
+      name: moreStylesTestNamesString["7-5"],
+    },
+  ];
+};
+
+const moreStylesTask = () => {
+  const result = {
+    ["7-1"]: false,
+    ["7-2"]: false,
+    ["7-3"]: false,
+    ["7-4"]: false,
+  };
+  try {
+    const styledDiv = document.querySelector(".styled-div");
+    result["7-1"] = !!styledDiv;
+
+    if (styledDiv) {
+      const styledDivStyles = window.getComputedStyle(styledDiv);
+      const correctTextAlign = styledDivStyles.textAlign === "center";
+      const correctBackgroundColor = styledDivStyles.backgroundColor === "rgb(211, 211, 211)";
+      const correctBorderRadius = styledDivStyles.borderRadius === "15px";
+
+      result["7-2"] = correctTextAlign && correctBackgroundColor && correctBorderRadius;
+    }
+
+    const styledImage = document.querySelector(".styled-image");
+    result["7-3"] = !!styledImage;
+
+    if (styledImage) {
+      const styledImageStyles = window.getComputedStyle(styledImage);
+      const correctWidth = styledImageStyles.width === "300px";
+      const correctHeight = styledImageStyles.height === "200px";
+      const correctObjectFit = styledImageStyles.objectFit === "cover";
+      const correctBorderRadius = styledImageStyles.borderRadius === "20px";
+
+      result["7-4"] = correctWidth && correctHeight && correctObjectFit && correctBorderRadius;
+    }
+  } catch (error) {
+    console.log(error);
+  }
+
+  return result;
+};
+
+const taskFontsNames = {
+  ["8-1"]: {
+    en: "Checking if <link> tag for Google Font 'Lobster' exists",
+  },
+  ["8-2"]: {
+    en: "Checking if <h1> tag exists with correct text",
+  },
+  ["8-3"]: {
+    en: "Checking if <p> tag exists with correct text",
+  },
+  ["8-4"]: {
+    en: "Checking if 'lobster-text' class is applied to <p> tag",
+  },
+  ["8-5"]: {
+    en: "Checking if 'lobster-text' class has correct font-family",
+  },
+};
+
+const taskFontsTests = () => {
+  const result = {
+    ["8-1"]: false,
+    ["8-2"]: false,
+    ["8-3"]: false,
+    ["8-4"]: false,
+    ["8-5"]: false,
+  };
+
+  try {
+    const linkTag = document.querySelector("link[href='https://fonts.googleapis.com/css2?family=Lobster&display=swap']");
+    result["8-1"] = !!linkTag;
+
+    const h1Tag = document.querySelector("h1");
+    result["8-2"] = h1Tag && h1Tag.textContent === "Welcome to My Styled Page";
+
+    const pTag = document.querySelector("p.lobster-text");
+    result["8-3"] = pTag && pTag.textContent === "This is an example paragraph styled with the Lobster font. Using custom fonts makes webpages more visually appealing.";
+    result["8-4"] = !!pTag;
+
+    if (pTag) {
+      const pTagStyles = window.getComputedStyle(pTag);
+      const correctFontFamily = pTagStyles.fontFamily.includes("Lobster");
+      result["8-5"] = correctFontFamily;
+    }
+  } catch (error) {
+    console.log(error);
+  }
+
+  return result;
+};
+
+const taskCSSPrioritiesTestNames = {
+  ["14-1"]: {
+    en: "Checking if global <div> element exists with correct text and style",
+  },
+  ["14-2"]: {
+    en: "Checking if class <div> element exists with correct text and style",
+  },
+  ["14-3"]: {
+    en: "Checking if ID <div> element exists with correct text and style",
+  },
+  ["14-4"]: {
+    en: "Checking if high-priority <div> element exists with correct text and style",
+  },
+};
+
+const taskCSSPriorities = () => {
+  const result = {
+    ["14-1"]: false,
+    ["14-2"]: false,
+    ["14-3"]: false,
+    ["14-4"]: false,
+  };
+
+  try {
+    const globalDiv = document.querySelector("div");
+    result["14-1"] = !!globalDiv && globalDiv.textContent.includes("This is a global element.");
+    if (globalDiv) {
+      const globalDivStyles = window.getComputedStyle(globalDiv);
+      result["14-1"] = result["14-1"] && globalDivStyles.backgroundColor === "rgb(211, 211, 211)"; // lightgray
+    }
+
+    const classDiv = document.querySelector("div.styled-box");
+    result["14-2"] = !!classDiv && classDiv.textContent.includes("This is a class element.");
+    if (classDiv) {
+      const classDivStyles = window.getComputedStyle(classDiv);
+      result["14-2"] = result["14-2"] && classDivStyles.backgroundColor === "rgb(173, 216, 230)"; // lightblue
+    }
+
+    const idDiv = document.querySelector("div#unique-box");
+    result["14-3"] = !!idDiv && idDiv.textContent.includes("This is an ID element.");
+    if (idDiv) {
+      const idDivStyles = window.getComputedStyle(idDiv);
+      result["14-3"] = result["14-3"] && idDivStyles.backgroundColor === "rgb(255, 255, 0)"; // yellow
+    }
+
+    const highPriorityDiv = document.querySelector("div.styled-box#unique-box");
+    result["14-4"] = !!highPriorityDiv && highPriorityDiv.textContent.includes("This is a high-priority element.");
+    if (highPriorityDiv) {
+      const highPriorityDivStyles = window.getComputedStyle(highPriorityDiv);
+      result["14-4"] = result["14-4"] && highPriorityDivStyles.backgroundColor === "rgb(255, 192, 203)"; // pink
+    }
+  } catch (error) {
+    console.log(error);
+  }
+
+  return result;
+};
+
+const taskCSSBoxModelTestNames = {
+  ["15-1"]: {
+    en: "Checking if card <div> element exists with correct text",
+  },
+  ["15-2"]: {
+    en: "Checking if card <div> element has correct padding",
+  },
+  ["15-3"]: {
+    en: "Checking if card <div> element has correct margin",
+  },
+  ["15-4"]: {
+    en: "Checking if card <div> element has correct border",
+  },
+  ["15-5"]: {
+    en: "Checking if card <div> element has correct border-radius",
+  },
+  ["15-6"]: {
+    en: "Checking if card <div> element has correct background color",
+  },
+};
+
+const taskCSSBoxModel = () => {
+  const result = {
+    ["15-1"]: false,
+    ["15-2"]: false,
+    ["15-3"]: false,
+    ["15-4"]: false,
+    ["15-5"]: false,
+    ["15-6"]: false,
+  };
+
+  try {
+    const cardDiv = document.querySelector("div.card");
+    result["15-1"] = !!cardDiv && cardDiv.textContent.includes("This is an information card. It demonstrates padding, margin, border, and border-radius styling.");
+
+    if (cardDiv) {
+      const cardDivStyles = window.getComputedStyle(cardDiv);
+      result["15-2"] = cardDivStyles.padding === "16px";
+      result["15-3"] = cardDivStyles.margin === "16px";
+      result["15-4"] = cardDivStyles.border === "1px solid rgb(128, 128, 128)"; // gray
+      result["15-5"] = cardDivStyles.borderRadius === "5px";
+      result["15-6"] = cardDivStyles.backgroundColor === "rgb(173, 216, 230)"; // lightblue
+    }
+  } catch (error) {
+    console.log(error);
+  }
+
+  return result;
+};
+
+const taskCSSCardWithImageTestNames = {
+  ["16-1"]: {
+    en: "Checking if card <div> element exists with correct structure",
+  },
+  ["16-2"]: {
+    en: "Checking if card <div> element has correct box-sizing",
+  },
+  ["16-3"]: {
+    en: "Checking if card <div> element has correct padding",
+  },
+  ["16-4"]: {
+    en: "Checking if card <div> element has correct margin",
+  },
+  ["16-5"]: {
+    en: "Checking if card <div> element has correct border",
+  },
+  ["16-6"]: {
+    en: "Checking if card <div> element has correct border-radius",
+  },
+  ["16-7"]: {
+    en: "Checking if card <div> element has correct background color",
+  },
+  ["16-9"]: {
+    en: "Checking if image inside card has correct height",
+  },
+  ["16-10"]: {
+    en: "Checking if image inside card has correct object-fit",
+  },
+};
+
+const taskCSSCardWithImage = () => {
+  const result = {
+    ["16-1"]: false,
+    ["16-2"]: false,
+    ["16-3"]: false,
+    ["16-4"]: false,
+    ["16-5"]: false,
+    ["16-6"]: false,
+    ["16-7"]: false,
+    ["16-9"]: false,
+    ["16-10"]: false,
+  };
+
+  try {
+    const cardDiv = document.querySelector("div.card");
+    const img = cardDiv.querySelector("img");
+    const heading = cardDiv.querySelector("h4");
+    const paragraph = cardDiv.querySelector("p");
+
+    result["16-1"] = !!cardDiv && !!img && !!heading && !!paragraph && heading.textContent === "Card Title" && paragraph.textContent === "This is an example card created using the CSS Box Model.";
+
+    if (cardDiv) {
+      const cardDivStyles = window.getComputedStyle(cardDiv);
+      result["16-2"] = cardDivStyles.boxSizing === "border-box";
+      result["16-3"] = cardDivStyles.padding === "16px";
+      result["16-4"] = cardDivStyles.margin === "16px";
+      result["16-5"] = cardDivStyles.border === "1px solid rgb(128, 128, 128)"; // gray
+      result["16-6"] = cardDivStyles.borderRadius === "10px";
+      result["16-7"] = cardDivStyles.backgroundColor === "rgb(173, 216, 230)"; // lightblue
+    }
+
+    if (img) {
+      const imgStyles = window.getComputedStyle(img);
+      result["16-9"] = imgStyles.height === "200px";
+      result["16-10"] = imgStyles.objectFit === "cover";
+    }
+  } catch (error) {
+    console.log(error);
+  }
+
+  return result;
+};
+
+const taskCSSCardsSideBySideTestNames = {
+  ["17-1"]: {
+    en: "Checking if both card <div> elements exist with correct structure",
+  },
+  ["17-2"]: {
+    en: "Checking if both card <div> elements have correct display property",
+  },
+  ["17-3"]: {
+    en: "Checking if both card <div> elements have correct box-sizing",
+  },
+  ["17-4"]: {
+    en: "Checking if both card <div> elements have correct padding",
+  },
+  ["17-5"]: {
+    en: "Checking if both card <div> elements have correct margin",
+  },
+  ["17-6"]: {
+    en: "Checking if both card <div> elements have correct border",
+  },
+  ["17-7"]: {
+    en: "Checking if both card <div> elements have correct border-radius",
+  },
+  ["17-8"]: {
+    en: "Checking if both card <div> elements have correct background color",
+  },
+  ["17-10"]: {
+    en: "Checking if images inside cards have correct height",
+  },
+  ["17-11"]: {
+    en: "Checking if images inside cards have correct object-fit",
+  },
+};
+
+const taskCSSCardsSideBySide = () => {
+  const result = {
+    ["17-1"]: false,
+    ["17-2"]: false,
+    ["17-3"]: false,
+    ["17-4"]: false,
+    ["17-5"]: false,
+    ["17-6"]: false,
+    ["17-7"]: false,
+    ["17-8"]: false,
+    ["17-10"]: false,
+    ["17-11"]: false,
+  };
+
+  try {
+    const cards = document.querySelectorAll("body > div");
+    const card1 = cards[0];
+    const card2 = cards[1];
+    const img1 = card1.querySelector("img");
+    const img2 = card2.querySelector("img");
+    const heading1 = card1.querySelector("h4");
+    const heading2 = card2.querySelector("h4");
+    const paragraph1 = card1.querySelector("p");
+    const paragraph2 = card2.querySelector("p");
+
+    result["17-1"] = cards.length === 2 && !!img1 && !!heading1 && !!paragraph1 && !!img2 && !!heading2 && !!paragraph2 && heading1.textContent === "Short Title" && heading2.textContent === "This is a longer title to demonstrate alignment.";
+
+    if (card1 && card2) {
+      const card1Styles = window.getComputedStyle(card1);
+      const card2Styles = window.getComputedStyle(card2);
+      result["17-2"] = card1Styles.display === "inline-block" && card2Styles.display === "inline-block";
+      result["17-3"] = card1Styles.boxSizing === "border-box" && card2Styles.boxSizing === "border-box";
+      result["17-4"] = card1Styles.padding === "16px" && card2Styles.padding === "16px";
+      result["17-5"] = card1Styles.margin === "16px" && card2Styles.margin === "16px";
+      result["17-6"] = card1Styles.border === "1px solid rgb(128, 128, 128)" && card2Styles.border === "1px solid rgb(128, 128, 128)"; // gray
+      result["17-7"] = card1Styles.borderRadius === "10px" && card2Styles.borderRadius === "10px";
+      result["17-8"] = card1Styles.backgroundColor === "rgb(211, 211, 211)" && card2Styles.backgroundColor === "rgb(211, 211, 211)"; // lightgray
+    }
+
+    if (img1 && img2) {
+      const img1Styles = window.getComputedStyle(img1);
+      const img2Styles = window.getComputedStyle(img2);
+      result["17-10"] = img1Styles.height === "150px" && img2Styles.height === "150px";
+      result["17-11"] = img1Styles.objectFit === "cover" && img2Styles.objectFit === "cover";
+    }
+  } catch (error) {
+    console.log(error);
+  }
+
+  return result;
+};
+
+const taskSemanticHTMLStructureTestNames = {
+  ["18-1"]: {
+    en: "Checking if <div> element with class page-wrapper exists with correct structure",
+  },
+  ["18-2"]: {
+    en: "Checking if <div> element with class page-wrapper has correct font-size",
+  },
+  ["18-3"]: {
+    en: "Checking if <header> and <footer> elements have correct height and background color",
+  },
+  ["18-4"]: {
+    en: "Checking if <main> and <aside> elements have correct width, height, and background color",
+  },
+  ["18-5"]: {
+    en: "Checking if <main> and <aside> elements have correct display property",
+  },
+};
+
+const taskSemanticHTMLStructure = () => {
+  const result = {
+    ["18-1"]: false,
+    ["18-2"]: false,
+    ["18-3"]: false,
+    ["18-4"]: false,
+    ["18-5"]: false,
+  };
+
+  try {
+    const pageWrapper = document.querySelector("div.page-wrapper");
+    const header = pageWrapper.querySelector("header");
+    const main = pageWrapper.querySelector("main");
+    const aside = pageWrapper.querySelector("aside");
+    const footer = pageWrapper.querySelector("footer");
+
+    result["18-1"] = !!pageWrapper && !!header && !!main && !!aside && !!footer;
+
+    if (pageWrapper) {
+      const pageWrapperStyles = window.getComputedStyle(pageWrapper);
+      result["18-2"] = pageWrapperStyles.fontSize === "0px";
+    }
+
+    if (header && footer) {
+      const headerStyles = window.getComputedStyle(header);
+      const footerStyles = window.getComputedStyle(footer);
+      result["18-3"] =
+        headerStyles.height === "80px" &&
+        footerStyles.height === "80px" &&
+        headerStyles.backgroundColor === "rgb(211, 211, 211)" && // lightgray
+        footerStyles.backgroundColor === "rgb(169, 169, 169)"; // darkgray
+    }
+
+    if (main && aside) {
+      const mainStyles = window.getComputedStyle(main);
+      const asideStyles = window.getComputedStyle(aside);
+      const pageWrapperRect = pageWrapper.getBoundingClientRect();
+      const mainRect = main.getBoundingClientRect();
+      const asideRect = aside.getBoundingClientRect();
+
+      const mainWidthPercentage = Math.round((mainRect.width / pageWrapperRect.width) * 100);
+      const asideWidthPercentage = Math.round((asideRect.width / pageWrapperRect.width) * 100);
+
+      result["18-4"] = mainWidthPercentage === 70 && mainStyles.height === "50px" && asideWidthPercentage === 30 && asideStyles.height === "50px" && mainStyles.backgroundColor !== asideStyles.backgroundColor;
+      result["18-5"] = mainStyles.display === "inline-block" && asideStyles.display === "inline-block";
     }
   } catch (error) {
     console.log(error);
@@ -541,11 +1133,24 @@ export default {
   ["f47d4836-b14f-472f-aa98-175c596d92f8"]: { test: task10, testNames: task10TestNames },
   ["e7d0092c-324f-4879-8fc7-df9ddbccdbe2"]: { test: task11, testNames: task11TestNames },
   ["9c5cfae4-07a5-4302-829c-d0981558e4d5"]: { test: task12, testNames: task12TestNames },
+  ["d5bbf42d-8396-4bc3-a974-5fa4a94a0f2b"]: { test: taskPracticeWithStyles, testNames: taskPracticeWithStylesTestNames },
+  ["91f1beff-ccfb-4e58-a610-681d0c0cb004"]: { test: taskElementSize, testNames: testNamesElementSize },
+  ["5c9cebf8-a4ba-49b4-8b99-1bd50add8fa9"]: { test: moreStylesTask, testNames: moreStylesTestNames },
+  ["47eb8acf-e1d5-435c-b53c-bd90d8ce1d93"]: { test: taskFontsTests, testNames: taskFontsNames },
+  ["24906b81-dc65-44fa-9cce-940935ded21d"]: { test: taskCSSPriorities, testNames: taskCSSPrioritiesTestNames },
+  ["100d0335-b9fb-476f-bfe6-a0d4ee0125e0"]: { test: taskCSSBoxModel, testNames: taskCSSBoxModelTestNames },
+  ["c372bb5a-f392-4b4a-b8e8-f23a42d33a2d"]: { test: taskCSSCardWithImage, testNames: taskCSSCardWithImageTestNames },
+  ["ef53c5ae-1d38-45c8-b24e-69ac25bfd249"]: { test: taskCSSCardsSideBySide, testNames: taskCSSCardsSideBySideTestNames },
+  ["138ebf7c-6a6f-4af2-a97a-8a365cbf3a9e"]: { test: taskSemanticHTMLStructure, testNames: taskSemanticHTMLStructureTestNames },
   codeCheckTasks: {
     ["423cfe50-9982-4ebd-9c82-b9f8e126a7c8"]: { test: task6, testNames: task6TestNames },
     ["f038e5bc-1cff-4f1f-acb6-03f24becf1ed"]: {
       test: task2,
       testNames: task2TestNames,
+    },
+    ["5c9cebf8-a4ba-49b4-8b99-1bd50add8fa9"]: {
+      testNames: moreStylesTestNamesString,
+      test: moreStylesTaskStringCheck,
     },
   },
 };
