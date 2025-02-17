@@ -170,7 +170,9 @@ export const GET_IS_COURSE_FINISHED_STATUS = async (req, res) => {
     });
 
     if (!lessonProgresses.length) {
-      return res.status(404).json({ message: "Course is not finished" });
+      return res
+        .status(404)
+        .json({ message: "Course is not finished", isFinished: false });
     }
 
     const completedLessonsIds = lessonProgresses.map((lp) => lp.lessonId);
@@ -180,10 +182,10 @@ export const GET_IS_COURSE_FINISHED_STATUS = async (req, res) => {
       isFinal: true,
     });
 
-    console.log("lessonProgress", completedLessonsIds.includes(lastLesson.id));
-
     if (!completedLessonsIds.includes(lastLesson.id)) {
-      return res.status(404).json({ message: "Course is not finished" });
+      return res
+        .status(404)
+        .json({ message: "Course is not finished", isFinished: false });
     }
 
     return res.status(200).json({
