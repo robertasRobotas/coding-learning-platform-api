@@ -6,6 +6,7 @@ import {
   GET_HIGHEST_FINISHED_LESSON,
   INCREASE_AI_HELP_COUNT,
   GET_USER_PROGRESS,
+  GET_IS_COURSE_FINISHED_STATUS,
 } from "../controllers/courseProgress.js";
 
 import { auth } from "../middlewares/auth.js";
@@ -18,5 +19,10 @@ router.put("/atempt/increase", auth, INCREASE_COMPLETE_ATTEMPT_COUNT);
 router.put("/help/increase", auth, INCREASE_AI_HELP_COUNT);
 router.post("/complete/lesson", auth, COMPLETE_LESSON);
 router.get("/progress/:courseId", auth, GET_HIGHEST_FINISHED_LESSON);
+router.get(
+  "/progress/course/status/:courseId/:userId",
+  auth,
+  GET_IS_COURSE_FINISHED_STATUS
+);
 
 export default router;

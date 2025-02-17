@@ -1,4 +1,6 @@
 import CourseProgressModel from "../models/courseProgress.js";
+import LessonModel from "../models/lesson.js";
+
 import { isProgressExit, completeLesson } from "../services/progress.js";
 
 export const CREATE_NEW_LESSON_PROGRESS = async (req, res) => {
@@ -152,6 +154,41 @@ export const GET_HIGHEST_FINISHED_LESSON = async (req, res) => {
     return res.status(200).json({
       progress: lessonProgress[0]?.lessonOrder,
       message: "Latest completed lesson ",
+    });
+  } catch (err) {
+    console.log(err);
+    return res.status(400).json({ message: "bad data", err: err });
+  }
+};
+
+export const GET_IS_COURSE_FINISHED_STATUS = async (req, res) => {
+  try {
+    const lessonProgresses = await CourseProgressModel.find({
+      userId: req.params.userId,
+      courseId: req.params.courseId,
+      status: "COMPLETED",
+    });
+
+    if (!lessonProgresses.length) {
+      return res.status(404).json({ message: "Course is not finished" });
+    }
+
+    const completedLessonsIds = lessonProgresses.map((lp) => lp.lessonId);
+
+    const lastLesson = await LessonModel.findOne({
+      courseId: req.params.courseId,
+      isFinal: true,
+    });
+
+    console.log("lessonProgress", completedLessonsIds.includes(lastLesson.id));
+
+    if (!completedLessonsIds.includes(lastLesson.id)) {
+      return res.status(404).json({ message: "Course is not finished" });
+    }
+
+    return res.status(200).json({
+      isFinished: true,
+      message: "Course finished",
     });
   } catch (err) {
     console.log(err);
