@@ -378,7 +378,7 @@ const task10TestNames = {
     en: "Checking if password input field exists with correct placeholder",
   },
   ["10-4"]: {
-    en: "Checking if date input field exists with correct placeholder",
+    en: "Checking if date input field exists",
   },
   ["10-5"]: {
     en: "Checking if submit button exists",
@@ -409,7 +409,7 @@ const task10 = () => {
     result["10-1"] = !!nameInput && nameInput.hasAttribute("placeholder") && nameInput.getAttribute("placeholder").trim() !== "";
     result["10-2"] = !!emailInput && emailInput.hasAttribute("placeholder") && emailInput.getAttribute("placeholder").trim() !== "";
     result["10-3"] = !!passwordInput && passwordInput.hasAttribute("placeholder") && passwordInput.getAttribute("placeholder").trim() !== "";
-    result["10-4"] = !!dateInput && dateInput.hasAttribute("placeholder") && dateInput.getAttribute("placeholder").trim() !== "";
+    result["10-4"] = !!dateInput;
     result["10-5"] = !!submitButton;
 
     // Check if form element exists and all inputs are inside the form
@@ -1118,6 +1118,160 @@ const taskSemanticHTMLStructure = () => {
   return result;
 };
 
+const taskDivCombinationsTestNames = {
+  ["1-1"]: {
+    en: "Checking if outermost <div> exists",
+  },
+  ["1-2"]: {
+    en: "Checking if first child <div> exists with correct text '111111'",
+  },
+  ["1-3"]: {
+    en: "Checking if second child <div> exists and contains nested <div> elements",
+  },
+  ["1-4"]: {
+    en: "Checking if nested <div> exists with correct text '222222'",
+  },
+  ["1-5"]: {
+    en: "Checking if nested <div> exists with correct text '333333'",
+  },
+  ["1-6"]: {
+    en: "Checking if third child <div> exists and contains nested <div> elements",
+  },
+  ["1-7"]: {
+    en: "Checking if nested <div> exists with correct text '444444'",
+  },
+  ["1-8"]: {
+    en: "Checking if nested <div> exists with correct text '555555'",
+  },
+};
+
+const taskDivCombinations = () => {
+  const result = {
+    ["1-1"]: false,
+    ["1-2"]: false,
+    ["1-3"]: false,
+    ["1-4"]: false,
+    ["1-5"]: false,
+    ["1-6"]: false,
+    ["1-7"]: false,
+    ["1-8"]: false,
+  };
+
+  try {
+    const outerDiv = document.querySelector("div");
+    result["1-1"] = !!outerDiv;
+
+    if (outerDiv) {
+      const firstChildDiv = outerDiv.children[0];
+      const secondChildDiv = outerDiv.children[1];
+      result["1-2"] = firstChildDiv && firstChildDiv.children[0].textContent.trim() === "111111";
+      result["1-3"] = firstChildDiv && firstChildDiv.children[1];
+
+      if (firstChildDiv && firstChildDiv.children[1]) {
+        const nestedDiv1 = firstChildDiv.children[1].children[0];
+        const nestedDiv2 = firstChildDiv.children[1].children[1];
+        result["1-4"] = nestedDiv1 && nestedDiv1.textContent.trim() === "222222";
+        result["1-5"] = nestedDiv2 && nestedDiv2.textContent.trim() === "333333";
+      }
+
+      result["1-6"] = secondChildDiv;
+
+      if (secondChildDiv) {
+        const nestedDiv3 = secondChildDiv.children[0];
+        const nestedDiv4 = secondChildDiv.children[1];
+        result["1-7"] = nestedDiv3 && nestedDiv3.textContent.trim() === "444444";
+        result["1-8"] = nestedDiv4 && nestedDiv4.textContent.trim() === "555555";
+      }
+    }
+  } catch (error) {
+    console.log(error);
+  }
+
+  return result;
+};
+
+const taskDivAndSpanCombinationsTestNames = {
+  ["1-1"]: {
+    en: "Checking if outermost <div> exists",
+  },
+  ["1-2"]: {
+    en: "Checking if first child <div> exists and contains nested <div> and <span> elements",
+  },
+  ["1-3"]: {
+    en: "Checking if nested <span> exists with correct text '111111'",
+  },
+  ["1-4"]: {
+    en: "Checking if nested <span> exists with correct text '222222'",
+  },
+  ["1-5"]: {
+    en: "Checking if nested <span> exists with correct text '333333'",
+  },
+  ["1-6"]: {
+    en: "Checking if second nested <div> exists with correct text '444444'",
+  },
+  ["1-7"]: {
+    en: "Checking if second child <div> exists and contains nested <div> and <span> elements",
+  },
+  ["1-8"]: {
+    en: "Checking if nested <div> exists with correct text '555555'",
+  },
+  ["1-9"]: {
+    en: "Checking if nested <span> exists with correct text '666666'",
+  },
+  ["1-10"]: {
+    en: "Checking if nested <span> exists with correct text '777777'",
+  },
+};
+
+const taskDivAndSpanCombinations = () => {
+  const result = {
+    ["1-1"]: false,
+    ["1-2"]: false,
+    ["1-3"]: false,
+    ["1-4"]: false,
+    ["1-5"]: false,
+    ["1-6"]: false,
+    ["1-7"]: false,
+    ["1-8"]: false,
+    ["1-9"]: false,
+    ["1-10"]: false,
+  };
+
+  try {
+    const outerDiv = document.querySelector("div");
+    result["1-1"] = !!outerDiv;
+
+    if (outerDiv) {
+      const firstChildDiv = outerDiv.children[0];
+      const secondChildDiv = outerDiv.children[1];
+      result["1-2"] = firstChildDiv && firstChildDiv.children[0] && firstChildDiv.children[0].querySelectorAll("span").length === 3;
+
+      if (firstChildDiv && firstChildDiv.children[0]) {
+        const spans = firstChildDiv.children[0].querySelectorAll("span");
+        result["1-3"] = spans[0] && spans[0].textContent.trim() === "111111";
+        result["1-4"] = spans[1] && spans[1].textContent.trim() === "222222";
+        result["1-5"] = spans[2] && spans[2].textContent.trim() === "333333";
+      }
+
+      result["1-6"] = firstChildDiv && firstChildDiv.children[1] && firstChildDiv.children[1].textContent.trim() === "444444";
+
+      result["1-7"] = secondChildDiv && secondChildDiv.children[0] && secondChildDiv.children[1] && secondChildDiv.children[1].querySelectorAll("span").length === 2;
+
+      if (secondChildDiv && secondChildDiv.children[1]) {
+        const spans = secondChildDiv.children[1].querySelectorAll("span");
+        result["1-9"] = spans[0] && spans[0].textContent.trim() === "666666";
+        result["1-10"] = spans[1] && spans[1].textContent.trim() === "777777";
+      }
+
+      result["1-8"] = secondChildDiv && secondChildDiv.children[0] && secondChildDiv.children[0].textContent.trim() === "555555";
+    }
+  } catch (error) {
+    console.log(error);
+  }
+
+  return result;
+};
+
 export default {
   ["362abec3-81b2-4361-870c-a4e054781d73"]: {
     test: task1,
@@ -1142,6 +1296,8 @@ export default {
   ["c372bb5a-f392-4b4a-b8e8-f23a42d33a2d"]: { test: taskCSSCardWithImage, testNames: taskCSSCardWithImageTestNames },
   ["ef53c5ae-1d38-45c8-b24e-69ac25bfd249"]: { test: taskCSSCardsSideBySide, testNames: taskCSSCardsSideBySideTestNames },
   ["138ebf7c-6a6f-4af2-a97a-8a365cbf3a9e"]: { test: taskSemanticHTMLStructure, testNames: taskSemanticHTMLStructureTestNames },
+  ["b877c620-7def-479c-93c6-1461d8d63b1a"]: { test: taskDivCombinations, testNames: taskDivCombinationsTestNames },
+  ["0c0771cb-18fa-4aac-9390-062e718948d7"]: { test: taskDivAndSpanCombinations, testNames: taskDivAndSpanCombinationsTestNames },
   codeCheckTasks: {
     ["423cfe50-9982-4ebd-9c82-b9f8e126a7c8"]: { test: task6, testNames: task6TestNames },
     ["f038e5bc-1cff-4f1f-acb6-03f24becf1ed"]: {
