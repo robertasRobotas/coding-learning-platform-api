@@ -1272,6 +1272,25 @@ const taskDivAndSpanCombinations = () => {
   return result;
 };
 
+const finalTestNames = {
+  ["1-1"]: {
+    en: "finishing Course",
+  },
+};
+
+const finalTest = () => {
+  const result = {
+    ["1-1"]: true,
+  };
+
+  return [
+    {
+      result: result["1-1"],
+      name: finalTestNames["1-1"],
+    },
+  ];
+};
+
 export default {
   ["362abec3-81b2-4361-870c-a4e054781d73"]: {
     test: task1,
@@ -1307,6 +1326,10 @@ export default {
     ["5c9cebf8-a4ba-49b4-8b99-1bd50add8fa9"]: {
       testNames: moreStylesTestNamesString,
       test: moreStylesTaskStringCheck,
+    },
+    ["c3c38276-8058-447a-a022-c8d20492fe25"]: {
+      testNames: finalTestNames,
+      test: finalTest,
     },
   },
 };
