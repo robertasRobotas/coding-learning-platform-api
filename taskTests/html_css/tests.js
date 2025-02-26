@@ -152,7 +152,7 @@ const task4 = () => {
       const childDivs = parentDiv.querySelectorAll("div");
       const spans = parentDiv.querySelectorAll("span");
 
-      result["4-2"] = childDivs.length > 0 && childDivs[0].textContent.trim() === "This is a first div";
+      result["4-2"] = childDivs.length > 0 && childDivs[0].textContent.trim() === "This is a first div.";
       result["4-3"] = childDivs.length > 1 && childDivs[1].textContent.trim() === "This is a second div.";
       result["4-4"] = spans.length > 0 && spans[0].textContent.trim() === "This is a first span.";
       result["4-5"] = spans.length > 1 && spans[1].textContent.trim() === "This is a second span.";
