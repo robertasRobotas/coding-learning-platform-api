@@ -84,6 +84,9 @@ const task3TestNames = {
   ["3-3"]: {
     en: "Checking if href attribute is 'https://google.com'",
   },
+  ["3-4"]: {
+    en: "Checking if <a> tag has text inside",
+  },
 };
 
 const task3 = () => {
@@ -91,6 +94,7 @@ const task3 = () => {
     ["3-1"]: false,
     ["3-2"]: false,
     ["3-3"]: false,
+    ["3-4"]: false,
   };
 
   try {
@@ -100,6 +104,7 @@ const task3 = () => {
     if (aTag) {
       result["3-2"] = aTag.hasAttribute("href");
       result["3-3"] = aTag.getAttribute("href") === "https://google.com" || aTag.getAttribute("href") === "https://google.com/";
+      result["3-4"] = aTag.textContent.trim().length > 0;
     }
   } catch (error) {
     console.log(error);
