@@ -217,7 +217,7 @@ const task6TestNames = {
     en: "Checking if <div> tag exists",
   },
   ["6-2"]: {
-    en: "Checking if comment exists before email <div>",
+    en: "Checking if commented-out <h4> tag contains specific text",
   },
 };
 
@@ -234,9 +234,9 @@ const task6 = (code) => {
     const divRegex = /<div>/g;
     result["6-1"] = divRegex.test(htmlCode);
 
-    // Check if any comment exists before email <div>
-    const commentBeforeEmailDivRegex = /<!--[\s\S]*?-->\s*<div>robert@gmail\.com<\/div>/;
-    result["6-2"] = commentBeforeEmailDivRegex.test(htmlCode);
+    // Check if <h4> tag is commented out
+    const h4CommentedOutRegex = /<!--\s*<h4[^>]*>[\s\S]*<\/h4>\s*-->/;
+    result["6-2"] = h4CommentedOutRegex.test(htmlCode);
   } catch (error) {
     console.log(error);
   }
