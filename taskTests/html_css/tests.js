@@ -276,7 +276,7 @@ const task7 = () => {
     result["7-1"] = !!img;
 
     if (img) {
-      result["7-2"] = img.getAttribute("src") === "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Larix_decidua_Aletschwald.jpg/1280px-Larix_decidua_Aletschwald.jpg";
+      result["7-2"] = img.getAttribute("src") === "https://f003.backblazeb2.com/file/codeacademy/img_lesson_1.jpg";
       result["7-3"] = img.hasAttribute("alt");
       result["7-4"] = img.complete && img.naturalHeight !== 0;
     }
