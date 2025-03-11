@@ -333,13 +333,19 @@ const task8 = () => {
 
 const task9TestNames = {
   ["9-1"]: {
-    en: "Checking if two <p> tags exist",
+    en: "Checking if <h2> tag with text 'My Daily Schedule' exists",
   },
   ["9-2"]: {
-    en: "Checking if <br> tag exists within the first <p> tag",
+    en: "Checking if three <p> tags exist below the first <h2> tag, each containing a <br> tag",
   },
   ["9-3"]: {
-    en: "Checking if <hr> tag exists between the two <p> tags",
+    en: "Checking if <hr> tag exists after the three <p> tags",
+  },
+  ["9-4"]: {
+    en: "Checking if <h2> tag with text 'Evening Plans' exists below the <hr> tag",
+  },
+  ["9-5"]: {
+    en: "Checking if two <p> tags exist below the second <h2> tag, each containing a <br> tag",
   },
 };
 
@@ -348,23 +354,20 @@ const task9 = () => {
     ["9-1"]: false,
     ["9-2"]: false,
     ["9-3"]: false,
+    ["9-4"]: false,
+    ["9-5"]: false,
   };
 
   try {
+    const headings = document.querySelectorAll("h2");
     const paragraphs = document.querySelectorAll("p");
-    result["9-1"] = paragraphs.length === 2;
-
-    if (paragraphs.length > 0) {
-      const firstParagraph = paragraphs[0];
-      result["9-2"] = firstParagraph.querySelector("br") !== null;
-    }
-
     const hr = document.querySelector("hr");
-    if (paragraphs.length === 2 && hr) {
-      const firstParagraph = paragraphs[0];
-      const secondParagraph = paragraphs[1];
-      result["9-3"] = firstParagraph.nextElementSibling === hr && hr.nextElementSibling === secondParagraph;
-    }
+
+    result["9-1"] = headings.length > 0 && headings[0].textContent.trim() === "My Daily Schedule";
+    result["9-2"] = paragraphs.length >= 3 && Array.from(paragraphs).slice(0, 3).every(p => p.querySelector("br")) && headings[0].nextElementSibling === paragraphs[0] && paragraphs[2].nextElementSibling === hr;
+    result["9-3"] = !!hr;
+    result["9-4"] = headings.length > 1 && headings[1].textContent.trim() === "Evening Plans" && hr.nextElementSibling === headings[1];
+    result["9-5"] = paragraphs.length >= 5 && Array.from(paragraphs).slice(3, 5).every(p => p.querySelector("br")) && headings[1].nextElementSibling === paragraphs[3] && paragraphs[4].nextElementSibling === null;
   } catch (error) {
     console.log(error);
   }
