@@ -1131,25 +1131,25 @@ const taskDivCombinationsTestNames = {
     en: "Checking if outermost <div> exists",
   },
   ["1-2"]: {
-    en: "Checking if first child <div> exists with correct text '111111'",
+    en: "Checking if first child <div> exists with correct text '11111'",
   },
   ["1-3"]: {
     en: "Checking if second child <div> exists and contains nested <div> elements",
   },
   ["1-4"]: {
-    en: "Checking if nested <div> exists with correct text '222222'",
+    en: "Checking if nested <div> exists with correct text '22222'",
   },
   ["1-5"]: {
-    en: "Checking if nested <div> exists with correct text '333333'",
+    en: "Checking if nested <div> exists with correct text '33333'",
   },
   ["1-6"]: {
     en: "Checking if third child <div> exists and contains nested <div> elements",
   },
   ["1-7"]: {
-    en: "Checking if nested <div> exists with correct text '444444'",
+    en: "Checking if nested <div> exists with correct text '44444'",
   },
   ["1-8"]: {
-    en: "Checking if nested <div> exists with correct text '555555'",
+    en: "Checking if nested <div> exists with correct text '55555'",
   },
 };
 
@@ -1172,14 +1172,14 @@ const taskDivCombinations = () => {
     if (outerDiv) {
       const firstChildDiv = outerDiv.children[0];
       const secondChildDiv = outerDiv.children[1];
-      result["1-2"] = firstChildDiv && firstChildDiv.children[0].textContent.trim() === "111111";
+      result["1-2"] = firstChildDiv && firstChildDiv.children[0].textContent.trim() === "11111";
       result["1-3"] = firstChildDiv && firstChildDiv.children[1];
 
       if (firstChildDiv && firstChildDiv.children[1]) {
         const nestedDiv1 = firstChildDiv.children[1].children[0];
         const nestedDiv2 = firstChildDiv.children[1].children[1];
-        result["1-4"] = nestedDiv1 && nestedDiv1.textContent.trim() === "222222";
-        result["1-5"] = nestedDiv2 && nestedDiv2.textContent.trim() === "333333";
+        result["1-4"] = nestedDiv1 && nestedDiv1.textContent.trim() === "22222";
+        result["1-5"] = nestedDiv2 && nestedDiv2.textContent.trim() === "33333";
       }
 
       result["1-6"] = secondChildDiv;
@@ -1187,8 +1187,8 @@ const taskDivCombinations = () => {
       if (secondChildDiv) {
         const nestedDiv3 = secondChildDiv.children[0];
         const nestedDiv4 = secondChildDiv.children[1];
-        result["1-7"] = nestedDiv3 && nestedDiv3.textContent.trim() === "444444";
-        result["1-8"] = nestedDiv4 && nestedDiv4.textContent.trim() === "555555";
+        result["1-7"] = nestedDiv3 && nestedDiv3.textContent.trim() === "44444";
+        result["1-8"] = nestedDiv4 && nestedDiv4.textContent.trim() === "55555";
       }
     }
   } catch (error) {
@@ -1206,28 +1206,28 @@ const taskDivAndSpanCombinationsTestNames = {
     en: "Checking if first child <div> exists and contains nested <div> and <span> elements",
   },
   ["1-3"]: {
-    en: "Checking if nested <span> exists with correct text '111111'",
+    en: "Checking if nested <span> exists with correct text '11111'",
   },
   ["1-4"]: {
-    en: "Checking if nested <span> exists with correct text '222222'",
+    en: "Checking if nested <span> exists with correct text '22222'",
   },
   ["1-5"]: {
-    en: "Checking if nested <span> exists with correct text '333333'",
+    en: "Checking if nested <span> exists with correct text '33333'",
   },
   ["1-6"]: {
-    en: "Checking if second nested <div> exists with correct text '444444'",
+    en: "Checking if second nested <div> exists with correct text '44444'",
   },
   ["1-7"]: {
     en: "Checking if second child <div> exists and contains nested <div> and <span> elements",
   },
   ["1-8"]: {
-    en: "Checking if nested <div> exists with correct text '555555'",
+    en: "Checking if nested <div> exists with correct text '55555'",
   },
   ["1-9"]: {
-    en: "Checking if nested <span> exists with correct text '666666'",
+    en: "Checking if nested <span> exists with correct text '66666'",
   },
   ["1-10"]: {
-    en: "Checking if nested <span> exists with correct text '777777'",
+    en: "Checking if nested <span> exists with correct text '77777'",
   },
 };
 
@@ -1256,22 +1256,22 @@ const taskDivAndSpanCombinations = () => {
 
       if (firstChildDiv && firstChildDiv.children[0]) {
         const spans = firstChildDiv.children[0].querySelectorAll("span");
-        result["1-3"] = spans[0] && spans[0].textContent.trim() === "111111";
-        result["1-4"] = spans[1] && spans[1].textContent.trim() === "222222";
-        result["1-5"] = spans[2] && spans[2].textContent.trim() === "333333";
+        result["1-3"] = spans[0] && spans[0].textContent.trim() === "11111";
+        result["1-4"] = spans[1] && spans[1].textContent.trim() === "22222";
+        result["1-5"] = spans[2] && spans[2].textContent.trim() === "33333";
       }
 
-      result["1-6"] = firstChildDiv && firstChildDiv.children[1] && firstChildDiv.children[1].textContent.trim() === "444444";
+      result["1-6"] = firstChildDiv && firstChildDiv.children[1] && firstChildDiv.children[1].textContent.trim() === "44444";
 
       result["1-7"] = secondChildDiv && secondChildDiv.children[0] && secondChildDiv.children[1] && secondChildDiv.children[1].querySelectorAll("span").length === 2;
 
       if (secondChildDiv && secondChildDiv.children[1]) {
         const spans = secondChildDiv.children[1].querySelectorAll("span");
-        result["1-9"] = spans[0] && spans[0].textContent.trim() === "666666";
-        result["1-10"] = spans[1] && spans[1].textContent.trim() === "777777";
+        result["1-9"] = spans[0] && spans[0].textContent.trim() === "66666";
+        result["1-10"] = spans[1] && spans[1].textContent.trim() === "77777";
       }
 
-      result["1-8"] = secondChildDiv && secondChildDiv.children[0] && secondChildDiv.children[0].textContent.trim() === "555555";
+      result["1-8"] = secondChildDiv && secondChildDiv.children[0] && secondChildDiv.children[0].textContent.trim() === "55555";
     }
   } catch (error) {
     console.log(error);
