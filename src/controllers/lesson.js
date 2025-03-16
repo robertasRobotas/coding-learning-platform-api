@@ -179,13 +179,13 @@ const runPuppeteerTest = async (code, id) => {
     const testFunction = new Function(`return ${test}`)();
     return testFunction();
   }, testToGive.toString());
-
+  
   await browser.close();
-
+  
   const response = Object.entries(testResults).map(([key, value]) => {
     const name = names[key];
     return {
-      result: value,
+      result: !!value,
       name,
     };
   });

@@ -1172,23 +1172,23 @@ const taskDivCombinations = () => {
     if (outerDiv) {
       const firstChildDiv = outerDiv.children[0];
       const secondChildDiv = outerDiv.children[1];
-      result["1-2"] = firstChildDiv && firstChildDiv.children[0].textContent.trim() === "11111";
-      result["1-3"] = firstChildDiv && firstChildDiv.children[1];
-
+      result["1-2"] = !!(firstChildDiv && firstChildDiv.children[0].textContent.trim() === "11111");
+      result["1-3"] = !!(firstChildDiv && firstChildDiv.children[1]);
+      
       if (firstChildDiv && firstChildDiv.children[1]) {
         const nestedDiv1 = firstChildDiv.children[1].children[0];
         const nestedDiv2 = firstChildDiv.children[1].children[1];
-        result["1-4"] = nestedDiv1 && nestedDiv1.textContent.trim() === "22222";
-        result["1-5"] = nestedDiv2 && nestedDiv2.textContent.trim() === "33333";
+        result["1-4"] = !!(nestedDiv1 && nestedDiv1.textContent.trim() === "22222");
+        result["1-5"] = !!(nestedDiv2 && nestedDiv2.textContent.trim() === "33333");
       }
 
-      result["1-6"] = secondChildDiv;
+      result["1-6"] = !!secondChildDiv;
 
       if (secondChildDiv) {
         const nestedDiv3 = secondChildDiv.children[0];
         const nestedDiv4 = secondChildDiv.children[1];
-        result["1-7"] = nestedDiv3 && nestedDiv3.textContent.trim() === "44444";
-        result["1-8"] = nestedDiv4 && nestedDiv4.textContent.trim() === "55555";
+        result["1-7"] = !!(nestedDiv3 && nestedDiv3.textContent.trim() === "44444");
+        result["1-8"] = !!(nestedDiv4 && nestedDiv4.textContent.trim() === "55555");
       }
     }
   } catch (error) {
@@ -1252,26 +1252,26 @@ const taskDivAndSpanCombinations = () => {
     if (outerDiv) {
       const firstChildDiv = outerDiv.children[0];
       const secondChildDiv = outerDiv.children[1];
-      result["1-2"] = firstChildDiv && firstChildDiv.children[0] && firstChildDiv.children[0].querySelectorAll("span").length === 3;
+      result["1-2"] = !!(firstChildDiv && firstChildDiv.children[0] && firstChildDiv.children[0].querySelectorAll("span").length === 3);
 
       if (firstChildDiv && firstChildDiv.children[0]) {
         const spans = firstChildDiv.children[0].querySelectorAll("span");
-        result["1-3"] = spans[0] && spans[0].textContent.trim() === "11111";
-        result["1-4"] = spans[1] && spans[1].textContent.trim() === "22222";
-        result["1-5"] = spans[2] && spans[2].textContent.trim() === "33333";
+        result["1-3"] = !!(spans[0] && spans[0].textContent.trim() === "11111");
+        result["1-4"] = !!(spans[1] && spans[1].textContent.trim() === "22222");
+        result["1-5"] = !!(spans[2] && spans[2].textContent.trim() === "33333");
       }
 
-      result["1-6"] = firstChildDiv && firstChildDiv.children[1] && firstChildDiv.children[1].textContent.trim() === "44444";
+      result["1-6"] = !!(firstChildDiv && firstChildDiv.children[1] && firstChildDiv.children[1].textContent.trim() === "44444");
 
-      result["1-7"] = secondChildDiv && secondChildDiv.children[0] && secondChildDiv.children[1] && secondChildDiv.children[1].querySelectorAll("span").length === 2;
+      result["1-7"] = !!(secondChildDiv && secondChildDiv.children[0] && secondChildDiv.children[1] && secondChildDiv.children[1].querySelectorAll("span").length === 2);
 
       if (secondChildDiv && secondChildDiv.children[1]) {
         const spans = secondChildDiv.children[1].querySelectorAll("span");
-        result["1-9"] = spans[0] && spans[0].textContent.trim() === "66666";
-        result["1-10"] = spans[1] && spans[1].textContent.trim() === "77777";
+        result["1-9"] = !!(spans[0] && spans[0].textContent.trim() === "66666");
+        result["1-10"] = !!(spans[1] && spans[1].textContent.trim() === "77777");
       }
 
-      result["1-8"] = secondChildDiv && secondChildDiv.children[0] && secondChildDiv.children[0].textContent.trim() === "55555";
+      result["1-8"] = !!(secondChildDiv && secondChildDiv.children[0] && secondChildDiv.children[0].textContent.trim() === "55555");
     }
   } catch (error) {
     console.log(error);
